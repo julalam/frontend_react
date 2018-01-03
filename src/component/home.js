@@ -8,7 +8,7 @@ class Home extends Component {
       <div className="home">
         <h1>LOGO</h1>
         <Login />
-        <Link to='/registration'>Create account</Link>
+        <Link to='/registration'>Create Account</Link>
       </div>
     );
   }

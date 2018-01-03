@@ -7,8 +7,9 @@ class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: null,
       username: '',
-      language: ''
+      language: '',
     };
   }
 
@@ -30,11 +31,12 @@ class Registration extends Component {
         username: event.target.username.value,
         language: event.target.language.value,
       }).then((response) => {
-        console.log(response)
         this.setState({
+          id: response.data.user.id,
           username: response.data.user.username,
-          username: response.data.user.language,
+          language: response.data.user.language,
         });
+        console.log(`User ${this.state.username} successfully created new account`)
       })
     }
   }
