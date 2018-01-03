@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import Test from './component/test_component'
+import { Switch, Route } from 'react-router-dom';
+import Test from './component/test_component';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>My App</h1>
-        <Test />
+        <Switch>
+          <Route path='/test' component={Test}/>
+        </Switch>
       </div>
     );
   }
