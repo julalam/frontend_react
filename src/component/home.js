@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Login from './login';
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
   render() {
@@ -7,7 +8,7 @@ class Home extends Component {
       <div className="home">
         <h1>LOGO</h1>
         <Login />
-        // add button for register page
+        <Link to='/registration'>Create account</Link>
       </div>
     );
   }
