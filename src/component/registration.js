@@ -26,10 +26,16 @@ class Registration extends Component {
     if (event.target.username.value === '') {
       alert('username is required');
     } else {
-      this.setState({
+      axios.post('http://localhost:8080/users', {
         username: event.target.username.value,
         language: event.target.language.value,
-      });
+      }).then((response) => {
+        console.log(response)
+        this.setState({
+          username: response.data.user.username,
+          username: response.data.user.language,
+        });
+      })
     }
   }
 
