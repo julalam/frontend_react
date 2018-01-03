@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Login from './login';
-import Register from './register';
 
 class Home extends Component {
   render() {
@@ -8,7 +7,7 @@ class Home extends Component {
       <div className="home">
         <h1>LOGO</h1>
         <Login />
-        <Register />
+        // add button for register page
       </div>
     );
   }
