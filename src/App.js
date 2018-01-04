@@ -7,6 +7,10 @@ import UserProfile from './component/user_profile';
 import './App.css';
 
 class App extends Component {
+  // setLoginUser(userData) {
+  //
+  // }
+
   render() {
     return (
       <div className="App">
@@ -14,7 +18,7 @@ class App extends Component {
           <Route exact path='/' component={Home}/>
           <Route path='/test' component={Test}/>
           <Route path='/registration' component={Registration}/>
-          <Route path='/:username' component={UserProfile}/>
+          <Route path='/:username' render={()=><UserProfile setLoginUser="test test" />} />
         </Switch>
       </div>
     );

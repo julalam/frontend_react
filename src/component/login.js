@@ -35,7 +35,7 @@ class Login extends Component {
   render() {
     if (this.state.id === this.state.session && this.state.session !== null) {
       return (
-        <Redirect to={this.state.username} component={UserProfile} />
+        <Redirect to={this.state.username} />
       )
     } else {
       return (
