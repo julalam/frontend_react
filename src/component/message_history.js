@@ -14,8 +14,17 @@ class MessageHistory extends Component {
     };
   }
 
+  // componentDidMount() {
+  //   axios.get('http://localhost:8080/messages').then((response) => {
+  //     const messages = Array.from(response.data);
+  //     this.setState({
+  //       messages: messages,
+  //     })
+  //   });
+  // };
+
   componentDidMount() {
-    axios.get('http://localhost:8080/messages').then((response) => {
+    axios.get('http://localhost:8080/messages?from=1&to=3').then((response) => {
       const messages = Array.from(response.data);
       this.setState({
         messages: messages,
@@ -32,7 +41,7 @@ class MessageHistory extends Component {
       axios.post('http://localhost:8080/messages', {
         text: event.target.message.value,
         from: 1,
-        to: 2,
+        to: 3,
         language: 'es'
       }).then((response) => {
         const allMessages = this.state.messages
@@ -40,8 +49,8 @@ class MessageHistory extends Component {
         this.setState({
           messages: allMessages,
         });
-        console.log('Message sent');
       });
+      console.log('Message sent');
       event.target.message.value = '';
     }
   };
@@ -50,6 +59,11 @@ class MessageHistory extends Component {
     const messages = this.state.messages.map(message => {
       return <div key={message.id}>{message.text}</div>
     });
+
+    // const messages = this.state.messages.map(message => {
+    //   if (message.to === this.state.from)
+    //   return <div key={message.id}>{message.text}</div>
+    // });
 
     return (
       <div>
