@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ContactList from './contact_list';
+import MessageHistory from './message_history';
 // import { Redirect } from 'react-router';
 // import axios from 'axios';
 
@@ -21,7 +22,8 @@ class UserProfile extends Component {
         <div className="contact-list">
           <ContactList />
         </div>
-        <div className="history">
+        <div className="message-history">
+          <MessageHistory />
         </div>
       </div>
     );

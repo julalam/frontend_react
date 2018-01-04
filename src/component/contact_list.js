@@ -16,8 +16,6 @@ class ContactList extends Component {
 
   componentDidMount() {
     axios.get('http://localhost:8080/users').then((response) => {
-      // const contacts = response.data.map(contactObject => contactObject.username);
-      // const contacts = response.data.map(contactObject => contactObject);
       const contacts = Array.from(response.data);
       this.setState({
         contacts: contacts,
@@ -32,7 +30,7 @@ class ContactList extends Component {
 
     return (
       <div>
-        Contact List
+        <strong>Contact List:</strong>
         {contacts}
       </div>
     );
