@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-import UserProfile from './user_profile';
 import axios from 'axios';
 
 class Login extends Component {

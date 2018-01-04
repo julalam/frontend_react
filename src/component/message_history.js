@@ -35,12 +35,14 @@ class MessageHistory extends Component {
         to: 2,
         language: 'es'
       }).then((response) => {
-        // const allMessages = this.state.messages.push(response.data)
-        // this.setState({
-        //   messages: allMessages,
-        // });
-        console.log('Message sent')
+        const allMessages = this.state.messages
+        allMessages.push(response.data)
+        this.setState({
+          messages: allMessages,
+        });
+        console.log('Message sent');
       });
+      event.target.message.value = '';
     }
   };
 
