@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import Login from './component/login';
-// import Register from './component/register';
 import axios from 'axios'
 
 class Registration extends Component {
@@ -19,10 +17,6 @@ class Registration extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    console.log(event.target)
-    console.log(event.target.username.value)
-    console.log(event.target.language.value)
 
     if (event.target.username.value === '') {
       alert('username is required');
