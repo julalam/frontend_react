@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
+import UserProfile from './user_profile';
 import axios from 'axios'
 
 class Registration extends Component {
@@ -8,6 +10,7 @@ class Registration extends Component {
       id: null,
       username: '',
       language: '',
+      session: null,
     };
   }
 
@@ -29,6 +32,7 @@ class Registration extends Component {
           id: response.data.user.id,
           username: response.data.user.username,
           language: response.data.user.language,
+          session: response.data.session,
         });
         console.log(`User ${this.state.username} successfully created new account`)
       })
@@ -39,17 +43,24 @@ class Registration extends Component {
     const languageOptions = this.props.languages.map(language => {
       return <option key={language} value={language}>{language}</option>
     });
-    return (
-      <div className="registration">
-        <h1>Create a New Account</h1>
 
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" placeholder="Username" name="username" />
-          <select name="language">{languageOptions}</select>
-          <button type="submit">Create Account</button>
-        </form>
-      </div>
-    );
+    if (this.state.id === this.state.session && this.state.session !== null) {
+      return (
+        <Redirect to={this.state.username} component={UserProfile} />
+      )
+    } else {
+      return (
+        <div className="registration">
+          <h1>Create a New Account</h1>
+
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <input type="text" placeholder="Username" name="username" />
+            <select name="language">{languageOptions}</select>
+            <button type="submit">Create Account</button>
+          </form>
+        </div>
+      );
+    }
   }
 }
 

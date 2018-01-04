@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import UserProfile from './user_profile';
-import Test from './test_component';
 import axios from 'axios';
 
 class Login extends Component {
@@ -10,7 +9,7 @@ class Login extends Component {
     this.state = {
       id: null,
       username: '',
-      session: '',
+      session: null,
     };
   }
 
@@ -41,10 +40,10 @@ class Login extends Component {
     } else {
       return (
         <div className="login">
-        <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" placeholder="Username" name="username" />
-        <button type="submit">Log In</button>
-        </form>
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <input type="text" placeholder="Username" name="username" />
+            <button type="submit">Log In</button>
+          </form>
         </div>
       );
     }
