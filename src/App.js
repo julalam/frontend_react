@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import Test from './component/test_component';
 import Home from './component/home';
 import Registration from './component/registration';
 import UserProfile from './component/user_profile';
-import './App.css';
 import axios from 'axios';
+import './App.css';
+
 
 
 class App extends Component {
@@ -17,7 +19,8 @@ class App extends Component {
     };
   }
 
-  handleLogin(username) {
+  handleLogin(event, username) {
+    alert('in handleLogin');
     axios.post('http://localhost:8080/login', {
       username: event.target.username.value,
     }).then((response) => {
@@ -29,22 +32,24 @@ class App extends Component {
     });
   }
 
-  // setLoginUser(userData) {
-  //
-  // }
-
   render() {
-    return (
-      <div className="App">
-        <Switch>
-          <Route exact path='/' render = { () =>
-            <Home onClick = {this.handleLogin} /> } />
-          <Route path='/test' component={Test}/>
-          <Route path='/registration' component={Registration}/>
-          <Route path='/:username' component={UserProfile}/>
-        </Switch>
-      </div>
-    );
+    if (this.state.user.id === this.state.session && this.state.session !== null) {
+      return (
+        <Redirect to={this.state.user.username} />
+      )
+    } else {
+      return (
+        <div className="App">
+          <Switch>
+            <Route exact path='/' render = { () =>
+              <Home onClick = {this.handleLogin.bind(this)} /> } />
+            <Route path='/test' component={Test}/>
+            <Route path='/registration' component={Registration}/>
+            <Route path='/:username' component={UserProfile}/>
+          </Switch>
+        </div>
+      );
+    }
   }
 }
 
