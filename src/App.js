@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Redirect } from 'react-router';
+// import { Redirect } from 'react-router';
 import Test from './component/test_component';
 import Home from './component/home';
 import Registration from './component/registration';
@@ -33,23 +33,23 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.user.id === this.state.session && this.state.session !== null) {
-      return (
-        <Redirect to={this.state.user.username} />
-      )
-    } else {
+    // if (this.state.user.id === this.state.session && this.state.session !== null) {
+    //   return (
+    //     <Redirect to={this.state.user.username} />
+    //   )
+    // } else {
       return (
         <div className="App">
           <Switch>
             <Route exact path='/' render = { () =>
-              <Home onClick = {this.handleLogin.bind(this)} /> } />
+              <Home onClick = {this.handleLogin.bind(this)} session={this.state.session} /> } />
             <Route path='/test' component={Test}/>
             <Route path='/registration' component={Registration}/>
             <Route path='/:username' component={UserProfile}/>
           </Switch>
         </div>
       );
-    }
+    // }
   }
 }
 
