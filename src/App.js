@@ -5,6 +5,8 @@ import Home from './component/home';
 import Registration from './component/registration';
 import UserProfile from './component/user_profile';
 import './App.css';
+import axios from 'axios';
+
 
 class App extends Component {
   constructor(props) {
@@ -20,8 +22,7 @@ class App extends Component {
       username: event.target.username.value,
     }).then((response) => {
       this.setState({
-        id: response.data.user.id,
-        username: response.data.user.username,
+        user: response.data.user,
         session: response.data.session,
       });
       console.log(`User ${this.state.username} logged in successfully`)
@@ -36,7 +37,8 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path='/' component={Home}/>
+          <Route exact path='/' render = { () =>
+            <Home onClick = {this.handleLogin} /> } />
           <Route path='/test' component={Test}/>
           <Route path='/registration' component={Registration}/>
           <Route path='/:username' component={UserProfile}/>

@@ -6,10 +6,14 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: null,
+      // id: null,
       username: '',
-      session: null,
+      // session: null,
     };
+  }
+
+  handleCLick(event) {
+    event.preventDefault();
   }
 
   // handleSubmit(event) {
@@ -39,14 +43,14 @@ class Login extends Component {
     // } else {
       return (
         <div className="login">
-          <form onSubmit={props.onLogin}>
-            <input type="text" placeholder="Username" name="username" />
+          <form onSubmit={this.handleCLick.bind(this)}>
+            <input type="text" placeholder="Username" name="username" value={this.state.username} />
             <button type="submit">Log In</button>
           </form>
         </div>
       );
     }
   }
-}
+// }
 
 export default Login;
