@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-// import { Redirect } from 'react-router';
 import Test from './component/test_component';
 import Home from './component/home';
 import Registration from './component/registration';
@@ -20,7 +19,6 @@ class App extends Component {
   }
 
   handleLogin(event, username) {
-    alert('in handleLogin');
     axios.post('http://localhost:8080/login', {
       username: event.target.username.value,
     }).then((response) => {
@@ -33,23 +31,17 @@ class App extends Component {
   }
 
   render() {
-    // if (this.state.user.id === this.state.session && this.state.session !== null) {
-    //   return (
-    //     <Redirect to={this.state.user.username} />
-    //   )
-    // } else {
       return (
         <div className="App">
           <Switch>
             <Route exact path='/' render = { () =>
-              <Home onClick = {this.handleLogin.bind(this)} session={this.state.session} /> } />
+              <Home onClick = {this.handleLogin.bind(this)} session={this.state.session} user={this.state.user}/> } />
             <Route path='/test' component={Test}/>
             <Route path='/registration' component={Registration}/>
             <Route path='/:username' component={UserProfile}/>
           </Switch>
         </div>
       );
-    // }
   }
 }
 
