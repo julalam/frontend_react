@@ -7,6 +7,27 @@ import UserProfile from './component/user_profile';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {},
+      session: null,
+    };
+  }
+
+  handleLogin(username) {
+    axios.post('http://localhost:8080/login', {
+      username: event.target.username.value,
+    }).then((response) => {
+      this.setState({
+        id: response.data.user.id,
+        username: response.data.user.username,
+        session: response.data.session,
+      });
+      console.log(`User ${this.state.username} logged in successfully`)
+    });
+  }
+
   // setLoginUser(userData) {
   //
   // }
@@ -18,7 +39,7 @@ class App extends Component {
           <Route exact path='/' component={Home}/>
           <Route path='/test' component={Test}/>
           <Route path='/registration' component={Registration}/>
-          <Route path='/:username' render={()=><UserProfile setLoginUser="test test" />} />
+          <Route path='/:username' component={UserProfile}/>
         </Switch>
       </div>
     );

@@ -7,7 +7,7 @@ class Home extends Component {
     return (
       <div className="home">
         <h1>LOGO</h1>
-        <Login />
+        <Login onLogin={() => this.props.onLogin(username)}/>
         <Link to='/registration'>Create Account</Link>
       </div>
     );
