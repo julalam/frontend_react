@@ -7,7 +7,7 @@ class ContactList extends Component {
     super(props);
     this.state = {
       user: this.props.user,
-      session: this.props.session,
+      // session: this.props.session,
       contacts: [],
     };
   }

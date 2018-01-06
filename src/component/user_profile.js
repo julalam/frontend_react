@@ -20,7 +20,7 @@ class UserProfile extends Component {
           <ContactList user={this.state.user} />
         </div>
         <div className="message-history">
-          <MessageHistory />
+          <MessageHistory user={this.state.user} />
         </div>
       </div>
     );
