@@ -6,7 +6,6 @@ class MessageHistory extends Component {
     super(props);
     this.state = {
       user: this.props.user,
-      // session: null,
       selectedUser: null,
       messages: [],
     };

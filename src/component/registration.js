@@ -20,7 +20,7 @@ class Registration extends Component {
       return <option key={language} value={language}>{language}</option>
     });
 
-    if (this.props.user.id === this.props.session && this.props.session !== null) {
+    if (this.props.session) {
       return (
         <Redirect to='/' />
       )

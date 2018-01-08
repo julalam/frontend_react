@@ -5,25 +5,23 @@ import Home from './component/home';
 import Registration from './component/registration';
 import axios from 'axios';
 import './App.css';
-
-
+import cookie from 'react-cookies';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
-      session: null,
+      session: cookie.load('session')
     };
   }
 
   handleLogin(event, username) {
     axios.post('http://localhost:8080/login', {username}).then((response) => {
       this.setState({
-        user: response.data.user,
         session: response.data.session,
       });
-      console.log(`User ${this.state.username} logged in successfully`)
+      cookie.save('session', this.state.session)
+      console.log(`User ${this.state.session.username} logged in successfully`);
     });
   }
 
@@ -32,12 +30,10 @@ class App extends Component {
       this.setState({
         session: response.data.session,
       });
-      if (this.state.session === null) {
-        this.setState({
-          user: null,
-        })
+      if (!this.state.session) {
+        cookie.remove('session')
+        console.log(`User logged out successfully`);
       }
-      console.log(`User logged out successfully`)
     });
   }
 
@@ -50,25 +46,25 @@ class App extends Component {
         language: user.language,
       }).then((response) => {
         this.setState({
-          user: response.data.user,
           session: response.data.session,
         });
-        console.log(`User ${this.state.user.username} successfully created new account`)
+        cookie.save('session', this.state.session)
+        console.log(`User ${this.state.session.username} successfully created new account`)
       })
     }
   }
 
   render() {
-      return (
-        <div className="App">
-          <Switch>
-            <Route exact path='/' render = { () =>
-              <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} user={this.state.user}/> } />
-            <Route path='/test' component={Test}/>
-            <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} user={this.state.user}/> } />
-          </Switch>
-        </div>
-      );
+    return (
+      <div className="App">
+        <Switch>
+          <Route exact path='/' render = { () =>
+            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} /> } />
+          <Route path='/test' component={Test}/>
+          <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} /> } />
+        </Switch>
+      </div>
+    );
   }
 }
 
