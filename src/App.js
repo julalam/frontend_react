@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import Test from './component/test_component';
 import Home from './component/home';
 import Registration from './component/registration';
-import UserProfile from './component/user_profile';
 import axios from 'axios';
 import './App.css';
 
