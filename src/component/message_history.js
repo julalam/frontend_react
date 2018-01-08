@@ -5,19 +5,38 @@ class MessageHistory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user,
-      selectedUser: null,
+      session: this.props.session,
+      contact: this.props.contact,
       messages: [],
     };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/messages?from=1&to=3').then((response) => {
+    axios.get('http://localhost:8080/messages?from=' + this.state.session.id + '&to=' + this.state.contact).then((response) => {
       const messages = Array.from(response.data);
       this.setState({
         messages: messages,
       })
     });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    // console.log('in componentDidUpdate');
+    // console.log(this.state.session);
+    // console.log(prevState.session);
+    // console.log(this.state.session !== prevState.session);
+    // console.log(this.props.contact);
+    // console.log(prevProps.contact);
+    // console.log(this.props.contact !== prevProps.contact);
+    if (this.state.session !== prevState.session || this.props.contact !== prevProps.contact) {
+      axios.get('http://localhost:8080/messages?from=' + this.state.session.id + '&to=' + this.props.contact).then((response) => {
+        console.log(response);
+        const messages = Array.from(response.data);
+        this.setState({
+          messages: messages,
+        })
+      });
+    }
   };
 
   sendMessage(event) {
@@ -48,7 +67,7 @@ class MessageHistory extends Component {
       return <div key={message.id}>{message.text}</div>
     });
 
-    if (this.state.selectedUser === null) {
+    if (!this.props.contact) {
       return <p>select a user...</p>
     } else {
       return (

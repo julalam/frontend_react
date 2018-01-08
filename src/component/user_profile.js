@@ -7,11 +7,18 @@ class UserProfile extends Component {
     super(props);
     this.state = {
       session: this.props.session,
+      contact: null,
     };
   }
 
   handleClick(event) {
     this.props.onLogout(event);
+  }
+
+  handleContact(contact) {
+    this.setState({
+      contact: contact,
+    })
   }
 
   render() {
@@ -20,10 +27,10 @@ class UserProfile extends Component {
         <button onClick={this.handleClick.bind(this)} type="button">Log Out</button>
         <strong>{this.state.session.username}</strong>
         <div className="contact-list">
-          <ContactList user={this.state.session} />
+          <ContactList session={this.state.session}  onContact={this.handleContact.bind(this)}/>
         </div>
         <div className="message-history">
-          <MessageHistory user={this.state.session} />
+          <MessageHistory session={this.state.session} contact={this.state.contact} />
         </div>
       </div>
     );

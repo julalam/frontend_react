@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-// import { Redirect } from 'react-router';
 import axios from 'axios';
 
 class ContactList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user,
-      // session: this.props.session,
+      session: this.props.session,
       contacts: [],
     };
   }
@@ -19,11 +17,15 @@ class ContactList extends Component {
         contacts: contacts,
       })
     });
-  };
+  }
+
+  handleClick(contact, event) {
+    this.props.onContact(contact);
+  }
 
   render() {
     const contacts = this.state.contacts.map(contact => {
-      return <div key={contact.id}>{contact.username}</div>
+      return <div onClick={this.handleClick.bind(this, contact.id)} key={contact.id}>{contact.username}</div>
     });
 
     return (
