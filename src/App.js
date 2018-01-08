@@ -19,9 +19,7 @@ class App extends Component {
   }
 
   handleLogin(event, username) {
-    axios.post('http://localhost:8080/login', {
-      username: event.target.username.value,
-    }).then((response) => {
+    axios.post('http://localhost:8080/login', {username}).then((response) => {
       this.setState({
         user: response.data.user,
         session: response.data.session,

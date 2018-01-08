@@ -4,7 +4,8 @@ class Login extends Component {
 
   handleClick(event) {
     event.preventDefault();
-    this.props.onLogin(event, "Julia");
+    const username = event.target.username.value;
+    this.props.onLogin(event, username);
   }
 
   render() {
