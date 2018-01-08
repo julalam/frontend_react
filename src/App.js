@@ -28,14 +28,31 @@ class App extends Component {
     });
   }
 
+  handleRegistration(event, user) {
+    if (user.username === '') {
+      alert('username is required');
+    } else {
+      axios.post('http://localhost:8080/users', {
+        username: user.username,
+        language: user.language,
+      }).then((response) => {
+        this.setState({
+          user: response.data.user,
+          session: response.data.session,
+        });
+        console.log(`User ${this.state.user.username} successfully created new account`)
+      })
+    }
+  }
+
   render() {
       return (
         <div className="App">
           <Switch>
             <Route exact path='/' render = { () =>
-              <Home onLogin = {this.handleLogin.bind(this)} session={this.state.session} user={this.state.user}/> } />
+              <Home onLogin={this.handleLogin.bind(this)} session={this.state.session} user={this.state.user}/> } />
             <Route path='/test' component={Test}/>
-            <Route path='/registration' component={Registration}/>
+            <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)}/> } />
             <Route path='/:username' component={UserProfile}/>
           </Switch>
         </div>

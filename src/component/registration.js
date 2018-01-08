@@ -20,23 +20,11 @@ class Registration extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    if (event.target.username.value === '') {
-      alert('username is required');
-    } else {
-      axios.post('http://localhost:8080/users', {
-        username: event.target.username.value,
-        language: event.target.language.value,
-      }).then((response) => {
-        this.setState({
-          id: response.data.user.id,
-          username: response.data.user.username,
-          language: response.data.user.language,
-          session: response.data.session,
-        });
-        console.log(`User ${this.state.username} successfully created new account`)
-      })
-    }
+    const user = {
+      username: event.target.username.value,
+      language: event.target.language.value,
+    };
+    this.props.onRegistration(event, user);
   }
 
   render() {
