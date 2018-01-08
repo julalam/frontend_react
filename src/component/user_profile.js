@@ -29,7 +29,7 @@ class UserProfile extends Component {
           <ContactList session={this.props.session}  onContact={this.handleContact.bind(this)}/>
         </div>
         <div className="message-history">
-          <MessageHistory session={this.props.session} contact={this.props.contact} />
+          <MessageHistory session={this.props.session} contact={this.state.contact} />
         </div>
       </div>
     );

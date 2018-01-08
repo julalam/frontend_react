@@ -26,8 +26,8 @@ class MessageHistory extends Component {
     // console.log(this.props.contact);
     // console.log(prevProps.contact);
     // console.log(this.props.contact !== prevProps.contact);
-    if (this.state.session !== prevState.session || this.props.contact !== prevProps.contact) {
-      axios.get('http://localhost:8080/messages?from=' + this.state.session.id + '&to=' + this.props.contact).then((response) => {
+    if (this.props.session !== prevState.session || this.props.contact !== prevProps.contact) {
+      axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact).then((response) => {
         console.log(response);
         const messages = Array.from(response.data);
         this.setState({
@@ -45,7 +45,7 @@ class MessageHistory extends Component {
     } else {
       axios.post('http://localhost:8080/messages', {
         text: event.target.message.value,
-        from: this.state.user.id,
+        from: this.props.user.id,
         to: 3,
         language: 'es'
       }).then((response) => {
