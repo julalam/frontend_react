@@ -4,7 +4,7 @@ class Login extends Component {
 
   handleClick(event) {
     event.preventDefault();
-    this.props.onClick(event, "Julia");
+    this.props.onLogin(event, "Julia");
   }
 
   render() {

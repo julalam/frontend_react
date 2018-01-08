@@ -35,7 +35,7 @@ class App extends Component {
         <div className="App">
           <Switch>
             <Route exact path='/' render = { () =>
-              <Home onClick = {this.handleLogin.bind(this)} session={this.state.session} user={this.state.user}/> } />
+              <Home onLogin = {this.handleLogin.bind(this)} session={this.state.session} user={this.state.user}/> } />
             <Route path='/test' component={Test}/>
             <Route path='/registration' component={Registration}/>
             <Route path='/:username' component={UserProfile}/>
