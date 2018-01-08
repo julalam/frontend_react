@@ -52,8 +52,7 @@ class App extends Component {
             <Route exact path='/' render = { () =>
               <Home onLogin={this.handleLogin.bind(this)} session={this.state.session} user={this.state.user}/> } />
             <Route path='/test' component={Test}/>
-            <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)}/> } />
-            <Route path='/:username' component={UserProfile}/>
+            <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} user={this.state.user}/> } />
           </Switch>
         </div>
       );

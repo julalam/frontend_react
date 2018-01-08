@@ -4,16 +4,6 @@ import UserProfile from './user_profile';
 import axios from 'axios'
 
 class Registration extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: null,
-      username: '',
-      language: '',
-      session: null,
-    };
-  }
-
   static defaultProps = {
     languages: ['ru', 'en', 'es']
   }
@@ -32,9 +22,9 @@ class Registration extends Component {
       return <option key={language} value={language}>{language}</option>
     });
 
-    if (this.state.id === this.state.session && this.state.session !== null) {
+    if (this.props.user.id === this.props.session && this.props.session !== null) {
       return (
-        <Redirect to={this.state.username} component={UserProfile} />
+        <Redirect to='/' />
       )
     } else {
       return (
