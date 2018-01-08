@@ -5,14 +5,12 @@ class MessageHistory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      session: this.props.session,
-      contact: this.props.contact,
       messages: [],
     };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/messages?from=' + this.state.session.id + '&to=' + this.state.contact).then((response) => {
+    axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact).then((response) => {
       const messages = Array.from(response.data);
       this.setState({
         messages: messages,

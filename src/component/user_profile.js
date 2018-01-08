@@ -6,7 +6,6 @@ class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      session: this.props.session,
       contact: null,
     };
   }
@@ -25,12 +24,12 @@ class UserProfile extends Component {
     return (
       <div className="user-profile">
         <button onClick={this.handleClick.bind(this)} type="button">Log Out</button>
-        <strong>{this.state.session.username}</strong>
+        <strong>{this.props.session.username}</strong>
         <div className="contact-list">
-          <ContactList session={this.state.session}  onContact={this.handleContact.bind(this)}/>
+          <ContactList session={this.props.session}  onContact={this.handleContact.bind(this)}/>
         </div>
         <div className="message-history">
-          <MessageHistory session={this.state.session} contact={this.state.contact} />
+          <MessageHistory session={this.props.session} contact={this.props.contact} />
         </div>
       </div>
     );
