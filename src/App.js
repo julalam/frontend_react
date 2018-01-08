@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Test from './component/test_component';
 import Home from './component/home';
 import Registration from './component/registration';
 import axios from 'axios';
@@ -60,7 +59,6 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render = { () =>
             <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} /> } />
-          <Route path='/test' component={Test}/>
           <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} /> } />
         </Switch>
       </div>
