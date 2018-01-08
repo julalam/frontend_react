@@ -13,7 +13,7 @@ class Home extends Component {
         <Link to='/registration'>Create Account</Link>
       </div>
     )
-    : <UserProfile user={this.props.user}/>
+    : <UserProfile onLogout={this.props.onLogout} user={this.props.user}/>
   }
   // render() {
   //   return <UserProfile user={this.props.user}/>;

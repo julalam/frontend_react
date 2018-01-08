@@ -27,6 +27,20 @@ class App extends Component {
     });
   }
 
+  handleLogout(event) {
+    axios.post('http://localhost:8080/logout').then((response) => {
+      this.setState({
+        session: response.data.session,
+      });
+      if (this.state.session === null) {
+        this.setState({
+          user: null,
+        })
+      }
+      console.log(`User logged out successfully`)
+    });
+  }
+
   handleRegistration(event, user) {
     if (user.username === '') {
       alert('username is required');
@@ -49,7 +63,7 @@ class App extends Component {
         <div className="App">
           <Switch>
             <Route exact path='/' render = { () =>
-              <Home onLogin={this.handleLogin.bind(this)} session={this.state.session} user={this.state.user}/> } />
+              <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} user={this.state.user}/> } />
             <Route path='/test' component={Test}/>
             <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} user={this.state.user}/> } />
           </Switch>
