@@ -45,11 +45,7 @@ class MessageHistory extends Component {
   };
 
   render() {
-    // const messages = this.state.messages.map(message => {
-    //   return <div key={message.id}>{message.text}</div>
-    // });
-
-    const messages = this.state.messages.map(message => {
+      const messages = this.state.messages.map(message => {
       if (message.from === this.props.session.id) {
         return <div key={message.id}>{message.text}</div>
       } else {
