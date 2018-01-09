@@ -4,21 +4,22 @@ import axios from 'axios';
 
 
 class Registration extends Component {
-  static defaultProps = {
-    languages: ['ru', 'en', 'es']
+  constructor(props) {
+    super(props);
+    this.state = {
+      languages: [],
+    };
   }
 
-  // componentWillMount() {
-  //   axios.get('http://localhost:8080/languages').then((response) => {
-  //     console.log(response);
-  //     const languages = Array.from(response.data);
-  //     this.props = {
-  //       languages: languages,
-  //     }
-  //     console.log(this.props.languages);
-  //   });
-  // }
-
+  componentWillMount() {
+    axios.get('http://localhost:8080/languages').then((response) => {
+      console.log(response);
+      const languages = Array.from(response.data);
+      this.setState({
+        languages: languages,
+      });
+    });
+  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -30,8 +31,9 @@ class Registration extends Component {
   }
 
   render() {
-    const languageOptions = this.props.languages.map(language => {
-      return <option key={language} value={language}>{language}</option>
+    console.log(this.state.languages);
+    const languageOptions = this.state.languages.map(language => {
+      return <option key={language.code} value={language.name}>{language.native_name}</option>
     });
 
     if (this.props.session) {
