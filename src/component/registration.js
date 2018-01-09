@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+import axios from 'axios';
+
 
 class Registration extends Component {
   static defaultProps = {
     languages: ['ru', 'en', 'es']
   }
+
+  // componentWillMount() {
+  //   axios.get('http://localhost:8080/languages').then((response) => {
+  //     console.log(response);
+  //     const languages = Array.from(response.data);
+  //     this.props = {
+  //       languages: languages,
+  //     }
+  //     console.log(this.props.languages);
+  //   });
+  // }
+
 
   handleSubmit(event) {
     event.preventDefault();
