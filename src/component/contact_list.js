@@ -24,7 +24,7 @@ class ContactList extends Component {
 
   render() {
     const contacts = this.state.contacts.map(contact => {
-      return <div onClick={this.handleClick.bind(this, contact.id)} key={contact.id}>{contact.username}</div>
+      return <div onClick={this.handleClick.bind(this, contact)} key={contact.id}>{contact.username}</div>
     });
 
     return (

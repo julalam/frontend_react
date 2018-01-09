@@ -9,25 +9,18 @@ class MessageHistory extends Component {
     };
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact).then((response) => {
-      const messages = Array.from(response.data);
-      this.setState({
-        messages: messages,
-      })
-    });
-  };
+  // componentDidMount() {
+  //   axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact).then((response) => {
+  //     const messages = Array.from(response.data);
+  //     this.setState({
+  //       messages: messages,
+  //     })
+  //   });
+  // };
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log('in componentDidUpdate');
-    // console.log(this.state.session);
-    // console.log(prevState.session);
-    // console.log(this.state.session !== prevState.session);
-    // console.log(this.props.contact);
-    // console.log(prevProps.contact);
-    // console.log(this.props.contact !== prevProps.contact);
     if (this.props.session !== prevProps.session || this.props.contact !== prevProps.contact) {
-      axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact).then((response) => {
+      axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact.id).then((response) => {
         console.log(response);
         const messages = Array.from(response.data);
         this.setState({
@@ -45,9 +38,9 @@ class MessageHistory extends Component {
     } else {
       axios.post('http://localhost:8080/messages', {
         text: event.target.message.value,
-        from: this.props.user.id,
-        to: 3,
-        language: 'es'
+        from: this.props.session.id,
+        to: this.props.contact.id,
+        language: this.props.contact.language,
       }).then((response) => {
         const allMessages = this.state.messages
         allMessages.push(response.data)
