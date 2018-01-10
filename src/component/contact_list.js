@@ -100,7 +100,7 @@ class ContactList extends Component {
         return (
           <div key={user.user.id}>
           <div>{user.user.username}
-          <button onClick={this.createRequest.bind(this, user)} type="button">Send Request</button></div>
+          <button onClick={this.createRequest.bind(this, user.user)} type="button">Send Request</button></div>
           </div>
         )
       }
