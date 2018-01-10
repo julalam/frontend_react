@@ -57,9 +57,8 @@ class MessageHistory extends Component {
       const messages = this.state.messages.map(message => {
       if (message.from === this.props.session.id) {
         return (
-          <div key={message.id} onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}>
+          <div key={message.id}>
           {message.text}
-          { this.state.hover && <div>{message.message}</div>}
           </div>
         )
       } else {
