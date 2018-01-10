@@ -26,9 +26,11 @@ class UserProfile extends Component {
         <button onClick={this.handleClick.bind(this)} type="button">Log Out</button>
         <strong>{this.props.session.username}</strong>
         <div className="contact-list">
+          <br/>
           <ContactList session={this.props.session}  onContact={this.handleContact.bind(this)}/>
         </div>
         <div className="message-history">
+          <br/>
           <MessageHistory session={this.props.session} contact={this.state.contact} />
         </div>
       </div>

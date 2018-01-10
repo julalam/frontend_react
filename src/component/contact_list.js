@@ -5,17 +5,27 @@ class ContactList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
+      users: {
+        sentRequests: [],
+        receivedRequests: [],
+        friends: [],
+        moreUsers: [],
+      },
       requests: [],
       contacts: [],
     };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/users').then((response) => {
-      const users = Array.from(response.data);
+    axios.get('http://localhost:8080/users?user=' + this.props.session.id).then((response) => {
+      const users = response.data;
       this.setState({
-        users: users,
+        users: {
+          sentRequests: users.sent_requests,
+          receivedRequests: users.received_requests,
+          friends: users.contact_list,
+          moreUsers: users.more_users,
+        }
       })
     });
 
@@ -47,14 +57,6 @@ class ContactList extends Component {
       status: 'accepted',
     }).then((response) => {
       console.log(`${this.props.session.username} accepted request`);
-      // const index = this.state.requests.findIndex(x => x.contact===contact)
-      // console.log(index);
-      // console.log(this.state.requests);
-      // console.log(this.state.requests.splice(index, 1));
-      // this.setState({
-      //   requests: this.state.requests.splice(index, 1),
-      //   contacts: this.state.contacts.splice(index, 0, contact)
-      // })
     });
   }
 
@@ -67,28 +69,35 @@ class ContactList extends Component {
   }
 
   render() {
-    // const users = this.state.users.map(user => {
-    //   if (this.state.requests.sender === user || this.state.contact.sender === user) {
-    //     return (
-    //       <div key={user.id}>
-    //         <div>{user.username}</div>
-    //       </div>
-    //     )
-    //   } else {
-    //     return (
-    //       <div key={user.id}>
-    //       <div>{user.username}</div>
-    //       <button onClick={this.createRequest.bind(this, user)} type="button">Send Request</button>
-    //       </div>
-    //     )
-    //   }
-    // });
-
-    const users = this.state.users.map(user => {
+    const moreUsers = this.state.users.moreUsers.map(user => {
       return (
         <div key={user.id}>
           <div>{user.username}</div>
           <button onClick={this.createRequest.bind(this, user)} type="button">Send Request</button>
+        </div>
+      )
+    });
+
+    const sentRequests = this.state.users.sentRequests.map(user => {
+      return (
+        <div key={user.id}>
+          <div>{user.username} Request sent</div>
+        </div>
+      )
+    });
+
+    const receivedRequests = this.state.users.receivedRequests.map(user => {
+      return (
+        <div key={user.id}>
+          <div>{user.username} User sent you a request</div>
+        </div>
+      )
+    });
+
+    const friends = this.state.users.friends.map(user => {
+      return (
+        <div key={user.id}>
+          <div>{user.username} Already in contact list</div>
         </div>
       )
     });
@@ -115,12 +124,17 @@ class ContactList extends Component {
       <div>
         <div>
           <strong>All Users:</strong>
-          {users}
+          {moreUsers}
+          {sentRequests}
+          {receivedRequests}
+          {friends}
         </div>
+        <br/>
         <div>
           <strong>All Pending Requests:</strong>
           {requests}
         </div>
+        <br/>
         <div>
           <strong>Contact List:</strong>
           {contacts}
