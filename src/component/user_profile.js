@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ContactList from './contact_list';
 import MessageHistory from './message_history';
+import ContactProfile from './contact_profile';
 import cookie from 'react-cookies';
 
 class UserProfile extends Component {
@@ -16,12 +17,12 @@ class UserProfile extends Component {
   }
 
   handleContact(contact) {
-    this.setState({
-      contact: contact,
-    })
     if (this.state.contact) {
       cookie.remove('contact')
     }
+    this.setState({
+      contact: contact,
+    })
     cookie.save('contact', this.state.contact)
   }
 
@@ -37,6 +38,10 @@ class UserProfile extends Component {
         <div className="message-history">
           <br/>
           <MessageHistory session={this.props.session} contact={this.state.contact} />
+        </div>
+        <br/>
+        <div className="contact-profile">
+          <ContactProfile contact={this.state.contact} />
         </div>
       </div>
     );
