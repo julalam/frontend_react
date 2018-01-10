@@ -13,7 +13,6 @@ class Registration extends Component {
 
   componentWillMount() {
     axios.get('http://localhost:8080/languages').then((response) => {
-      console.log(response);
       const languages = Array.from(response.data);
       this.setState({
         languages: languages,
@@ -31,7 +30,6 @@ class Registration extends Component {
   }
 
   render() {
-    console.log(this.state.languages);
     const languageOptions = this.state.languages.map(language => {
       return <option key={language.code} value={language.name}>{language.native_name}</option>
     });

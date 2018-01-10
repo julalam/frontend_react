@@ -42,12 +42,20 @@ class ContactList extends Component {
     });
   }
 
-  acceptRequest(event) {
-
+  acceptRequest(contact, event) {
+    axios.patch('http://localhost:8080/contacts/' + contact.id, {
+      status: 'accepted',
+    }).then((response) => {
+      console.log(`${this.props.session.username} accepted request`);
+    });
   }
 
-  declineRequest(event) {
-
+  declineRequest(contact, event) {
+    axios.patch('http://localhost:8080/contacts/' + contact.id, {
+      status: 'declined',
+    }).then((response) => {
+      console.log(`${this.props.session.username} declined request`);
+    });
   }
 
   render() {
@@ -64,16 +72,16 @@ class ContactList extends Component {
       return (
         <div key={contact.sender.id}>
           <div>{contact.sender.username}</div>
-          <button onClick={this.acceptRequest.bind(this, contact.sender)} type="button">Accept Request</button>
-          <button onClick={this.declineRequest.bind(this, contact.sender)} type="button">Decline Request</button>
+          <button onClick={this.acceptRequest.bind(this, contact.contact)} type="button">Accept Request</button>
+          <button onClick={this.declineRequest.bind(this, contact.contact)} type="button">Decline Request</button>
         </div>
       )
     });
 
     const contacts = this.state.contacts.map(contact => {
       return (
-        <div key={contact.id}>
-          <div onClick={this.handleClick.bind(this, contact)}>{contact.username}</div>
+        <div key={contact.sender.id}>
+          <div onClick={this.handleClick.bind(this, contact)}>{contact.sender.username}</div>
         </div>
       )
     });
