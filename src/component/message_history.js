@@ -44,6 +44,9 @@ class MessageHistory extends Component {
   };
 
   render() {
+    console.log(this.props.contact);
+    console.log(this.props.session);
+    console.log(this.state.messages);
       const messages = this.state.messages.map(message => {
       if (message.from === this.props.session.id) {
         return <div key={message.id}>{message.text}</div>
@@ -57,14 +60,14 @@ class MessageHistory extends Component {
     } else {
       return (
         <div>
-        <strong>Message History with user {this.props.contact.username}:</strong>
-        {messages}
-        <div className="new-message">
-        <form onSubmit={this.sendMessage.bind(this)}>
-        <input type="text" placeholder="Type a message..." name="message" />
-        <button type="submit">Send</button>
-        </form>
-        </div>
+          <strong>Message History with user {this.props.contact.username}:</strong>
+          {messages}
+          <div className="new-message">
+            <form onSubmit={this.sendMessage.bind(this)}>
+              <input type="text" placeholder="Type a message..." name="message" />
+              <button type="submit">Send</button>
+            </form>
+          </div>
         </div>
       );
     }

@@ -31,6 +31,7 @@ class App extends Component {
       });
       if (!this.state.session) {
         cookie.remove('session')
+        cookie.remove('contact')
         console.log(`User logged out successfully`);
       }
     });

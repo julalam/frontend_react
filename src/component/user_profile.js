@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ContactList from './contact_list';
 import MessageHistory from './message_history';
+import cookie from 'react-cookies';
 
 class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contact: null,
+      contact: cookie.load('contact'),
     };
   }
 
@@ -18,6 +19,10 @@ class UserProfile extends Component {
     this.setState({
       contact: contact,
     })
+    if (this.state.contact) {
+      cookie.remove('contact')
+    }
+    cookie.save('contact', this.state.contact)
   }
 
   render() {
