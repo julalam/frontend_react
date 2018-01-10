@@ -33,7 +33,7 @@ class ContactList extends Component {
     this.props.onContact(contact);
   }
 
-  handleRequest(user, event) {
+  createRequest(user, event) {
     axios.post('http://localhost:8080/contacts', {
       from: this.props.session.id,
       to: user.id,
@@ -63,7 +63,7 @@ class ContactList extends Component {
       return (
         <div key={user.id}>
           <div>{user.username}</div>
-          <button onClick={this.handleRequest.bind(this, user)} type="button">Send Request</button>
+          <button onClick={this.createRequest.bind(this, user)} type="button">Send Request</button>
         </div>
       )
     });
@@ -81,7 +81,7 @@ class ContactList extends Component {
     const contacts = this.state.contacts.map(contact => {
       return (
         <div key={contact.sender.id}>
-          <div onClick={this.handleClick.bind(this, contact)}>{contact.sender.username}</div>
+          <div onClick={this.handleClick.bind(this, contact.sender)}>{contact.sender.username}</div>
         </div>
       )
     });
