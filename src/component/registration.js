@@ -31,7 +31,7 @@ class Registration extends Component {
 
   render() {
     const languageOptions = this.state.languages.map(language => {
-      return <option key={language.code} value={language.name}>{language.native_name}</option>
+      return <option key={language.code} value={language.code}>{language.native_name}</option>
     });
 
     if (this.props.session) {

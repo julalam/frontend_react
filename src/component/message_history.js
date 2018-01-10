@@ -57,7 +57,7 @@ class MessageHistory extends Component {
     } else {
       return (
         <div>
-        <strong>Message History:</strong>
+        <strong>Message History with user {this.props.contact.username}:</strong>
         {messages}
         <div className="new-message">
         <form onSubmit={this.sendMessage.bind(this)}>

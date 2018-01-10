@@ -47,6 +47,14 @@ class ContactList extends Component {
       status: 'accepted',
     }).then((response) => {
       console.log(`${this.props.session.username} accepted request`);
+      // const index = this.state.requests.findIndex(x => x.contact===contact)
+      // console.log(index);
+      // console.log(this.state.requests);
+      // console.log(this.state.requests.splice(index, 1));
+      // this.setState({
+      //   requests: this.state.requests.splice(index, 1),
+      //   contacts: this.state.contacts.splice(index, 0, contact)
+      // })
     });
   }
 
@@ -59,6 +67,23 @@ class ContactList extends Component {
   }
 
   render() {
+    // const users = this.state.users.map(user => {
+    //   if (this.state.requests.sender === user || this.state.contact.sender === user) {
+    //     return (
+    //       <div key={user.id}>
+    //         <div>{user.username}</div>
+    //       </div>
+    //     )
+    //   } else {
+    //     return (
+    //       <div key={user.id}>
+    //       <div>{user.username}</div>
+    //       <button onClick={this.createRequest.bind(this, user)} type="button">Send Request</button>
+    //       </div>
+    //     )
+    //   }
+    // });
+
     const users = this.state.users.map(user => {
       return (
         <div key={user.id}>
@@ -68,12 +93,12 @@ class ContactList extends Component {
       )
     });
 
-    const requests = this.state.requests.map(contact => {
+    const requests = this.state.requests.map(request => {
       return (
-        <div key={contact.sender.id}>
-          <div>{contact.sender.username}</div>
-          <button onClick={this.acceptRequest.bind(this, contact.contact)} type="button">Accept Request</button>
-          <button onClick={this.declineRequest.bind(this, contact.contact)} type="button">Decline Request</button>
+        <div key={request.sender.id}>
+          <div>{request.sender.username}</div>
+          <button onClick={this.acceptRequest.bind(this, request.contact)} type="button">Accept Request</button>
+          <button onClick={this.declineRequest.bind(this, request.contact)} type="button">Decline Request</button>
         </div>
       )
     });
