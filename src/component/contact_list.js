@@ -16,7 +16,7 @@ class ContactList extends Component {
     };
   }
 
-  componentDidMount() {
+  getUsersAndContacts() {
     axios.get('http://localhost:8080/users?user=' + this.props.session.id).then((response) => {
       const users = response.data;
       this.setState({
@@ -39,6 +39,10 @@ class ContactList extends Component {
     });
   }
 
+  componentDidMount() {
+    this.getUsersAndContacts();
+  }
+
   handleClick(contact, event) {
     this.props.onContact(contact);
   }
@@ -49,6 +53,7 @@ class ContactList extends Component {
       to: user.id,
     }).then((response) => {
       console.log(`Sent request from ${this.props.session.username} to ${user.username}`);
+      this.getUsersAndContacts();
     });
   }
 
@@ -57,6 +62,7 @@ class ContactList extends Component {
       status: 'accepted',
     }).then((response) => {
       console.log(`${this.props.session.username} accepted request`);
+      this.getUsersAndContacts();
     });
   }
 
@@ -65,6 +71,7 @@ class ContactList extends Component {
       status: 'declined',
     }).then((response) => {
       console.log(`${this.props.session.username} declined request`);
+      this.getUsersAndContacts();
     });
   }
 
