@@ -83,11 +83,23 @@ class ContactList extends Component {
   }
 
   render() {
-    const filteredUsers = this.state.users.moreUsers.filter((user) => {
+    const filteredMoreUsers = this.state.users.moreUsers.filter((user) => {
       return user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
     });
-    
-    const moreUsers = filteredUsers.map(user => {
+
+    const filteredSentRequests = this.state.users.sentRequests.filter((user) => {
+      return user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+    });
+
+    const filteredReceivedRequests = this.state.users.sentRequests.filter((user) => {
+      return user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+    });
+
+    const filteredFriends = this.state.users.sentRequests.filter((user) => {
+      return user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+    });
+
+    const moreUsers = filteredMoreUsers.map(user => {
       return (
         <div key={user.id}>
           <div>{user.username}</div>
@@ -96,16 +108,7 @@ class ContactList extends Component {
       )
     });
 
-    // const moreUsers = this.state.users.moreUsers.map(user => {
-    //   return (
-    //     <div key={user.id}>
-    //       <div>{user.username}</div>
-    //       <button onClick={this.createRequest.bind(this, user)} type="button">Send Request</button>
-    //     </div>
-    //   )
-    // });
-
-    const sentRequests = this.state.users.sentRequests.map(user => {
+    const sentRequests = filteredSentRequests.map(user => {
       return (
         <div key={user.id}>
           <div>{user.username} Request sent</div>
@@ -113,7 +116,7 @@ class ContactList extends Component {
       )
     });
 
-    const receivedRequests = this.state.users.receivedRequests.map(user => {
+    const receivedRequests = filteredReceivedRequests.map(user => {
       return (
         <div key={user.id}>
           <div>{user.username} User sent you a request</div>
@@ -121,7 +124,7 @@ class ContactList extends Component {
       )
     });
 
-    const friends = this.state.users.friends.map(user => {
+    const friends = filteredFriends.map(user => {
       return (
         <div key={user.id}>
           <div>{user.username} Already in contact list</div>
