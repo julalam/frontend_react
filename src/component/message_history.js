@@ -6,6 +6,7 @@ class MessageHistory extends Component {
     super(props);
     this.state = {
       messages: [],
+      hover: false,
     };
   }
 
@@ -43,15 +44,31 @@ class MessageHistory extends Component {
     }
   };
 
+  handleMouseHover() {
+    this.setState({
+      hover: !this.state.hover,
+    })
+  }
+
   render() {
     console.log(this.props.contact);
     console.log(this.props.session);
     console.log(this.state.messages);
       const messages = this.state.messages.map(message => {
       if (message.from === this.props.session.id) {
-        return <div key={message.id}>{message.text}</div>
+        return (
+          <div key={message.id} onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}>
+          {message.text}
+          { this.state.hover && <div>{message.message}</div>}
+          </div>
+        )
       } else {
-        return <div key={message.id}>{message.message}</div>
+        return (
+          <div key={message.id}
+          onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}>
+          {message.message}
+          { this.state.hover && <div>{message.text}</div>}
+          </div>)
       }
     });
 
