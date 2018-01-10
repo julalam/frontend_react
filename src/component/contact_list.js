@@ -5,12 +5,7 @@ class ContactList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: {
-        sentRequests: [],
-        receivedRequests: [],
-        friends: [],
-        moreUsers: [],
-      },
+      users: [],
       requests: [],
       contacts: [],
       search: '',
@@ -21,12 +16,7 @@ class ContactList extends Component {
     axios.get('http://localhost:8080/users?user=' + this.props.session.id).then((response) => {
       const users = response.data;
       this.setState({
-        users: {
-          sentRequests: users.sent_requests,
-          receivedRequests: users.received_requests,
-          friends: users.contact_list,
-          moreUsers: users.more_users,
-        }
+        users: users,
       })
     });
 
@@ -83,53 +73,37 @@ class ContactList extends Component {
   }
 
   render() {
-    const filteredMoreUsers = this.state.users.moreUsers.filter((user) => {
-      return user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+    const filteredUsers = this.state.users.filter((user) => {
+      return user.user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
     });
 
-    const filteredSentRequests = this.state.users.sentRequests.filter((user) => {
-      return user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-    });
-
-    const filteredReceivedRequests = this.state.users.sentRequests.filter((user) => {
-      return user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-    });
-
-    const filteredFriends = this.state.users.sentRequests.filter((user) => {
-      return user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-    });
-
-    const moreUsers = filteredMoreUsers.map(user => {
-      return (
-        <div key={user.id}>
-          <div>{user.username}</div>
-          <button onClick={this.createRequest.bind(this, user)} type="button">Send Request</button>
-        </div>
-      )
-    });
-
-    const sentRequests = filteredSentRequests.map(user => {
-      return (
-        <div key={user.id}>
-          <div>{user.username} Request sent</div>
-        </div>
-      )
-    });
-
-    const receivedRequests = filteredReceivedRequests.map(user => {
-      return (
-        <div key={user.id}>
-          <div>{user.username} User sent you a request</div>
-        </div>
-      )
-    });
-
-    const friends = filteredFriends.map(user => {
-      return (
-        <div key={user.id}>
-          <div>{user.username} Already in contact list</div>
-        </div>
-      )
+    const users = filteredUsers.map(user => {
+      if (user.status === 'friend') {
+        return (
+          <div key={user.user.id}>
+          <div>{user.user.username} (already in your contact list)</div>
+          </div>
+        )
+      } else if (user.status === 'received_request') {
+        return (
+          <div key={user.user.id}>
+          <div>{user.user.username} (sent you a request)</div>
+          </div>
+        )
+      } else if (user.status === 'sent_request') {
+        return (
+          <div key={user.user.id}>
+          <div>{user.user.username} (request already sent)</div>
+          </div>
+        )
+      } else {
+        return (
+          <div key={user.user.id}>
+          <div>{user.user.username}
+          <button onClick={this.createRequest.bind(this, user)} type="button">Send Request</button></div>
+          </div>
+        )
+      }
     });
 
     const requests = this.state.requests.map(request => {
@@ -156,10 +130,7 @@ class ContactList extends Component {
         <div>
         <br/>
           <strong>All Users:</strong>
-          {moreUsers}
-          {sentRequests}
-          {receivedRequests}
-          {friends}
+          {users}
         </div>
         <br/>
         <div>
