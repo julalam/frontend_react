@@ -13,6 +13,7 @@ class ContactList extends Component {
       },
       requests: [],
       contacts: [],
+      search: '',
     };
   }
 
@@ -75,8 +76,18 @@ class ContactList extends Component {
     });
   }
 
+  updateSearch(event) {
+    this.setState({
+      search: event.target.value.substr(0, 20)
+    });
+  }
+
   render() {
-    const moreUsers = this.state.users.moreUsers.map(user => {
+    const filteredUsers = this.state.users.moreUsers.filter((user) => {
+      return user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+    });
+    
+    const moreUsers = filteredUsers.map(user => {
       return (
         <div key={user.id}>
           <div>{user.username}</div>
@@ -84,6 +95,15 @@ class ContactList extends Component {
         </div>
       )
     });
+
+    // const moreUsers = this.state.users.moreUsers.map(user => {
+    //   return (
+    //     <div key={user.id}>
+    //       <div>{user.username}</div>
+    //       <button onClick={this.createRequest.bind(this, user)} type="button">Send Request</button>
+    //     </div>
+    //   )
+    // });
 
     const sentRequests = this.state.users.sentRequests.map(user => {
       return (
@@ -129,7 +149,9 @@ class ContactList extends Component {
 
     return (
       <div>
+        <input type="text" placeholder='Search...' value={this.state.search} onChange={this.updateSearch.bind(this)} />
         <div>
+        <br/>
           <strong>All Users:</strong>
           {moreUsers}
           {sentRequests}
