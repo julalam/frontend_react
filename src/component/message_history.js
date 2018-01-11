@@ -67,7 +67,8 @@ class MessageHistory extends Component {
           onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}>
           {message.message}
           { this.state.hover && <div>{message.text}</div>}
-          </div>)
+          </div>
+        )
       }
     });
 
