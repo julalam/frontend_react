@@ -11,6 +11,7 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
+        { this.props.errors && <div>{this.props.errors}</div>}
         <form onSubmit={this.handleClick.bind(this)}>
           <input type="text" placeholder="Username" name="username" />
           <button type="submit">Log In</button>
