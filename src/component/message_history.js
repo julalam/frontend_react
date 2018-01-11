@@ -11,6 +11,7 @@ class MessageHistory extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidMount');
     if (this.props.session !== prevProps.session || this.props.contact !== prevProps.contact) {
       axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact.id).then((response) => {
         const messages = Array.from(response.data);
@@ -54,7 +55,7 @@ class MessageHistory extends Component {
     console.log(this.props.contact);
     console.log(this.props.session);
     console.log(this.state.messages);
-      const messages = this.state.messages.map(message => {
+    const messages = this.state.messages.map(message => {
       if (message.from === this.props.session.id) {
         return (
           <div key={message.id}>
@@ -64,9 +65,10 @@ class MessageHistory extends Component {
       } else {
         return (
           <div key={message.id}
-          onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}>
+          // onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
+          >
           {message.message}
-          { this.state.hover && <div>{message.text}</div>}
+          // { this.state.hover && <div>{message.text}</div>}
           </div>
         )
       }
