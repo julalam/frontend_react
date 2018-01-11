@@ -59,6 +59,9 @@ class App extends Component {
     } else {
       axios.post('http://localhost:8080/users', {
         username: user.username,
+        email: user.email,
+        password: user.password,
+        country: user.country,
         language: user.language,
       }).then((response) => {
         this.setState({

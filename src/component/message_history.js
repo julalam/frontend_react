@@ -12,7 +12,7 @@ class MessageHistory extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log('componentDidMount');
-    if (this.props.session !== prevProps.session || this.props.contact !== prevProps.contact) {
+    if (this.props.session !== prevProps.session || this.props.contact !== prevProps.contact){
       axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact.id).then((response) => {
         const messages = Array.from(response.data);
         this.setState({
