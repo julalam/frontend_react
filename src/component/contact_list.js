@@ -47,9 +47,7 @@ class ContactList extends Component {
   }
 
   declineRequest(contact, event) {
-    axios.patch('http://localhost:8080/contacts/' + contact.id, {
-      status: 'declined',
-    }).then((response) => {
+    axios.delete('http://localhost:8080/contacts/' + contact.id).then((response) => {
       console.log(`${this.props.session.username} declined request`);
       this.getContacts();
     });
