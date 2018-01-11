@@ -6,6 +6,7 @@ class ContactList extends Component {
     super(props);
     this.state = {
       contacts: [],
+      search: '',
     };
   }
 
@@ -55,16 +56,19 @@ class ContactList extends Component {
   }
 
   updateSearch(event) {
-    // this.setState({
-    //   search: event.target.value.substr(0, 20)
-    // });
+    const query = event.target.value.substr(0, 20);
+    axios.get('http://localhost:8080/users?user=' + this.props.session.id + '&search=' + query).then((response) => {
+      const contacts = response.data;
+      this.setState({
+        contacts: contacts,
+      })
+    });
+    this.setState({
+      search: query
+    });
   }
 
   render() {
-    // const filteredUsers = this.state.users.filter((user) => {
-    //   return user.user.username.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-    // });
-
     const contacts = this.state.contacts.map(contact => {
       if (contact.status === 'friend') {
         return (
