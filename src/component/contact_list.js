@@ -10,7 +10,7 @@ class ContactList extends Component {
     };
   }
 
-  getUsersAndContacts() {
+  getContacts() {
     axios.get('http://localhost:8080/users?user=' + this.props.session.id).then((response) => {
       const contacts = response.data;
       this.setState({
@@ -20,7 +20,7 @@ class ContactList extends Component {
   }
 
   componentDidMount() {
-    this.getUsersAndContacts();
+    this.getContacts();
   }
 
   handleClick(contact, event) {
@@ -33,7 +33,7 @@ class ContactList extends Component {
       to: user.id,
     }).then((response) => {
       console.log(`Sent request from ${this.props.session.username} to ${user.username}`);
-      this.getUsersAndContacts();
+      this.getContacts();
     });
   }
 
@@ -42,7 +42,7 @@ class ContactList extends Component {
       status: 'accepted',
     }).then((response) => {
       console.log(`${this.props.session.username} accepted request`);
-      this.getUsersAndContacts();
+      this.getContacts();
     });
   }
 
@@ -51,7 +51,7 @@ class ContactList extends Component {
       status: 'declined',
     }).then((response) => {
       console.log(`${this.props.session.username} declined request`);
-      this.getUsersAndContacts();
+      this.getContacts();
     });
   }
 
@@ -70,13 +70,20 @@ class ContactList extends Component {
 
   render() {
     const contacts = this.state.contacts.map(contact => {
-      if (contact.status === 'friend') {
+      if (contact.status === 'sent_request') {
         return (
-          <div key={contact.user.id} onClick={this.handleClick.bind(this, contact.user)}>
-          {contact.user.username}
+          <div key={contact.user.id}>
+            {contact.user.username} (request already sent)
           </div>
         )
-      } else {
+      } else if (contact.status === 'user') {
+        return (
+          <div key={contact.user.id}>
+            {contact.user.username}
+            <button onClick={this.createRequest.bind(this, contact.user)} type="button">Send Request</button>
+          </div>
+        )
+      } else if (contact.status === 'received_request'){
         return (
           <div key={contact.user.id}>
             {contact.user.username}
@@ -84,55 +91,14 @@ class ContactList extends Component {
             <button onClick={this.declineRequest.bind(this, contact.contact)} type="button">Decline Request</button>
           </div>
         )
+      } else {
+        return (
+          <div key={contact.user.id} onClick={this.handleClick.bind(this, contact.user)}>
+          {contact.user.username}
+          </div>
+        )
       }
     });
-
-    // const users = filteredUsers.map(user => {
-    //   if (user.status === 'friend') {
-    //     return (
-    //       <div key={user.user.id}>
-    //       <div>{user.user.username} (already in your contact list)</div>
-    //       </div>
-    //     )
-    //   } else if (user.status === 'received_request') {
-    //     return (
-    //       <div key={user.user.id}>
-    //       <div>{user.user.username} (sent you a request)</div>
-    //       </div>
-    //     )
-    //   } else if (user.status === 'sent_request') {
-    //     return (
-    //       <div key={user.user.id}>
-    //       <div>{user.user.username} (request already sent)</div>
-    //       </div>
-    //     )
-    //   } else {
-    //     return (
-    //       <div key={user.user.id}>
-    //       <div>{user.user.username}
-    //       <button onClick={this.createRequest.bind(this, user.user)} type="button">Send Request</button></div>
-    //       </div>
-    //     )
-    //   }
-    // });
-
-    // const requests = this.state.requests.map(request => {
-    //   return (
-    //     <div key={request.sender.id}>
-    //       <div>{request.sender.username}</div>
-    //       <button onClick={this.acceptRequest.bind(this, request.contact)} type="button">Accept Request</button>
-    //       <button onClick={this.declineRequest.bind(this, request.contact)} type="button">Decline Request</button>
-    //     </div>
-    //   )
-    // });
-    //
-    // const contacts = this.state.contacts.map(contact => {
-    //   return (
-    //     <div key={contact.sender.id}>
-    //       <div onClick={this.handleClick.bind(this, contact.sender)}>{contact.sender.username}</div>
-    //     </div>
-    //   )
-    // });
 
     return (
       <div>
