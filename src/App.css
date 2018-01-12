@@ -1,1 +1,25 @@
+/* LOGIN PAGE */
 
+.logo {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.home {
+  vertical-align: middle;;
+  height: 600px;
+}
+
+.login {
+  display: block;
+  margin: auto;
+}
+
+.login h1 {
+  padding-bottom: 1em;
+}
+
+.login input, .login button {
+  margin: .5em 0;
+}

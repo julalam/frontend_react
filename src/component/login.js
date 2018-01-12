@@ -13,8 +13,11 @@ class Login extends Component {
       <div className="login">
         { this.props.errors && <div>{this.props.errors}</div>}
         <form onSubmit={this.handleClick.bind(this)}>
-          <input type="text" placeholder="Username" name="username" />
-          <button type="submit">Log In</button>
+          <div className="input-group-lg">
+            <input className="form-control" type="text" placeholder="Username" name="username" />
+            <input className="form-control" type="password" placeholder="Password" name="password" />
+            <button className="form-control" type="submit">Sign In</button>
+          </div>
         </form>
       </div>
     );
