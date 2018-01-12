@@ -54,23 +54,19 @@ class App extends Component {
   }
 
   handleRegistration(event, user) {
-    if (user.username === '') {
-      alert('username is required');
-    } else {
-      axios.post('http://localhost:8080/users', {
-        username: user.username,
-        email: user.email,
-        password: user.password,
-        country: user.country,
-        language: user.language,
-      }).then((response) => {
-        this.setState({
-          session: response.data.session,
-        });
-        cookie.save('session', this.state.session)
-        console.log(`User ${this.state.session.username} successfully created new account`)
-      })
-    }
+    axios.post('http://localhost:8080/users', {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      country: user.country,
+      language: user.language,
+    }).then((response) => {
+      this.setState({
+        session: response.data.session,
+      });
+      cookie.save('session', this.state.session)
+      console.log(`User ${this.state.session.username} successfully created new account`)
+    })
   }
 
   render() {

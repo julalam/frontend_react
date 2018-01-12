@@ -9,6 +9,14 @@ class Registration extends Component {
     this.state = {
       languages: [],
       countries: [],
+      username: '',
+      email: '',
+      password: '',
+      formErrors: {username: '', email: '', password: ''},
+      usernameValid: false,
+      emailValid: false,
+      passwordValid: false,
+      formValid: false,
     };
   }
 
@@ -28,6 +36,53 @@ class Registration extends Component {
     });
   }
 
+  handleUserInput(event) {
+    const field = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [field]: value
+    }, () => {this.validateField(field, value) });
+  }
+
+  validateField(field, value) {
+    let formErrors = this.state.formErrors;
+    let usernameValid = this.state.usernameValid;
+    let emailValid = this.state.emailValid;
+    let passwordValid = this.state.passwordValid;
+
+    switch(field) {
+      case 'username':
+        usernameValid = value.length > 0 && value.length <= 15;
+        formErrors.username = usernameValid ? '' : 'is invalid';
+        console.log(usernameValid);
+        break;
+      case 'email':
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        formErrors.email = emailValid ? '' : 'is invalid';
+        console.log(emailValid);
+        break;
+      case 'password':
+        passwordValid = value.length >= 6 && value.length <= 10;
+        formErrors.password = passwordValid ? '' : 'is invalid';
+        break;
+      default:
+        break;
+    }
+
+    this.setState({
+      formErrors: formErrors,
+      usernameValid: usernameValid,
+      emailValid: emailValid,
+      passwordValid: passwordValid,
+    }, this.validateForm);
+  }
+
+  validateForm() {
+    this.setState({
+      formValid: this.state.usernameValid && this.state.emailValid && this.state.passwordValid
+    })
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const user = {
@@ -41,6 +96,16 @@ class Registration extends Component {
   }
 
   render() {
+    const errors = Object.keys(this.state.formErrors).map((field, i) => {
+      if (this.state.formErrors[field].length > 0) {
+        return (
+          <p key={i}>{field}: {this.state.formErrors[field]}</p>
+        )
+      } else {
+        return '';
+      }
+    });
+
     const languageOptions = this.state.languages.map(language => {
       return <option key={language.id} value={language.code}>{language.native_name}</option>
     });
@@ -58,23 +123,26 @@ class Registration extends Component {
         <div className="registration">
           <h1>Create a New Account</h1>
 
+          <div>{errors}</div>
+
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <input type="text" placeholder="Username" name="username" />
+            <input type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput.bind(this)} />
             <br/>
-            <input type="text" placeholder="Email" name="email" />
+            <input type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput.bind(this)} />
             <br/>
-            <input type="password" placeholder="Password" name="password" />
+            <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput.bind(this)} />
             <br/>
             <select name="country">
               <option value="" disabled selected>Select Country</option>
               {countryOptions}
             </select>
+            <br/>
             <select name="language">
               <option value="" disabled selected>Select Language</option>
               {languageOptions}
             </select>
-
-            <button type="submit">Create Account</button>
+            <br/>
+            <button type="submit" disabled={!this.state.formValid} >Create Account</button>
           </form>
         </div>
       );
