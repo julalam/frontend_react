@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+import Footer from './footer';
 import axios from 'axios';
 
 
@@ -146,6 +147,7 @@ class Registration extends Component {
               </div>
             </form>
           </div>
+          <Footer />
         </div>
       );
     }

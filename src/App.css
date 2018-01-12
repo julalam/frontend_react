@@ -1,6 +1,11 @@
 /* COLORS */
 /* placeholder grey #85929E */
 
+/* GENERAL */
+html, body {
+  height: 100%;
+}
+
 /* LOGIN PAGE */
 .logo {
   display: block;
@@ -13,7 +18,7 @@
   height: 40rem;
 }
 
-.login {
+.login, .registration {
   max-width: 20em;
   display: block;
   margin: auto;
@@ -32,17 +37,6 @@
 }
 
 /* REGISTRATION PAGE */
-.registration {
-  width: 25rem;
-  display: block;
-  margin: auto;
-}
-
-.registration form {
-  max-width: 20rem;
-  margin: auto;
-}
-
 .registration form select {
   text-indent: .5rem;
   color: #85929E;
@@ -55,4 +49,14 @@
 
 .registration h2 {
   margin-left: 2.6rem;
+}
+
+/* FOOTER */
+footer {
+  position: absolute;
+  bottom: -50px;
+  height: 40px;
+  left: 0;
+  right: 0;
+  text-align: center;
 }

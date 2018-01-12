@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Login from './login';
 import UserProfile from './user_profile';
+import Footer from './footer';
 import { Link } from 'react-router-dom'
 
 class Home extends Component {
@@ -18,6 +19,7 @@ class Home extends Component {
               <Link className="form-control text-center" to='/registration'>Create Account</Link>
             </div>
           </div>
+          <Footer />
         </div>
       )
     }
