@@ -120,30 +120,32 @@ class Registration extends Component {
       )
     } else {
       return (
-        <div className="registration">
-          <h1>Create a New Account</h1>
+        <div className="row wrapper">
+          <div className="registration">
+            <img className="logo-sm" src="http://via.placeholder.com/100x100" />
 
-          <div>{errors}</div>
+            <h2>Sign Up</h2>
 
-          <form onSubmit={this.handleSubmit.bind(this)}>
-            <input type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput.bind(this)} />
-            <br/>
-            <input type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput.bind(this)} />
-            <br/>
-            <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput.bind(this)} />
-            <br/>
-            <select name="country">
-              <option value="" disabled selected>Select Country</option>
-              {countryOptions}
-            </select>
-            <br/>
-            <select name="language">
-              <option value="" disabled selected>Select Language</option>
-              {languageOptions}
-            </select>
-            <br/>
-            <button type="submit" disabled={!this.state.formValid} >Create Account</button>
-          </form>
+            <div>{errors}</div>
+
+            <form onSubmit={this.handleSubmit.bind(this)}>
+
+              <div className="input-group-lg">
+                <input className="form-control" type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput.bind(this)} />
+                <input className="form-control" type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput.bind(this)} />
+                <input className="form-control" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput.bind(this)} />
+                <select className="form-control" name="country">
+                  <option value="" disabled selected>Select Country</option>
+                  {countryOptions}
+                </select>
+                <select className="form-control" name="language">
+                  <option value="" disabled selected>Select Language</option>
+                  {languageOptions}
+                </select>
+                <button className="form-control" type="submit" disabled={!this.state.formValid} >Create Account</button>
+              </div>
+            </form>
+          </div>
         </div>
       );
     }

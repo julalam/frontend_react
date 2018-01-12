@@ -9,15 +9,13 @@ class Home extends Component {
       return <UserProfile onLogout={this.props.onLogout} session={this.props.session} />
     } else {
       return (
-        <div className="container-fluid">
-          <div className="row home">
-            <div className="login">
-              <img className="logo" src="http://via.placeholder.com/150x150" />
-              <h1 className="logo">NAME</h1>
-              <Login onLogin={this.props.onLogin} errors={this.props.errors} />
-              <div className="input-group-lg">
-                <Link className="form-control text-center" to='/registration'>Create Account</Link>
-              </div>
+        <div className="row wrapper">
+          <div className="login">
+            <img className="logo" src="http://via.placeholder.com/150x150" />
+            <h1 className="logo">NAME</h1>
+            <Login onLogin={this.props.onLogin} errors={this.props.errors} />
+            <div className="input-group-lg">
+              <Link className="form-control text-center" to='/registration'>Create Account</Link>
             </div>
           </div>
         </div>

@@ -1,17 +1,20 @@
-/* LOGIN PAGE */
+/* COLORS */
+/* placeholder grey #85929E */
 
+/* LOGIN PAGE */
 .logo {
   display: block;
   margin: auto;
   text-align: center;
 }
 
-.home {
-  vertical-align: middle;;
-  height: 600px;
+.wrapper {
+  vertical-align: middle;
+  height: 40rem;
 }
 
 .login {
+  max-width: 20em;
   display: block;
   margin: auto;
 }
@@ -20,6 +23,36 @@
   padding-bottom: 1em;
 }
 
-.login input, .login button {
+.login input, .login button, .registration input, .registration button, .registration select {
   margin: .5em 0;
+}
+
+.login a {
+  text-decoration: none;
+}
+
+/* REGISTRATION PAGE */
+.registration {
+  width: 25rem;
+  display: block;
+  margin: auto;
+}
+
+.registration form {
+  max-width: 20rem;
+  margin: auto;
+}
+
+.registration form select {
+  text-indent: .5rem;
+  color: #85929E;
+}
+
+.logo-sm {
+  display: block;
+  margin-bottom: 3rem;
+}
+
+.registration h2 {
+  margin-left: 2.6rem;
 }

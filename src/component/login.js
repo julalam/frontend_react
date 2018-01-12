@@ -10,7 +10,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login">
+      <div>
         { this.props.errors && <div>{this.props.errors}</div>}
         <form onSubmit={this.handleClick.bind(this)}>
           <div className="input-group-lg">
