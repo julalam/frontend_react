@@ -76,7 +76,7 @@ class ContactList extends Component {
         )
       } else if (contact.status === 'user') {
         return (
-          <div key={contact.user.id}>
+          <div key={contact.user.id} className="btn btn-default">
             {contact.user.username}
             <button onClick={this.createRequest.bind(this, contact.user)} type="button">Send Request</button>
           </div>
