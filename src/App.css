@@ -11,24 +11,28 @@ html, body {
   display: block;
   margin: auto;
   text-align: center;
+
+  padding-top: 7rem;
 }
 
 .wrapper {
   vertical-align: middle;
   height: 40rem;
+
 }
 
 .login, .registration {
-  max-width: 20em;
+  max-width: 17em;
   display: block;
   margin: auto;
 }
 
 .login h1 {
+  padding-top: .5rem;
   padding-bottom: 1em;
 }
 
-.login input, .login button, .registration input, .registration button, .registration select {
+.login .input-group, .login button, .registration .input-group, .registration button, .registration select  {
   margin: .5em 0;
 }
 
@@ -54,11 +58,11 @@ html, body {
 /* FOOTER */
 footer {
   position: absolute;
-  bottom: -50px;
-  height: 40px;
+  bottom: 0;
   left: 0;
   right: 0;
   text-align: center;
+  padding: 1.5rem;
 }
 
 /* USER PROFILE */

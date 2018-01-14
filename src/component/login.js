@@ -13,9 +13,19 @@ class Login extends Component {
       <div>
         { this.props.errors && <div>{this.props.errors}</div>}
         <form onSubmit={this.handleClick.bind(this)}>
-          <div className="input-group-lg">
-            <input className="form-control" type="text" placeholder="Username" name="username" />
-            <input className="form-control" type="password" placeholder="Password" name="password" />
+          <div className="form-group-lg">
+            <div className="input-group">
+              <div className="input-group-addon">
+                <span className="glyphicon glyphicon-user"></span>
+              </div>
+              <input className="form-control" type="text" placeholder="Username" name="username" />
+            </div>
+            <div className="input-group">
+              <div className="input-group-addon">
+                <span className="glyphicon glyphicon-lock"></span>
+              </div>
+              <input className="form-control" type="password" placeholder="Password" name="password" />
+            </div>
             <button className="form-control" type="submit">Sign In</button>
           </div>
         </form>
