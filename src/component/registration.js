@@ -121,7 +121,7 @@ class Registration extends Component {
       )
     } else {
       return (
-        <div className="row wrapper">
+        <div className="row">
           <div className="registration">
             <img className="logo-sm" src="http://via.placeholder.com/100x100" />
 

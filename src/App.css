@@ -1,5 +1,5 @@
 /* COLORS */
-/* placeholder grey #85929E */
+/* placeholder grey #999 */
 
 /* GENERAL */
 html, body {
@@ -11,14 +11,7 @@ html, body {
   display: block;
   margin: auto;
   text-align: center;
-
   padding-top: 7rem;
-}
-
-.wrapper {
-  vertical-align: middle;
-  height: 40rem;
-
 }
 
 .login, .registration {
@@ -32,7 +25,7 @@ html, body {
   padding-bottom: 1em;
 }
 
-.login .input-group, .login button, .registration .input-group, .registration button, .registration select  {
+.login .input-group, .login button, .registration input, .registration button, .registration select  {
   margin: .5em 0;
 }
 
@@ -41,9 +34,13 @@ html, body {
 }
 
 /* REGISTRATION PAGE */
+.registration {
+  padding-top: 4rem;
+}
+
 .registration form select {
   text-indent: .5rem;
-  color: #85929E;
+  color: #999;
 }
 
 .logo-sm {

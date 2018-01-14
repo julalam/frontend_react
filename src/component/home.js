@@ -10,7 +10,7 @@ class Home extends Component {
       return <UserProfile onLogout={this.props.onLogout} session={this.props.session} />
     } else {
       return (
-        <div className="row wrapper">
+        <div className="row">
           <div className="login">
             <img className="logo" src="http://via.placeholder.com/150x150" />
             <h1 className="logo">NAME</h1>
