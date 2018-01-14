@@ -60,3 +60,20 @@ footer {
   right: 0;
   text-align: center;
 }
+
+/* USER PROFILE */
+
+/* CONTACT-LIST */
+.contact-list, .message-history, .contact-profile {
+  border: 1px solid red;
+  /* height: 96vh; */
+}
+
+.contact-list input {
+  margin: .5rem 0;
+}
+
+.contact {
+  border: 1px solid red;
+  padding: 1rem;
+}

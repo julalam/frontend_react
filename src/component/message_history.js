@@ -75,7 +75,9 @@ class MessageHistory extends Component {
     });
 
     if (!this.props.contact) {
-      return <p>select a user...</p>
+      return (
+        <div><p>select a user...</p></div>
+      )
     } else {
       return (
         <div>

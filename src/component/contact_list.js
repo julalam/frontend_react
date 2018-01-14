@@ -70,29 +70,29 @@ class ContactList extends Component {
     const contacts = this.state.contacts.map(contact => {
       if (contact.status === 'sent_request') {
         return (
-          <div key={contact.user.id}>
-            {contact.user.username} (request already sent)
+          <div className="contact" key={contact.user.id}>
+            <strong>{contact.user.username}</strong> (request already sent)
           </div>
         )
       } else if (contact.status === 'user') {
         return (
-          <div key={contact.user.id} className="btn btn-default">
-            {contact.user.username}
+          <div className="contact" key={contact.user.id}>
+            <strong>{contact.user.username}</strong>
             <button onClick={this.createRequest.bind(this, contact.user)} type="button">Send Request</button>
           </div>
         )
       } else if (contact.status === 'received_request'){
         return (
-          <div key={contact.user.id}>
-            {contact.user.username}
+          <div className="contact" key={contact.user.id}>
+            <strong>{contact.user.username}</strong>
             <button onClick={this.acceptRequest.bind(this, contact.contact)} type="button">Accept Request</button>
             <button onClick={this.declineRequest.bind(this, contact.contact)} type="button">Decline Request</button>
           </div>
         )
       } else {
         return (
-          <div key={contact.user.id} onClick={this.handleClick.bind(this, contact.user)}>
-          {contact.user.username}
+          <div className="contact" key={contact.user.id} onClick={this.handleClick.bind(this, contact.user)}>
+          <strong>{contact.user.username}</strong>
           </div>
         )
       }
@@ -100,11 +100,12 @@ class ContactList extends Component {
 
     return (
       <div>
-        <input type="text" placeholder='Search...' value={this.state.search} onChange={this.updateSearch.bind(this)} />
+        <div className="input-group">
+          <span className="input-group-addon"><i className="fas fa-search-plus"></i></span>
+          <input className="form-control" type="text" placeholder='Search my chat app...' value={this.state.search} onChange={this.updateSearch.bind(this)} />
+        </div>
 
-        <br/>
         <div>
-          <strong>Contact List:</strong>
           {contacts}
         </div>
       </div>

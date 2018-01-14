@@ -71,7 +71,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className=" container-fluid app">
+      <div className="container-fluid app">
         <Switch>
           <Route exact path='/' render = { () =>
             <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} errors={this.state.errors} /> } />

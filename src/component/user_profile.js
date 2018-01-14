@@ -29,19 +29,21 @@ class UserProfile extends Component {
 
   render() {
     return (
-      <div className="user-profile">
-        <button onClick={this.handleClick.bind(this)} type="button">Log Out</button>
-        <strong>{this.props.session.username}</strong>
-        <div className="contact-list">
-          <br/>
+      <div className="row user-profile">
+        <div className="col-lg-12">
+          <button onClick={this.handleClick.bind(this)} type="button">Log Out</button>
+          <strong>{this.props.session.username}</strong>
+        </div>
+
+        <div className="contact-list col-lg-3">
           <ContactList session={this.props.session}  onContact={this.handleContact.bind(this)}/>
         </div>
-        <div className="message-history">
-          <br/>
+
+        <div className="message-history col-lg-6">
           <MessageHistory session={this.props.session} contact={this.state.contact} />
         </div>
-        <br/>
-        <div className="contact-profile">
+
+        <div className="contact-profile col-lg-3">
           <ContactProfile contact={this.state.contact} />
         </div>
       </div>
