@@ -123,7 +123,7 @@ class Registration extends Component {
       return (
         <div className="row">
           <div className="registration">
-            <img className="logo-sm" src="http://via.placeholder.com/100x100" />
+            <img className="logo-sm" src={require("../assets/logo-name.png")} />
 
             <h2>Sign Up</h2>
 
@@ -143,7 +143,7 @@ class Registration extends Component {
                   <option value="" disabled selected>Select Language</option>
                   {languageOptions}
                 </select>
-                <button className="form-control" type="submit" disabled={!this.state.formValid} >Create Account</button>
+                <button className="form-control orange-button" type="submit" disabled={!this.state.formValid} >Create Account</button>
               </div>
             </form>
           </div>

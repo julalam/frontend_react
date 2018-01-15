@@ -26,7 +26,7 @@ class Login extends Component {
               </div>
               <input className="form-control" type="password" placeholder="Password" name="password" />
             </div>
-            <button className="form-control" type="submit">Sign In</button>
+            <button className="form-control blue-button" type="submit">Sign In</button>
           </div>
         </form>
       </div>

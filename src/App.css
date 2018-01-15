@@ -1,9 +1,49 @@
 /* COLORS */
 /* placeholder grey #999 */
+/* fonts-dark blue #1f4359 */
+/* orange buttons #e45e21 */
+/* #d55818 */
+/* #fb6a26 */
+/* #9f3d0b */
+/* blue buttons #76c6cf */
+/* #2a94a1 */
+/* #83dde6 */
 
 /* GENERAL */
 html, body {
   height: 100%;
+  color: #1f4359;
+}
+
+.blue-button {
+  color: #2a94a1;
+  background-color: #83dde6;
+  border-color: #76c6cf;
+}
+
+.input-group-addon {
+  background-color: #C8F6F8;
+}
+
+.form-control, .input-group-addon {
+  color: #2a94a1;
+  border-color: #76c6cf;
+}
+
+.input-group input::placeholder {
+  /* color: #83dde6; */
+}
+
+.orange-button {
+  color: #9f3d0b;
+  background-color: #fb6a26;
+  border-color: #e45e21;
+}
+
+.orange-button[disabled] {
+  color: rgba(159,61,11,.6);
+  background-color: rgba(251,106,38,.6);
+  border-color: rgba(228,94,33,.6);
 }
 
 /* LOGIN PAGE */
@@ -12,6 +52,10 @@ html, body {
   margin: auto;
   text-align: center;
   padding-top: 7rem;
+}
+
+img.logo {
+  width: 160px;
 }
 
 .login, .registration {
@@ -39,13 +83,14 @@ html, body {
 }
 
 .registration form select {
-  text-indent: .5rem;
+  text-indent: .8rem;
   color: #999;
 }
 
 .logo-sm {
   display: block;
   margin-bottom: 3rem;
+  height: 140px;
 }
 
 /* FOOTER */

@@ -12,11 +12,11 @@ class Home extends Component {
       return (
         <div className="row">
           <div className="login">
-            <img className="logo" src="http://via.placeholder.com/150x150" />
+            <img className="logo" src={require("../assets/logo-circle.png")} alt="SpeakEasy Logo" />
             <h1 className="logo">NAME</h1>
             <Login onLogin={this.props.onLogin} errors={this.props.errors} />
             <div className="input-group-lg">
-              <Link className="form-control text-center" to='/registration'>Create Account</Link>
+              <Link className="form-control text-center orange-button" to='/registration'>Create Account</Link>
             </div>
           </div>
           <Footer />
