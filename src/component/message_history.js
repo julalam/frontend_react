@@ -7,12 +7,11 @@ class MessageHistory extends Component {
     super(props);
     this.state = {
       messages: [],
-      hover: false,
+      // hover: false,
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidMount');
     if (this.props.session !== prevProps.session || this.props.contact !== prevProps.contact){
       axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact.id).then((response) => {
         const messages = Array.from(response.data);
@@ -21,6 +20,7 @@ class MessageHistory extends Component {
         });
       });
     }
+
   };
 
   sendMessage(event) {
@@ -46,7 +46,7 @@ class MessageHistory extends Component {
     let messages = this.state.messages;
     messages.push(message);
     this.setState({
-        messages: messages
+        messages: messages,
     });
   }
 
@@ -88,9 +88,6 @@ class MessageHistory extends Component {
             <form onSubmit={this.sendMessage.bind(this)}>
               <input type="text" placeholder="Type a message..." name="message" />
             </form>
-
-            <textarea className="form-control expandable" type="text" id="myIn2" placeholder="Bottom expandable" rows="3"></textarea>
-
           </div>
         </div>
       );
