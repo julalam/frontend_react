@@ -15,8 +15,8 @@ class App extends Component {
     };
   }
 
-  handleLogin(event, username) {
-    axios.post('http://localhost:8080/login', {username})
+  handleLogin(event, data) {
+    axios.post('http://localhost:8080/login', {data})
     .then((response) => {
       if (response.data.session) {
         this.setState({
@@ -27,7 +27,7 @@ class App extends Component {
       } else if (response.data.user === null) {
         console.log('Username does\'n match');
         this.setState({
-          errors: 'The username you\'ve entered doesn\'t match any account.'
+          errors: 'We do not recognize that username and password combination'
         })
       }
     })
