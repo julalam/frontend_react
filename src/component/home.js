@@ -12,8 +12,7 @@ class Home extends Component {
       return (
         <div className="row">
           <div className="login">
-            <img className="logo" src={require("../assets/logo-circle.png")} alt="SpeakEasy Logo" />
-            <h1 className="logo">NAME</h1>
+            <img className="logo" src={require("../assets/login-logo.png")} alt="SpeakEasy Logo" />
             <Login onLogin={this.props.onLogin} errors={this.props.errors} />
             <div className="input-group-lg">
               <Link className="form-control text-center orange-button" to='/registration'>Create Account</Link>

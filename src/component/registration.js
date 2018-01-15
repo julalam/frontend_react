@@ -122,9 +122,9 @@ class Registration extends Component {
     } else {
       return (
         <div className="row">
-          <div className="registration">
-            <img className="logo-sm" src={require("../assets/logo-name.png")} />
+            <img className="logo-sm" src={require("../assets/logo-name-circle.png")} />
 
+            <div className="registration">
             <h2>Sign Up</h2>
 
             <div>{errors}</div>

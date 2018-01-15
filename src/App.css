@@ -51,11 +51,12 @@ html, body {
   display: block;
   margin: auto;
   text-align: center;
-  padding-top: 7rem;
+  padding-top: 4rem;
 }
 
 img.logo {
-  width: 160px;
+  width: 200px;
+  margin-bottom: 7rem;
 }
 
 .login, .registration {
@@ -79,7 +80,7 @@ img.logo {
 
 /* REGISTRATION PAGE */
 .registration {
-  padding-top: 4rem;
+  /* padding-top: 1rem; */
 }
 
 .registration form select {
@@ -88,9 +89,9 @@ img.logo {
 }
 
 .logo-sm {
+  margin: 5rem auto 3rem auto;
   display: block;
-  margin-bottom: 3rem;
-  height: 140px;
+  height: 120px;
 }
 
 /* FOOTER */
