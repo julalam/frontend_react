@@ -48,10 +48,6 @@ html, body {
   margin-bottom: 3rem;
 }
 
-.registration h2 {
-  margin-left: 2.6rem;
-}
-
 /* FOOTER */
 footer {
   position: absolute;
@@ -67,14 +63,65 @@ footer {
 /* CONTACT-LIST */
 .contact-list, .message-history, .contact-profile {
   border: 1px solid red;
-  /* height: 96vh; */
+  height: 96vh;
 }
 
-.contact-list input {
+.contact-list .input-group {
   margin: .5rem 0;
 }
 
 .contact {
   border: 1px solid red;
   padding: 1rem;
+}
+
+/* MESSAGE HISTORY */
+.message {
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+  padding: .7rem 1.3rem;
+  margin: .5rem;
+}
+
+.message p {
+  margin: 0;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.new-message {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.new-message input {
+  width: 100%;
+  height: 5rem;
+}
+
+
+textarea.expandable {
+  height:40px;
+  -webkit-transition: all 0.5s ease-in-out;
+}
+
+textarea.expandable:hover, textarea.expandable:focus {
+  height:calc(100% - 90px);
+  -webkit-transition: all 0.8s ease-in-out;
+}
+
+.panel-300:hover, .panel-300 {
+  height:300px;
+}
+
+textarea.expandable + textarea.expandable:hover, textarea.expandable + textarea.expandable:focus {
+  height:calc(100% - 90px)
 }

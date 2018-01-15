@@ -58,19 +58,30 @@ class MessageHistory extends Component {
     const messages = this.state.messages.map(message => {
       if (message.from === this.props.session.id) {
         return (
-          <div key={message.id}>
-          {message.text}
+          <div key={message.id} className="message pull-right clearfix">
+            <p className="pull-right">{message.text}</p>
           </div>
         )
       } else {
-        return (
-          <div key={message.id}
-          // onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
-          >
-          {message.message}
-          // { this.state.hover && <div>{message.text}</div>}
-          </div>
-        )
+        if (message.message) {
+          return (
+            <div key={message.id} className="message pull-left clearfix"
+            // onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
+            >
+            <p className="pull-left">{message.message}</p>
+            // { this.state.hover && <div>{message.text}</div>}
+            </div>
+          )
+        } else {
+          return (
+            <div key={message.id} className="message pull-left clearfix"
+            // onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
+            >
+            <p className="pull-left">{message.text}</p>
+            // { this.state.hover && <div>{message.text}</div>}
+            </div>
+          )
+        }
       }
     });
 
@@ -82,12 +93,16 @@ class MessageHistory extends Component {
       return (
         <div>
           <strong>Message History with user {this.props.contact.username}:</strong>
-          {messages}
+          <div className="clearfix">
+            {messages}
+          </div>
           <div className="new-message">
             <form onSubmit={this.sendMessage.bind(this)}>
               <input type="text" placeholder="Type a message..." name="message" />
-              <button type="submit">Send</button>
             </form>
+
+            <textarea className="form-control expandable" type="text" id="myIn2" placeholder="Bottom expandable" rows="3"></textarea>
+
           </div>
         </div>
       );

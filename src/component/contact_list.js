@@ -101,7 +101,7 @@ class ContactList extends Component {
     return (
       <div>
         <div className="input-group">
-          <span className="input-group-addon"><i className="fas fa-search-plus"></i></span>
+          <div className="input-group-addon"><span className="glyphicon glyphicon-search"></span></div>
           <input className="form-control" type="text" placeholder='Search my chat app...' value={this.state.search} onChange={this.updateSearch.bind(this)} />
         </div>
 
