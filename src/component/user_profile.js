@@ -39,7 +39,7 @@ class UserProfile extends Component {
           <ContactList session={this.props.session}  onContact={this.handleContact.bind(this)}/>
         </div>
 
-        <div className="message-history col-lg-6">
+        <div className="message-history-wrapper col-lg-6">
           <MessageHistory session={this.props.session} contact={this.state.contact} />
         </div>
 

@@ -79,7 +79,7 @@ class MessageHistory extends Component {
   render() {
     const messages = this.state.messages.map(message => {
       const from_me = message.from === this.props.session.id;
-      const className = "message clearfix " + (from_me ? "pull-right" : "pull-left");
+      const className = "message clearfix " + (from_me ? "pull-right from" : "pull-left to");
       return (
         <div key={message.id} className={className}
         // onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
@@ -95,11 +95,13 @@ class MessageHistory extends Component {
       )
     } else {
       return (
-        <div>
+        <div className="message-history">
           <strong>Message History with user {this.props.contact.username}:</strong>
-          <ActionCable ref='cable' channel={{channel: 'MessagesChannel', id: this.props.contact.id}} onReceived={this.onMessage.bind(this)} />
-          <div className="clearfix">
-            {messages}
+          <div className="messages">
+            <ActionCable ref='cable' channel={{channel: 'MessagesChannel', id: this.props.contact.id}} onReceived={this.onMessage.bind(this)} />
+            <div className="clearfix">
+              {messages}
+            </div>
           </div>
           <div className="new-message">
             <form onSubmit={this.sendMessage.bind(this)}>
