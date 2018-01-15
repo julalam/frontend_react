@@ -20,15 +20,12 @@ class MessageHistory extends Component {
         });
       });
     }
-
   };
 
   sendMessage(event) {
     event.preventDefault();
 
-    if (event.target.message.value === '') {
-      alert('the message can\'t be blank');
-    } else {
+    if (event.target.message.value !== '') {
       axios.post('http://localhost:8080/messages', {
         text: event.target.message.value,
         from: this.props.session.id,
@@ -43,10 +40,33 @@ class MessageHistory extends Component {
 
   onMessage(message) {
     console.log('Message received');
-    let messages = this.state.messages;
+    const messages = this.state.messages;
+    console.log(message);
+    console.log(messages);
+    console.log(this.state.messages);
+
+    // const newMessage = messages.forEach(text => {
+    //   if (text.id === message.id) {
+    //     return false;
+    //   }
+    // })
+    // if (newMessage) {
+    //   messages.push(message);
+    //   this.setState({
+    //     messages: messages,
+    //   });
+    // }
+
+    // if (!messages.includes(message)) {
+    //   messages.push(message);
+    //   this.setState({
+    //     messages: messages,
+    //   });
+    // }
+
     messages.push(message);
     this.setState({
-        messages: messages,
+      messages: messages,
     });
   }
 
@@ -57,9 +77,6 @@ class MessageHistory extends Component {
   }
 
   render() {
-    console.log(this.props.contact);
-    console.log(this.props.session);
-    console.log(this.state.messages);
     const messages = this.state.messages.map(message => {
       const from_me = message.from === this.props.session.id;
       const className = "message clearfix " + (from_me ? "pull-right" : "pull-left");
