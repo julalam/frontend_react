@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {ActionCable} from 'react-actioncable-provider'
 
 class MessageHistory extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class MessageHistory extends Component {
         const messages = Array.from(response.data);
         this.setState({
           messages: messages,
-        })
+        });
       });
     }
   };
@@ -34,16 +35,20 @@ class MessageHistory extends Component {
         to: this.props.contact.id,
         language: this.props.contact.language,
       }).then((response) => {
-        const allMessages = this.state.messages
-        allMessages.push(response.data)
-        this.setState({
-          messages: allMessages,
-        });
+        console.log('Message successfully sent');
       });
-      console.log('Message sent');
       event.target.message.value = '';
     }
   };
+
+  onMessage(message) {
+    console.log('Message received');
+    let messages = this.state.messages;
+    messages.push(message);
+    this.setState({
+        messages: messages
+    });
+  }
 
   handleMouseHover() {
     this.setState({
@@ -56,33 +61,15 @@ class MessageHistory extends Component {
     console.log(this.props.session);
     console.log(this.state.messages);
     const messages = this.state.messages.map(message => {
-      if (message.from === this.props.session.id) {
-        return (
-          <div key={message.id} className="message pull-right clearfix">
-            <p className="pull-right">{message.text}</p>
-          </div>
-        )
-      } else {
-        if (message.message) {
-          return (
-            <div key={message.id} className="message pull-left clearfix"
-            // onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
-            >
-            <p className="pull-left">{message.message}</p>
-            // { this.state.hover && <div>{message.text}</div>}
-            </div>
-          )
-        } else {
-          return (
-            <div key={message.id} className="message pull-left clearfix"
-            // onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
-            >
-            <p className="pull-left">{message.text}</p>
-            // { this.state.hover && <div>{message.text}</div>}
-            </div>
-          )
-        }
-      }
+      const from_me = message.from === this.props.session.id;
+      const className = "message clearfix " + (from_me ? "pull-right" : "pull-left");
+      return (
+        <div key={message.id} className={className}
+        // onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
+        >
+          <p className="pull-right">{message.from === this.props.session.id ? message.text : message.message ? message.message : message.text}</p>
+        </div>
+      );
     });
 
     if (!this.props.contact) {
@@ -93,6 +80,7 @@ class MessageHistory extends Component {
       return (
         <div>
           <strong>Message History with user {this.props.contact.username}:</strong>
+          <ActionCable ref='cable' channel={{channel: 'MessagesChannel', id: this.props.contact.id}} onReceived={this.onMessage.bind(this)} />
           <div className="clearfix">
             {messages}
           </div>
