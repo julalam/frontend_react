@@ -23,7 +23,7 @@ class ContactList extends Component {
 
   handleClick(contact, event) {
     this.props.onContact(contact);
-    const newMessages = this.state.newMessages;
+    const newMessages = this.state.newMessages.slice();
     const index = newMessages.indexOf(contact.id);
     if (index > -1) {
       newMessages.splice(index, 1);
@@ -72,7 +72,7 @@ class ContactList extends Component {
 
   onMessage(message) {
     console.log('Message received by contact list');
-    const newMessages = this.state.newMessages;
+    const newMessages = this.state.newMessages.slice();
     newMessages.push(message.from);
     this.setState({
       newMessages: newMessages,
@@ -120,7 +120,6 @@ class ContactList extends Component {
           </div>
         )
       } else {
-        console.log(contact.user);
         const className = "contact" +  (this.state.newMessages.includes(contact.user.id) ? " notification" : "");
         return (
           <div className={className} key={contact.user.id} onClick={this.handleClick.bind(this, contact.user)}>

@@ -48,9 +48,6 @@ class MessageHistory extends Component {
   onMessage(message) {
     console.log('Message received');
     const messages = this.state.messages.slice();
-    console.log(message);
-    console.log(messages);
-    console.log(this.state.messages);
 
     // const newMessage = messages.forEach(text => {
     //   if (text.id === message.id) {
