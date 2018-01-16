@@ -12,17 +12,13 @@ class ContactList extends Component {
     };
   }
 
-  getContacts() {
+  componentDidMount() {
     axios.get('http://localhost:8080/users?user=' + this.props.session.id).then((response) => {
       const contacts = response.data;
       this.setState({
         contacts: contacts,
       })
     });
-  }
-
-  componentDidMount() {
-    this.getContacts();
   }
 
   handleClick(contact, event) {
@@ -43,7 +39,6 @@ class ContactList extends Component {
       to: user.id,
     }).then((response) => {
       console.log(`Sent request from ${this.props.session.username} to ${user.username}`);
-      this.getContacts();
     });
   }
 
@@ -52,7 +47,6 @@ class ContactList extends Component {
       status: 'accepted',
     }).then((response) => {
       console.log(`${this.props.session.username} accepted request`);
-      this.getContacts();
     });
   }
 
@@ -72,7 +66,7 @@ class ContactList extends Component {
       })
     });
     this.setState({
-      search: query
+      search: query,
     });
   }
 
