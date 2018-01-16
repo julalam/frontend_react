@@ -138,7 +138,7 @@ class Registration extends Component {
             <div className="registration">
             { this.props.errors && <div className="error">{this.props.errors}</div>}
 
-            { !this.state.formReady && <div className="error">We are experiencing temporary technical difficulties. Please try again later.</div> }
+            { !this.state.formReady && <div className="error">We are experiencing temporary technical difficulties. Please try again later</div> }
 
             <h2>Sign Up</h2>
 

@@ -5,6 +5,9 @@ import {ActionCable} from 'react-actioncable-provider'
 class MessageHistory extends Component {
   constructor(props) {
     super(props);
+    if (this.props.contact) {
+      this.getMessages();
+    }
     this.state = {
       messages: [],
       hover: false,
@@ -13,13 +16,17 @@ class MessageHistory extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.session !== prevProps.session || this.props.contact !== prevProps.contact){
-      axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact.id).then((response) => {
-        const messages = Array.from(response.data);
-        this.setState({
-          messages: messages,
-        });
-      });
+      this.getMessages();
     }
+  };
+
+  getMessages() {
+    axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact.id).then((response) => {
+      const messages = Array.from(response.data);
+      this.setState({
+        messages: messages,
+      });
+    });
   };
 
   sendMessage(event) {
@@ -40,7 +47,7 @@ class MessageHistory extends Component {
 
   onMessage(message) {
     console.log('Message received');
-    const messages = this.state.messages;
+    const messages = this.state.messages.slice();
     console.log(message);
     console.log(messages);
     console.log(this.state.messages);
