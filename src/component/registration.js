@@ -16,7 +16,9 @@ class Registration extends Component {
       usernameValid: false,
       emailValid: false,
       passwordValid: false,
+      languageValid: false,
       formValid: false,
+      formEmpty: true,
     };
   }
 
@@ -48,16 +50,20 @@ class Registration extends Component {
     let usernameValid = this.state.usernameValid;
     let emailValid = this.state.emailValid;
     let passwordValid = this.state.passwordValid;
+    let languageValid = this.state.languageValid;
 
     switch(field) {
       case 'username':
-        usernameValid = value.length > 3 && value.length <= 15;
+        usernameValid = value.length >= 3 && value.length <= 15;
         break;
       case 'email':
         emailValid = value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
         break;
       case 'password':
         passwordValid = value.length >= 6 && value.length <= 10;
+        break;
+      case 'language':
+        languageValid = value.length > 0;
         break;
       default:
         break;
@@ -66,12 +72,14 @@ class Registration extends Component {
       usernameValid: usernameValid,
       emailValid: emailValid,
       passwordValid: passwordValid,
+      languageValid: languageValid,
+      formEmpty: this.state.username.length === 0 && this.state.email.length === 0 && this.state.password.length === 0 && this.state.language.length === 0
     }, this.validateForm);
   }
 
   validateForm() {
     this.setState({
-      formValid: this.state.usernameValid && this.state.emailValid && this.state.passwordValid
+      formValid: this.state.usernameValid && this.state.emailValid && this.state.passwordValid && this.state.language
     })
   }
 
@@ -88,11 +96,13 @@ class Registration extends Component {
   }
 
   render() {
-    const usernameClass = "input-group-lg" + (!this.state.usernameValid ? " has-error" : "");
+    const usernameClass = "input-group-lg" + (!this.state.usernameValid && !this.state.formEmpty ? " has-error" : "");
 
-    const emailClass = "input-group-lg" + (!this.state.emailValid ? " has-error" : "");
+    const emailClass = "input-group-lg" + (!this.state.emailValid && !this.state.formEmpty ? " has-error" : "");
 
-    const passwordClass = "input-group-lg" + (!this.state.passwordValid ? " has-error" : "");
+    const passwordClass = "input-group-lg" + (!this.state.passwordValid && !this.state.formEmpty ? " has-error" : "");
+
+    const languageClass = "input-group-lg" + (!this.state.languageValid && !this.state.formEmpty ? " has-error" : "");
 
     const languageOptions = this.state.languages.map(language => {
       return <option key={language.id} value={language.code}>{language.native_name}</option>
@@ -118,17 +128,17 @@ class Registration extends Component {
 
               <div className={usernameClass}>
                 <input id="username" className="form-control" type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput.bind(this)} />
-                <div id="username-note" className="note">Username must be maximum of 15 characters.</div>
+                <div id="username-note" className="note">Username must be between 3 and 15 characters.</div>
               </div>
 
               <div className={emailClass}>
                 <input id="email" className="form-control" type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput.bind(this)} />
-                <div id="email-note" className="note">Please enter your email in the right format.</div>
+                <div id="email-note" className="note">Please enter email in following format: name@gmail.com.</div>
               </div>
 
               <div className={passwordClass}>
                 <input id="password" className="form-control" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput.bind(this)} />
-                <div id="password-note" className="note">Select an 6-10 character password. Your password may not contain your email, word "password", or any blank spaces.</div>
+                <div id="password-note" className="note">Select a 6-10 character password that begins with a letter and contains at least one number. Your password may not contain your email, word "password", or any blank spaces.</div>
               </div>
 
               <div className="input-group-lg">
@@ -138,8 +148,8 @@ class Registration extends Component {
                 </select>
               </div>
 
-              <div className="input-group-lg has-error">
-                <select className="form-control" name="language">
+              <div className={languageClass}>
+                <select className="form-control" name="language" onChange={this.handleUserInput.bind(this)}>
                   <option value="" disabled selected>Select Language</option>
                   {languageOptions}
                 </select>

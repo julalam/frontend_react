@@ -38,7 +38,7 @@ class Login extends Component {
     this.setState({
       usernameValid: usernameValid,
       passwordValid: passwordValid,
-      formEmpty: this.state.username.length == 0 && this.state.password.length == 0
+      formEmpty: this.state.username.length === 0 && this.state.password.length === 0
     }, this.validateForm);
   }
 

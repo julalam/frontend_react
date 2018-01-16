@@ -144,7 +144,7 @@ class ContactList extends Component {
         </div>
 
         <div>
-        <ActionCable ref='cable' channel={{channel: 'MessagesChannel', id: this.props.session.id}} onReceived={this.onMessage.bind(this)} />
+        <ActionCable ref='cable3' channel={{channel: 'MessagesChannel', id: this.props.session.id}} onReceived={this.onMessage.bind(this)} />
 
         <ActionCable ref='cable2' channel={{channel: 'ContactsChannel', id: this.props.session.id}} onReceived={this.onContact.bind(this)} />
           {contacts}
