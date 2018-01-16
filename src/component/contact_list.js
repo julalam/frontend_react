@@ -27,6 +27,14 @@ class ContactList extends Component {
 
   handleClick(contact, event) {
     this.props.onContact(contact);
+    const newMessages = this.state.newMessages;
+    const index = newMessages.indexOf(contact.id);
+    if (index > -1) {
+      newMessages.splice(index, 1);
+    }
+    this.setState({
+      newMessages: newMessages,
+    })
   }
 
   createRequest(user, event) {
