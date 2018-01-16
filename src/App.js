@@ -40,7 +40,8 @@ class App extends Component {
   }
 
   handleLogout(event) {
-    axios.post('http://localhost:8080/logout').then((response) => {
+    axios.post('http://localhost:8080/logout')
+    .then((response) => {
       this.setState({
         session: response.data.session,
         errors: '',
@@ -50,7 +51,10 @@ class App extends Component {
         cookie.remove('contact')
         console.log(`User logged out successfully`);
       }
-    });
+    })
+    .catch((error) => {
+      console.log('User couldn\'t log out');
+    })
   }
 
   handleRegistration(event, user) {
@@ -60,12 +64,19 @@ class App extends Component {
       password: user.password,
       country: user.country,
       language: user.language,
-    }).then((response) => {
+    })
+    .then((response) => {
       this.setState({
         session: response.data.session,
       });
       cookie.save('session', this.state.session)
       console.log(`User ${this.state.session.username} successfully created new account`)
+    })
+    .catch((error) => {
+      console.log('New account wasn\'t created');
+      this.setState({
+        errors: 'Something went wrong. Please try again later',
+      })
     })
   }
 
@@ -75,7 +86,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render = { () =>
             <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} errors={this.state.errors} /> } />
-          <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} /> } />
+          <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} errors={this.state.errors} /> } />
         </Switch>
       </div>
     );

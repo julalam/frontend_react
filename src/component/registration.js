@@ -19,23 +19,37 @@ class Registration extends Component {
       languageValid: false,
       formValid: false,
       formEmpty: true,
+      formReady: true,
     };
   }
 
   componentWillMount() {
-    axios.get('http://localhost:8080/languages').then((response) => {
+    axios.get('http://localhost:8080/languages')
+    .then((response) => {
       const languages = Array.from(response.data);
       this.setState({
         languages: languages,
       });
-    });
+    })
+    .catch((error) => {
+      console.log('Couldn\'t get languages');
+      this.setState({
+        formReady: false,
+      })
+    })
 
     axios.get('http://localhost:8080/countries').then((response) => {
       const countries = Array.from(response.data);
       this.setState({
         countries: countries,
       });
-    });
+    })
+    .catch((error) => {
+      console.log('Couldn\'t get countries');
+      this.setState({
+        formReady: false,
+      })
+    })
   }
 
   handleUserInput(event) {
@@ -122,6 +136,10 @@ class Registration extends Component {
             <img className="logo-sm" src={require("../assets/logo-name-circle.png")} alt="SpeakEasy logo" />
 
             <div className="registration">
+            { this.props.errors && <div className="error">{this.props.errors}</div>}
+
+            { !this.state.formReady && <div className="error">We are experiencing temporary technical difficulties. Please try again later.</div> }
+
             <h2>Sign Up</h2>
 
             <form onSubmit={this.handleSubmit.bind(this)}>
@@ -133,7 +151,7 @@ class Registration extends Component {
 
               <div className={emailClass}>
                 <input id="email" className="form-control" type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput.bind(this)} />
-                <div id="email-note" className="note">Please enter email in following format: name@gmail.com.</div>
+                <div id="email-note" className="note">Please enter email in following format: name@gmail.com</div>
               </div>
 
               <div className={passwordClass}>
@@ -156,7 +174,7 @@ class Registration extends Component {
               </div>
 
               <div className="input-group-lg">
-                <button className="form-control orange-button" type="submit" disabled={!this.state.formValid}>Create Account</button>
+                <button className="form-control orange-button" type="submit" disabled={!this.state.formValid || !this.state.formReady}>Create Account</button>
               </div>
 
             </form>

@@ -90,7 +90,7 @@ class ContactList extends Component {
     const contacts = this.state.contacts;
     for (let i = 0; i < contacts.length; i++)
     {
-      if (contacts[i].user.id == contact.user.id)
+      if (contacts[i].user.id === contact.user.id)
       {
         contacts.splice(i, 1);
         break;
