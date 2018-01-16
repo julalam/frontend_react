@@ -9,6 +9,7 @@ class Login extends Component {
       usernameValid: false,
       passwordValid: false,
       formValid: false,
+      formEmpty: true,
     };
   }
 
@@ -37,12 +38,14 @@ class Login extends Component {
     this.setState({
       usernameValid: usernameValid,
       passwordValid: passwordValid,
+      formEmpty: this.state.username.length == 0 && this.state.password.length == 0
     }, this.validateForm);
   }
 
   validateForm() {
     this.setState({
-      formValid: this.state.usernameValid && this.state.passwordValid
+      formValid:
+        this.state.usernameValid && this.state.passwordValid
     })
   }
 
@@ -56,8 +59,8 @@ class Login extends Component {
   }
 
   render() {
-    const usernameClass = "input-group" + (!this.state.usernameValid ? " has-error" : "");
-    const passwordClass = "input-group" + (!this.state.passwordValid ? " has-error" : "");
+    const usernameClass = "input-group" + (!this.state.usernameValid && !this.state.formEmpty ? " has-error" : "");
+    const passwordClass = "input-group" + (!this.state.passwordValid && !this.state.formEmpty ? " has-error" : "");
     return (
       <div>
         { this.props.errors && <div className="error">{this.props.errors}</div>}
