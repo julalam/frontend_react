@@ -56,12 +56,14 @@ class Login extends Component {
   }
 
   render() {
+    const usernameClass = "input-group" + (!this.state.usernameValid ? " has-error" : "");
+    const passwordClass = "input-group" + (!this.state.passwordValid ? " has-error" : "");
     return (
       <div>
-        { this.props.errors && <div>{this.props.errors}</div>}
+        { this.props.errors && <div className="error">{this.props.errors}</div>}
         <form onSubmit={this.handleClick.bind(this)}>
           <div className="form-group-lg">
-            <div className="input-group">
+            <div className={usernameClass}>
               <div className="input-group-addon">
                 <span className="glyphicon glyphicon-user"></span>
               </div>
@@ -73,7 +75,7 @@ class Login extends Component {
                 placeholder="Username"
                 name="username" />
             </div>
-            <div className="input-group">
+            <div className={passwordClass}>
               <div className="input-group-addon">
                 <span className="glyphicon glyphicon-lock"></span>
               </div>

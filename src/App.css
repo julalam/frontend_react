@@ -9,6 +9,8 @@
 /* #2a94a1 */
 /* #83dde6 */
 
+/* red for errors #fcc4c5 */
+
 /* GENERAL */
 html, body {
   height: 100%;
@@ -52,6 +54,13 @@ html, body {
   border-color: rgba(118,198,207,.5);
 }
 
+.error {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fcc4c5;
+  border: 1px solid red;
+}
+
 /* LOGIN PAGE */
 .logo {
   display: block;
@@ -66,7 +75,7 @@ img.logo {
 }
 
 .login, .registration {
-  max-width: 17em;
+  max-width: 18em;
   display: block;
   margin: auto;
 }
@@ -100,6 +109,26 @@ img.logo {
   height: 120px;
 }
 
+.note {
+  display: none;
+  border: 1px solid red;
+  background-color: #fcc4c5;
+  padding: .5rem;
+  font-size: .8em;
+}
+
+#username:focus + #username-note {
+  display: block;
+}
+
+#email:focus + #email-note {
+  display: block;
+}
+
+#password:focus + #password-note {
+  display: block;
+}
+
 /* FOOTER */
 footer {
   position: absolute;
@@ -111,6 +140,9 @@ footer {
 }
 
 /* USER PROFILE */
+.logo-xs {
+  width: 80px;
+}
 
 /* CONTACT-LIST */
 .contact-list, .message-history-wrapper, .contact-profile {
@@ -125,6 +157,10 @@ footer {
 .contact {
   border: 1px solid red;
   padding: 1rem;
+}
+
+.notification {
+  background-color: red;
 }
 
 /* MESSAGE HISTORY */
@@ -144,6 +180,7 @@ footer {
 }
 
 .from {
+  background-color: #c8f6f8;
   border-radius: 30px 30px 5px 30px;
   -webkit-border-radius: 30px 30px 5px 30px;
 	-moz-border-radius: 30px 30px 5px 30px;

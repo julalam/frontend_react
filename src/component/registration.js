@@ -13,7 +13,6 @@ class Registration extends Component {
       username: '',
       email: '',
       password: '',
-      formErrors: {username: '', email: '', password: ''},
       usernameValid: false,
       emailValid: false,
       passwordValid: false,
@@ -46,32 +45,24 @@ class Registration extends Component {
   }
 
   validateField(field, value) {
-    let formErrors = this.state.formErrors;
-    let usernameValid = this.state.usernameValid;
-    let emailValid = this.state.emailValid;
-    let passwordValid = this.state.passwordValid;
+    let usernameValid;
+    let emailValid;
+    let passwordValid;
 
     switch(field) {
       case 'username':
-        usernameValid = value.length > 0 && value.length <= 15;
-        formErrors.username = usernameValid ? '' : 'is invalid';
-        console.log(usernameValid);
+         usernameValid = value.length > 0 && value.length <= 15;
         break;
       case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        formErrors.email = emailValid ? '' : 'is invalid';
-        console.log(emailValid);
+         emailValid = value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
         break;
       case 'password':
-        passwordValid = value.length >= 6 && value.length <= 10;
-        formErrors.password = passwordValid ? '' : 'is invalid';
+         passwordValid = value.length >= 6 && value.length <= 10;
         break;
       default:
         break;
     }
-
     this.setState({
-      formErrors: formErrors,
       usernameValid: usernameValid,
       emailValid: emailValid,
       passwordValid: passwordValid,
@@ -97,15 +88,11 @@ class Registration extends Component {
   }
 
   render() {
-    const errors = Object.keys(this.state.formErrors).map((field, i) => {
-      if (this.state.formErrors[field].length > 0) {
-        return (
-          <p key={i}>{field}: {this.state.formErrors[field]}</p>
-        )
-      } else {
-        return '';
-      }
-    });
+    const usernameClass = "input-group-lg" + (!this.state.usernameValid ? " has-error" : "");
+
+    const emailClass = "input-group-lg" + (!this.state.emailValid ? " has-error" : "");
+
+    const passwordClass = "input-group-lg" + (!this.state.passwordValid ? " has-error" : "");
 
     const languageOptions = this.state.languages.map(language => {
       return <option key={language.id} value={language.code}>{language.native_name}</option>
@@ -122,29 +109,46 @@ class Registration extends Component {
     } else {
       return (
         <div className="row">
-            <img className="logo-sm" src={require("../assets/logo-name-circle.png")} />
+            <img className="logo-sm" src={require("../assets/logo-name-circle.png")} alt="SpeakEasy logo" />
 
             <div className="registration">
             <h2>Sign Up</h2>
 
-            <div>{errors}</div>
-
             <form onSubmit={this.handleSubmit.bind(this)}>
 
+              <div className={usernameClass}>
+                <input id="username" className="form-control" type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput.bind(this)} />
+                <div id="username-note" className="note">Username must be maximum of 15 characters.</div>
+              </div>
+
+              <div className={emailClass}>
+                <input id="email" className="form-control" type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput.bind(this)} />
+                <div id="email-note" className="note">Please enter your email in the right format.</div>
+              </div>
+
+              <div className={passwordClass}>
+                <input id="password" className="form-control" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput.bind(this)} />
+                <div id="password-note" className="note">Select an 6-10 character password. Your password may not contain your email, word "password", or any blank spaces.</div>
+              </div>
+
               <div className="input-group-lg">
-                <input className="form-control" type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput.bind(this)} />
-                <input className="form-control" type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput.bind(this)} />
-                <input className="form-control" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput.bind(this)} />
                 <select className="form-control" name="country">
                   <option value="" disabled selected>Select Country</option>
                   {countryOptions}
                 </select>
+              </div>
+
+              <div className="input-group-lg has-error">
                 <select className="form-control" name="language">
                   <option value="" disabled selected>Select Language</option>
                   {languageOptions}
                 </select>
-                <button className="form-control orange-button" type="submit" disabled={!this.state.formValid} >Create Account</button>
               </div>
+
+              <div className="input-group-lg">
+                <button className="form-control orange-button" type="submit" disabled={this.state.formValid}>Create Account</button>
+              </div>
+
             </form>
           </div>
           <Footer />

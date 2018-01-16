@@ -31,12 +31,13 @@ class UserProfile extends Component {
     return (
       <div className="row user-profile">
         <div className="col-lg-12">
-          <button onClick={this.handleClick.bind(this)} type="button">Log Out</button>
+          <img className="logo-xs" src={require("../assets/logo-sm.png")} alt="SpeakEasy logo" />
+          <button className="pull-right" onClick={this.handleClick.bind(this)} type="button">Log Out</button>
           <strong>{this.props.session.username}</strong>
         </div>
 
         <div className="contact-list col-lg-3">
-          <ContactList session={this.props.session}  onContact={this.handleContact.bind(this)}/>
+          <ContactList session={this.props.session} onContact={this.handleContact.bind(this)}/>
         </div>
 
         <div className="message-history-wrapper col-lg-6">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {ActionCable} from 'react-actioncable-provider'
 import axios from 'axios';
 
 class ContactList extends Component {
@@ -6,6 +7,7 @@ class ContactList extends Component {
     super(props);
     this.state = {
       contacts: [],
+      newMessages: [],
       search: '',
     };
   }
@@ -66,6 +68,15 @@ class ContactList extends Component {
     });
   }
 
+  onMessage(message) {
+    console.log('Message received by contact list');
+    const newMessages = this.state.newMessages;
+    newMessages.push(message.from);
+    this.setState({
+      newMessages: newMessages,
+    });
+  }
+
   render() {
     const contacts = this.state.contacts.map(contact => {
       if (contact.status === 'sent_request') {
@@ -90,8 +101,9 @@ class ContactList extends Component {
           </div>
         )
       } else {
+        const className = "contact" +  (this.state.newMessages.includes(contact.user.id) ? " notification" : "");
         return (
-          <div className="contact" key={contact.user.id} onClick={this.handleClick.bind(this, contact.user)}>
+          <div className={className} key={contact.user.id} onClick={this.handleClick.bind(this, contact.user)}>
           <strong>{contact.user.username}</strong>
           </div>
         )
@@ -102,10 +114,11 @@ class ContactList extends Component {
       <div>
         <div className="input-group">
           <div className="input-group-addon"><span className="glyphicon glyphicon-search"></span></div>
-          <input className="form-control" type="text" placeholder='Search my chat app...' value={this.state.search} onChange={this.updateSearch.bind(this)} />
+          <input className="form-control" type="text" placeholder='Search SpeakEasy...' value={this.state.search} onChange={this.updateSearch.bind(this)} />
         </div>
 
         <div>
+        <ActionCable ref='cable' channel={{channel: 'MessagesChannel', id: this.props.session.id}} onReceived={this.onMessage.bind(this)} />
           {contacts}
         </div>
       </div>
