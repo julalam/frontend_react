@@ -33,7 +33,7 @@ class UserProfile extends Component {
         <div className="col-lg-12">
           <img className="logo-xs" src={require("../assets/logo-sm.png")} alt="SpeakEasy logo" />
           <button className="pull-right" onClick={this.handleClick.bind(this)} type="button">Log Out</button>
-          <strong>{this.props.session.username}</strong>
+          <strong>Hi, {this.props.session.username}</strong>
         </div>
 
         <div className="contact-list col-lg-3">

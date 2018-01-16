@@ -85,6 +85,23 @@ class ContactList extends Component {
     });
   }
 
+  onContact(contact) {
+    console.log('Contact received');
+    const contacts = this.state.contacts;
+    for (let i = 0; i < contacts.length; i++)
+    {
+      if (contacts[i].user.id == contact.user.id)
+      {
+        contacts.splice(i, 1);
+        break;
+      }
+    }
+    contacts.push(contact);
+    this.setState({
+      contacts: contacts,
+    });
+  }
+
   render() {
     const contacts = this.state.contacts.map(contact => {
       if (contact.status === 'sent_request') {
@@ -109,6 +126,7 @@ class ContactList extends Component {
           </div>
         )
       } else {
+        console.log(contact.user);
         const className = "contact" +  (this.state.newMessages.includes(contact.user.id) ? " notification" : "");
         return (
           <div className={className} key={contact.user.id} onClick={this.handleClick.bind(this, contact.user)}>
@@ -127,6 +145,8 @@ class ContactList extends Component {
 
         <div>
         <ActionCable ref='cable' channel={{channel: 'MessagesChannel', id: this.props.session.id}} onReceived={this.onMessage.bind(this)} />
+
+        <ActionCable ref='cable2' channel={{channel: 'ContactsChannel', id: this.props.session.id}} onReceived={this.onContact.bind(this)} />
           {contacts}
         </div>
       </div>
