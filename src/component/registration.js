@@ -45,19 +45,19 @@ class Registration extends Component {
   }
 
   validateField(field, value) {
-    let usernameValid;
-    let emailValid;
-    let passwordValid;
+    let usernameValid = this.state.usernameValid;
+    let emailValid = this.state.emailValid;
+    let passwordValid = this.state.passwordValid;
 
     switch(field) {
       case 'username':
-         usernameValid = value.length > 0 && value.length <= 15;
+        usernameValid = value.length > 3 && value.length <= 15;
         break;
       case 'email':
-         emailValid = value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+        emailValid = value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
         break;
       case 'password':
-         passwordValid = value.length >= 6 && value.length <= 10;
+        passwordValid = value.length >= 6 && value.length <= 10;
         break;
       default:
         break;
@@ -146,7 +146,7 @@ class Registration extends Component {
               </div>
 
               <div className="input-group-lg">
-                <button className="form-control orange-button" type="submit" disabled={this.state.formValid}>Create Account</button>
+                <button className="form-control orange-button" type="submit" disabled={!this.state.formValid}>Create Account</button>
               </div>
 
             </form>
