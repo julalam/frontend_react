@@ -147,7 +147,11 @@ footer {
 /* CONTACT-LIST */
 .contact-list, .message-history-wrapper, .contact-profile {
   border: 1px solid red;
-  height: 97vh;
+  height: 90vh;
+}
+
+.message-history-wrapper {
+  padding: 0;
 }
 
 .contact-list .input-group {
@@ -167,10 +171,11 @@ footer {
 .message-history {
   height: 100%;
   overflow: scroll;
+  padding: 1.5rem;
 }
 
 .messages {
-  /* overflow: scroll; */
+  margin-bottom: 2rem;
 }
 
 .message {
@@ -206,7 +211,6 @@ footer {
   left: 0;
   right: 0;
   text-align: center;
-  /* padding: 1.5rem; */
 }
 
 .new-message input {

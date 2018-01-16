@@ -99,13 +99,13 @@ class MessageHistory extends Component {
       )
     } else {
       return (
-        <div className="message-history">
-          <strong>Message History with user {this.props.contact.username}:</strong>
-          <div className="messages">
+        <div className="message-history" scrollTop>
+          <div className="messages clearfix">
+            <strong>Message History with user {this.props.contact.username}:</strong>
             <ActionCable ref='cable' channel={{channel: 'MessagesChannel', id: this.props.contact.id}} onReceived={this.onMessage.bind(this)} />
-            <div className="clearfix">
+            // <div className="clearfix messages">
               {messages}
-            </div>
+            // </div>
           </div>
           <div className="new-message">
             <form onSubmit={this.sendMessage.bind(this)}>
