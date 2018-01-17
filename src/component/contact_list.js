@@ -8,7 +8,7 @@ class ContactList extends Component {
     this.state = {
       contacts: [],
       newMessages: [],
-      search: '',
+      query: '',
     };
   }
 
@@ -63,14 +63,18 @@ class ContactList extends Component {
 
   updateSearch(event) {
     const query = event.target.value.substr(0, 20);
-    axios.get('http://localhost:8080/users?user=' + this.props.session.id + '&search=' + query).then((response) => {
-      const contacts = response.data;
-      this.setState({
-        contacts: contacts,
-      })
-    });
+    if (query === '') {
+      this.getContacts();
+    } else {
+      axios.get('http://localhost:8080/search?user=' + this.props.session.id + '&query=' + query).then((response) => {
+        const contacts = response.data;
+        this.setState({
+          contacts: contacts,
+        })
+      });
+    }
     this.setState({
-      search: query,
+      query: query,
     });
   }
 
@@ -81,15 +85,24 @@ class ContactList extends Component {
     this.setState({
       newMessages: newMessages,
     });
+
+    const contacts = this.state.contacts;
+    for (let i = 0; i < contacts.length; i++) {
+      if (contacts[i].user.id === message.to || contacts[i].user.id === message.from) {
+        contacts[i].last_message = message;
+        break;
+      }
+    }
+    this.setState({
+        contacts: contacts,
+    });
   }
 
   onContact(contact) {
     console.log('Contact received');
     const contacts = this.state.contacts;
-    for (let i = 0; i < contacts.length; i++)
-    {
-      if (contacts[i].user.id === contact.user.id)
-      {
+    for (let i = 0; i < contacts.length; i++) {
+      if (contacts[i].user.id === contact.user.id) {
         contacts.splice(i, 1);
         break;
       }
@@ -128,6 +141,8 @@ class ContactList extends Component {
         return (
           <div className={className} key={contact.user.id} onClick={this.handleClick.bind(this, contact.user)}>
           <strong>{contact.user.username}</strong>
+          <br/>
+          <strong>{contact.last_message  ? contact.last_message.text : ''}</strong>
           </div>
         )
       }
@@ -137,7 +152,7 @@ class ContactList extends Component {
       <div>
         <div className="input-group">
           <div className="input-group-addon"><span className="glyphicon glyphicon-search"></span></div>
-          <input className="form-control" type="text" placeholder='Search SpeakEasy...' value={this.state.search} onChange={this.updateSearch.bind(this)} />
+          <input className="form-control" type="text" placeholder='Search SpeakEasy...' value={this.state.query} onChange={this.updateSearch.bind(this)} />
         </div>
 
         <div>
