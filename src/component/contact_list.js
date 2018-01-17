@@ -12,13 +12,17 @@ class ContactList extends Component {
     };
   }
 
-  componentDidMount() {
+  getContacts() {
     axios.get('http://localhost:8080/users?user=' + this.props.session.id).then((response) => {
       const contacts = response.data;
       this.setState({
         contacts: contacts,
       })
     });
+  }
+
+  componentDidMount() {
+    this.getContacts();
   }
 
   handleClick(contact, event) {
