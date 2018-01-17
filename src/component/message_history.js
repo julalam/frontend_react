@@ -20,12 +20,18 @@ class MessageHistory extends Component {
     }
   };
 
+  updateMessages(messages) {
+    this.setState({
+      messages: messages,
+    }, () => {
+      this.messageHistory.scrollTop = this.messageHistory.scrollHeight;
+    });
+  }
+
   getMessages() {
     axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact.id).then((response) => {
       const messages = Array.from(response.data);
-      this.setState({
-        messages: messages,
-      });
+      this.updateMessages(messages);
     });
   };
 
@@ -69,9 +75,7 @@ class MessageHistory extends Component {
     // }
 
     messages.push(message);
-    this.setState({
-      messages: messages,
-    });
+    this.updateMessages(messages);
   }
 
   handleMouseHover() {
@@ -99,7 +103,7 @@ class MessageHistory extends Component {
       )
     } else {
       return (
-        <div className="message-history" scrollTop>
+        <div className="message-history" ref={div => this.messageHistory = div}>
           <div className="messages clearfix">
             <strong>Message History with user {this.props.contact.username}:</strong>
             <ActionCable ref='cable' channel={{channel: 'MessagesChannel', id: this.props.contact.id}} onReceived={this.onMessage.bind(this)} />
