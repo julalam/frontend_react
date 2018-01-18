@@ -11,6 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       session: cookie.load('session'),
+      avatar: cookie.load('avatar'),
       errors: '',
     };
   }
@@ -21,8 +22,10 @@ class App extends Component {
       if (response.data.session) {
         this.setState({
           session: response.data.session,
+          avatar: response.data.avatar,
         });
         cookie.save('session', this.state.session)
+        cookie.save('avatar', this.state.avatar)
         console.log(`User ${this.state.session.username} logged in successfully`);
       } else if (response.data.user === null) {
         console.log('Username does\'n match');
@@ -44,10 +47,12 @@ class App extends Component {
     .then((response) => {
       this.setState({
         session: response.data.session,
+        avatar: response.data.avatar,
         errors: '',
       });
-      if (!this.state.session) {
+      if (!this.state.session || !this.state.avatar) {
         cookie.remove('session')
+        cookie.remove('avatar')
         cookie.remove('contact')
         console.log(`User logged out successfully`);
       }
@@ -68,8 +73,10 @@ class App extends Component {
     .then((response) => {
       this.setState({
         session: response.data.session,
+        avatar: response.data.avatar,
       });
       cookie.save('session', this.state.session)
+      cookie.save('avatar', this.state.avatar)
       console.log(`User ${this.state.session.username} successfully created new account`)
     })
     .catch((error) => {
@@ -82,10 +89,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container-fluid app">
+      <div className="container-fluid">
         <Switch>
           <Route exact path='/' render = { () =>
-            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} errors={this.state.errors} /> } />
+            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} avatar={this.state.avatar} errors={this.state.errors} /> } />
           <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} errors={this.state.errors} /> } />
         </Switch>
       </div>

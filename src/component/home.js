@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 class Home extends Component {
   render() {
     if (this.props.session) {
-      return <UserProfile onLogout={this.props.onLogout} session={this.props.session} />
+      return <UserProfile onLogout={this.props.onLogout} session={this.props.session} avatar={this.props.avatar} />
     } else {
       return (
         <div className="row">
