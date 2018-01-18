@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {ActionCable} from 'react-actioncable-provider'
 import axios from 'axios';
+import dateFormat from 'dateformat';
 
 class ContactList extends Component {
   constructor(props) {
@@ -116,33 +117,51 @@ class ContactList extends Component {
   render() {
     const contacts = this.state.contacts.map(contact => {
       if (contact.status === 'sent_request') {
+        const date = dateFormat(contact.contact.created_at).slice(0,-3);
         return (
-          <div className="contact" key={contact.user.id}>
-            <strong>{contact.user.username}</strong> (request already sent)
+          <div className="contact clearfix" key={contact.user.id}>
+            <img className="img-circle pull-left" src={contact.avatar} alt="Avatar" />
+            <div className="contact-text">
+              <strong>{contact.user.username}</strong>
+              <br/>
+              <small>Request sent on {date}</small>
+            </div>
           </div>
         )
       } else if (contact.status === 'user') {
         return (
-          <div className="contact" key={contact.user.id}>
-            <strong>{contact.user.username}</strong>
-            <button onClick={this.createRequest.bind(this, contact.user)} type="button">Send Request</button>
+          <div className="contact clearfix" key={contact.user.id}>
+            <img className="img-circle pull-left clearfix" src={contact.avatar} alt="Avatar" />
+            <div className="contact-text">
+              <strong>{contact.user.username}</strong>
+              <button className="btn btn-default pull-right" onClick={this.createRequest.bind(this, contact.user)} type="button">Send friend request</button>
+            </div>
           </div>
         )
       } else if (contact.status === 'received_request'){
+        const date = dateFormat(contact.contact.created_at).slice(0,-3);
         return (
-          <div className="contact" key={contact.user.id}>
-            <strong>{contact.user.username}</strong>
-            <button onClick={this.acceptRequest.bind(this, contact.contact)} type="button">Accept Request</button>
-            <button onClick={this.declineRequest.bind(this, contact.contact)} type="button">Decline Request</button>
+          <div className="contact clearfix" key={contact.user.id}>
+            <img className="img-circle pull-left clearfix" src={contact.avatar} alt="Avatar" />
+            <div className="contact-text">
+              <strong>{contact.user.username}</strong>
+              <br/>
+              <small>Request sent on {date}</small>
+              <button className="btn btn-default glyphicon glyphicon-remove pull-right" onClick={this.declineRequest.bind(this, contact.contact)} type="button"></button>
+              <button className="btn btn-default glyphicon glyphicon-ok pull-right" onClick={this.acceptRequest.bind(this, contact.contact)} type="button"></button>
+            </div>
           </div>
         )
       } else {
-        const className = "contact" +  (this.state.newMessages.includes(contact.user.id) ? " notification" : "");
+        const className = "contact clearfix" +  (this.state.newMessages.includes(contact.user.id) ? " notification" : "");
         return (
           <div className={className} key={contact.user.id} onClick={this.handleClick.bind(this, contact)}>
-          <strong>{contact.user.username}</strong>
-          <br/>
-          <strong>{contact.last_message  ? contact.last_message.text : ''}</strong>
+            <img className="img-circle pull-left" src={contact.avatar} alt="Avatar" />
+            <div className="contact-text">
+              <strong>{contact.user.username}</strong>
+              <br/>
+              {contact.last_message  ? contact.last_message.text : ''}
+            </div>
           </div>
         )
       }

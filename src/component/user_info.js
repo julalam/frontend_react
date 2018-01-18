@@ -35,7 +35,7 @@ class UserInfo extends Component {
   render() {
     return (
       <div className="user-info">
-        <img className="img-thumbnail avatar" src={this.state.avatar} alt="Avatar" />
+        <img className="img-thumbnail" src={this.state.avatar} alt="Avatar" />
 
         <form className="image-form" onSubmit={this.handleUpload.bind(this)} >
           <label>Upload new avatar</label>

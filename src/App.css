@@ -159,13 +159,31 @@ footer {
 }
 
 .contact {
-  border: 1px solid red;
   padding: 1rem;
+  border-bottom: 1px solid #76c6cf;
+}
+
+.contact:hover {
+  background-color: #c8f6f8;
 }
 
 .notification {
   background-color: red;
 }
+
+.img-circle {
+  width: 5rem;
+  margin-right: 1.5rem;
+}
+
+.contact-text {
+  padding-top: .4rem;
+}
+
+.contact-text button {
+  margin: .5rem 0 .5rem .5rem;
+}
+
 
 /* MESSAGE HISTORY */
 .message-history {
@@ -223,7 +241,7 @@ footer {
   padding: 1rem;
 }
 
-.avatar {
+.img-thumbnail {
   display: block;
   width: 80%;
   margin: 2rem auto;
