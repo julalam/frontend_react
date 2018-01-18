@@ -10,6 +10,7 @@ class UserProfile extends Component {
     super(props);
     this.state = {
       contact: cookie.load('contact'),
+      contact_avatar: cookie.load('contact_avatar'),
       update: false,
     };
   }
@@ -33,11 +34,14 @@ class UserProfile extends Component {
   handleContact(contact) {
     if (this.state.contact) {
       cookie.remove('contact')
+      cookie.remove('contact_avatar')
     }
     this.setState({
-      contact: contact,
+      contact: contact.user,
+      contact_avatar: contact.avatar,
     })
-    cookie.save('contact', contact)
+    cookie.save('contact', contact.user)
+    cookie.save('contact_avatar', contact.avatar)
   }
 
   render() {
@@ -59,7 +63,7 @@ class UserProfile extends Component {
         </div>
 
         <div className="contact-profile col-lg-3">
-          <ContactProfile contact={this.state.contact} />
+          <ContactProfile contact={this.state.contact} avatar={this.state.contact_avatar} />
         </div>
       </div>
     );

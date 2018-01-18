@@ -6,10 +6,13 @@ class ContactProfile extends Component {
       return <div>Please select contact...</div>
     }
     return (
-      <div>
-        <strong>Contact Profile: user {this.props.contact.username}</strong>
-        <br/>
-        <strong>Language: </strong> "User's Language"
+      <div className="user-info">
+        <img className="img-thumbnail avatar" src={this.props.avatar} alt="Avatar" />
+
+        <p><strong>Username: </strong>{this.props.contact.username}</p>
+        <p><strong>Country: </strong>{this.props.contact.country}</p>
+        <p><strong>Language: </strong>{this.props.contact.language}</p>
+
       </div>
     );
   }

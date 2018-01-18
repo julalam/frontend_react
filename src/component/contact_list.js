@@ -139,7 +139,7 @@ class ContactList extends Component {
       } else {
         const className = "contact" +  (this.state.newMessages.includes(contact.user.id) ? " notification" : "");
         return (
-          <div className={className} key={contact.user.id} onClick={this.handleClick.bind(this, contact.user)}>
+          <div className={className} key={contact.user.id} onClick={this.handleClick.bind(this, contact)}>
           <strong>{contact.user.username}</strong>
           <br/>
           <strong>{contact.last_message  ? contact.last_message.text : ''}</strong>

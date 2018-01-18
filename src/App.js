@@ -54,6 +54,7 @@ class App extends Component {
         cookie.remove('session')
         cookie.remove('avatar')
         cookie.remove('contact')
+        cookie.remove('contact_avatar')
         console.log(`User logged out successfully`);
       }
     })
