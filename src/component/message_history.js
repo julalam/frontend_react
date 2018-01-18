@@ -29,7 +29,7 @@ class MessageHistory extends Component {
   }
 
   getMessages() {
-    axios.get('http://localhost:8080/messages?from=' + this.props.session.session.id + '&to=' + this.props.contact.id).then((response) => {
+    axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact.id).then((response) => {
       const messages = Array.from(response.data);
       this.updateMessages(messages);
     });

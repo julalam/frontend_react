@@ -217,3 +217,27 @@ footer {
   width: 100%;
   height: 5rem;
 }
+
+/* USER INFO */
+.user-info {
+  padding: 1rem;
+}
+
+.avatar {
+  display: block;
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.image-form label {
+  display: block;
+}
+
+.image-form input {
+  display: inline-block;
+  width: 22rem;
+}
+
+.user-info p {
+  margin: 2rem 0;
+}

@@ -26,7 +26,7 @@ class UserInfo extends Component {
       })
       .then((response) => {
         this.setState({
-          avatar: response.data.avatar.substr(2),
+          avatar: response.data.avatar,
         })
       });
     }
@@ -34,12 +34,19 @@ class UserInfo extends Component {
 
   render() {
     return (
-      <div>
-        <img src={this.state.avatar} alt="Avatar" />
-        <form onSubmit={this.handleUpload.bind(this)}>
+      <div className="user-info">
+        <img className="img-thumbnail avatar" src={this.state.avatar} alt="Avatar" />
+
+        <form className="image-form" onSubmit={this.handleUpload.bind(this)} >
+          <label>Upload new avatar</label>
           <input id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
           <button type="submit">Upload</button>
         </form>
+
+        <p><strong>Country: </strong>{this.props.session.country}</p>
+        <p><strong>Language: </strong>{this.props.session.language}</p>
+
+
         <button className="pull-right" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
       </div>
     );
