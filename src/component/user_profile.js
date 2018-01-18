@@ -2,19 +2,32 @@ import React, { Component } from 'react';
 import ContactList from './contact_list';
 import MessageHistory from './message_history';
 import ContactProfile from './contact_profile';
+import UserInfo from './user_info';
 import cookie from 'react-cookies';
 
 class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //contact: null,
       contact: cookie.load('contact'),
+      update: false,
     };
   }
 
-  handleClick(event) {
+  handleLogOut(event) {
     this.props.onLogout(event);
+  }
+
+  handleUpdate(event) {
+    this.setState({
+      update: true,
+    })
+  }
+
+  handleCancel(event) {
+    this.setState({
+      update: false,
+    })
   }
 
   handleContact(contact) {
@@ -32,12 +45,13 @@ class UserProfile extends Component {
       <div className="row user-profile">
         <div className="col-lg-12">
           <img className="logo-xs" src={require("../assets/logo-sm.png")} alt="SpeakEasy logo" />
-          <button className="pull-right" onClick={this.handleClick.bind(this)} type="button">Log Out</button>
+          <button className="pull-right" onClick={this.handleUpdate.bind(this)} type="button">Edit Profile</button>
+          <button className="pull-right" onClick={this.handleLogOut.bind(this)} type="button">Log Out</button>
           <strong>Hi, {this.props.session.username}</strong>
         </div>
 
         <div className="contact-list col-lg-3">
-          <ContactList session={this.props.session} onContact={this.handleContact.bind(this)}/>
+          { this.state.update ? <UserInfo session={this.props.session} onCancel={this.handleCancel.bind(this)} /> : <ContactList session={this.props.session} onContact={this.handleContact.bind(this)} /> }
         </div>
 
         <div className="message-history-wrapper col-lg-6">
