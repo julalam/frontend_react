@@ -47,11 +47,17 @@ class UserProfile extends Component {
   render() {
     return (
       <div className="row user-profile">
-        <div className="col-lg-12">
-          <img className="logo-xs" src={require("../assets/logo-sm.png")} alt="SpeakEasy logo" />
-          <button className="pull-right" onClick={this.handleUpdate.bind(this)} type="button">Edit Profile</button>
-          <button className="pull-right" onClick={this.handleLogOut.bind(this)} type="button">Log Out</button>
-          <strong>Hi, {this.props.session.username}</strong>
+        <div className="col-lg-12 clearfix">
+          <div className="col-lg-3">
+            <img className="logo-xs" src={require("../assets/logo-name.png")} alt="SpeakEasy logo" />
+          </div>
+          <div className="col-lg-6">
+            <h2>Hi, {this.props.session.username}</h2>
+          </div>
+          <div className="col-lg-3 user-buttons">
+            <button className="btn btn-default glyphicon glyphicon-log-out pull-right" onClick={this.handleLogOut.bind(this)} type="button"></button>
+            <button className="btn btn-default glyphicon glyphicon-edit pull-right" onClick={this.handleUpdate.bind(this)} type="button"></button>
+          </div>
         </div>
 
         <div className="contact-list col-lg-3">

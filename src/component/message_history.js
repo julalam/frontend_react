@@ -105,7 +105,6 @@ class MessageHistory extends Component {
       return (
         <div className="message-history" ref={div => this.messageHistory = div}>
           <div className="messages clearfix">
-            <strong>Message History with user {this.props.contact.username}:</strong>
             <ActionCable ref='cable' channel={{channel: 'MessagesChannel', id: this.props.contact.id}} onReceived={this.onMessage.bind(this)} />
               {messages}
           </div>

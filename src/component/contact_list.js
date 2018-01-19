@@ -146,7 +146,7 @@ class ContactList extends Component {
             <div className="contact-text">
               <strong>{contact.user.username}</strong>
               <br/>
-              <small>Request sent on {date}</small>
+              <small>Request received on {date}</small>
               <button className="btn btn-default glyphicon glyphicon-remove pull-right" onClick={this.declineRequest.bind(this, contact.contact)} type="button"></button>
               <button className="btn btn-default glyphicon glyphicon-ok pull-right" onClick={this.acceptRequest.bind(this, contact.contact)} type="button"></button>
             </div>

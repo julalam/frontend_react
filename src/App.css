@@ -17,6 +17,10 @@ html, body {
   color: #1f4359;
 }
 
+div {
+  /* border: 1px solid red; */
+}
+
 .blue-button {
   color: #2a94a1;
   background-color: #83dde6;
@@ -59,6 +63,10 @@ html, body {
   margin-bottom: 1rem;
   background-color: #fcc4c5;
   border: 1px solid red;
+}
+
+.clearfix {
+  clear: both;
 }
 
 /* LOGIN PAGE */
@@ -141,12 +149,27 @@ footer {
 
 /* USER PROFILE */
 .logo-xs {
-  width: 80px;
+  height: 7rem;
+  display: block;
+  margin: .5rem auto;
+}
+
+.col-lg-12 {
+  padding: 0;
+  border-bottom: 1px solid #76c6cf;
+}
+
+.user-profile h2 {
+  text-align: center;
+  font-weight: 200;
+}
+
+.user-buttons button{
+  margin: 1.5rem 1rem 1rem 0;
 }
 
 /* CONTACT-LIST */
 .contact-list, .message-history-wrapper, .contact-profile {
-  border: 1px solid red;
   height: 90vh;
 }
 
@@ -155,7 +178,7 @@ footer {
 }
 
 .contact-list .input-group {
-  margin: .5rem 0;
+  margin: 1rem 0;
 }
 
 .contact {
@@ -186,6 +209,11 @@ footer {
 
 
 /* MESSAGE HISTORY */
+.message-history-wrapper {
+  border-left: 1px solid #76c6cf;
+  border-right: 1px solid #76c6cf;
+}
+
 .message-history {
   height: 100%;
   overflow: scroll;
@@ -217,10 +245,6 @@ footer {
 
 .message p {
   margin: 0;
-}
-
-.clearfix {
-  clear: both;
 }
 
 .new-message {
