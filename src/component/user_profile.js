@@ -55,8 +55,8 @@ class UserProfile extends Component {
             <h2>Hi, {this.props.session.username}</h2>
           </div>
           <div className="col-lg-3 user-buttons">
-            <button className="btn btn-default glyphicon glyphicon-log-out pull-right" onClick={this.handleLogOut.bind(this)} type="button"></button>
-            <button className="btn btn-default glyphicon glyphicon-edit pull-right" onClick={this.handleUpdate.bind(this)} type="button"></button>
+            <button className="btn btn-default glyphicon glyphicon-log-out pull-right orange-button" onClick={this.handleLogOut.bind(this)} type="button"></button>
+            <button className="btn btn-default glyphicon glyphicon-edit pull-right blue-button" onClick={this.handleUpdate.bind(this)} type="button"></button>
           </div>
         </div>
 

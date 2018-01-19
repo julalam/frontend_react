@@ -134,7 +134,7 @@ class ContactList extends Component {
             <img className="img-circle pull-left clearfix" src={contact.avatar} alt="Avatar" />
             <div className="contact-text">
               <strong>{contact.user.username}</strong>
-              <button className="btn btn-default pull-right" onClick={this.createRequest.bind(this, contact.user)} type="button">Send friend request</button>
+              <button className="btn btn-default pull-right blue-button" onClick={this.createRequest.bind(this, contact.user)} type="button">Send friend request</button>
             </div>
           </div>
         )
@@ -147,8 +147,8 @@ class ContactList extends Component {
               <strong>{contact.user.username}</strong>
               <br/>
               <small>Request received on {date}</small>
-              <button className="btn btn-default glyphicon glyphicon-remove pull-right" onClick={this.declineRequest.bind(this, contact.contact)} type="button"></button>
-              <button className="btn btn-default glyphicon glyphicon-ok pull-right" onClick={this.acceptRequest.bind(this, contact.contact)} type="button"></button>
+              <button className="btn btn-default glyphicon glyphicon-remove pull-right orange-button" onClick={this.declineRequest.bind(this, contact.contact)} type="button"></button>
+              <button className="btn btn-default glyphicon glyphicon-ok pull-right blue-button" onClick={this.acceptRequest.bind(this, contact.contact)} type="button"></button>
             </div>
           </div>
         )

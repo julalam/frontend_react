@@ -34,20 +34,22 @@ class UserInfo extends Component {
 
   render() {
     return (
-      <div className="user-info">
+      <div className="user-info clearfix">
         <img className="img-thumbnail" src={this.state.avatar} alt="Avatar" />
 
         <form className="image-form" onSubmit={this.handleUpload.bind(this)} >
           <label>Upload new avatar</label>
           <input id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
-          <button type="submit">Upload</button>
+          <button className="btn btn-default blue-button" type="submit">Upload</button>
         </form>
 
         <p><strong>Country: </strong>{this.props.session.country}</p>
         <p><strong>Language: </strong>{this.props.session.language}</p>
 
 
-        <button className="pull-right" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
+        <button className="btn btn-default pull-right orange-button" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
+
+        <button className="btn btn-default pull-right blue-button" onClick={this.handleCancel.bind(this)} type="button">Save</button>
       </div>
     );
   }

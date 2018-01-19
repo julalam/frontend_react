@@ -110,7 +110,12 @@ class MessageHistory extends Component {
           </div>
           <div className="new-message">
             <form onSubmit={this.sendMessage.bind(this)}>
-              <input type="text" placeholder="Type a message..." name="message" />
+              <div className="input-group">
+                <input className="form-control" type="text" placeholder="Type a message..." name="message" />
+                <div className="input-group-addon">
+                  <span className="glyphicon glyphicon-send"></span>
+                </div>
+              </div>
             </form>
           </div>
         </div>
