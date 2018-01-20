@@ -155,9 +155,10 @@ class ContactList extends Component {
       } else {
         const className = "contact clearfix" +  (this.state.newMessages.includes(contact.user.id) ? " notification" : "");
         let date = '';
-        const date_rails =dateFormat(contact.last_message.created_at).slice(0,10);
+        let date_rails = '';
+        contact.last_message ? date_rails = dateFormat(contact.last_message.created_at).slice(0,10) : date_rails = '';
         const date_today = dateFormat(new Date()).slice(0,10);
-        !contact.last_message ? date = '' : date_rails === date_today ? date =  dateFormat(contact.last_message.created_at, 'h:MM') :  date = dateFormat(contact.last_message.created_at, 'mmm dS')
+        !contact.last_message ? date = '' : date_rails === date_today ? date = dateFormat(contact.last_message.created_at, 'h:MM') :  date = dateFormat(contact.last_message.created_at, 'mmm dS')
         return (
           <div className={className} key={contact.user.id} onClick={this.handleClick.bind(this, contact)}>
             <img className="img-circle pull-left" src={contact.avatar} alt="Avatar" />

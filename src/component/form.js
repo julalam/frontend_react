@@ -8,7 +8,7 @@ class Form extends Component {
     this.state = {
       languages: [],
       countries: [],
-      username: props.session ? props.session.username : '',
+      username: '',
       email: props.session ? props.session.email : '',
       password: '',
       language: '',
@@ -18,7 +18,7 @@ class Form extends Component {
       languageValid: false,
       formValid: false,
       formEmpty: true,
-      formReady: true,
+      formReady: true,   
     };
   }
 
@@ -111,17 +111,19 @@ class Form extends Component {
   handleUpdate(event) {
     event.preventDefault();
     const user = {
-      username: event.target.username.value,
       email: event.target.email.value,
-      password: event.target.password.value,
       country: event.target.country.value,
       language: event.target.language.value,
     };
     this.props.onUpdateUser(event, user);
   }
 
+  handleCancel(event) {
+    this.props.onCancel(event);
+  }
+
   render() {
-    const usernameClass = (this.props.session ? "" : "input-group-lg") + (!this.state.usernameValid && !this.state.formEmpty ? " has-error" : "");
+    const usernameClass = "input-group-lg" + (!this.state.usernameValid && !this.state.formEmpty ? " has-error" : "");
 
     const emailClass = (this.props.session ? "" : "input-group-lg") + (!this.state.emailValid && !this.state.formEmpty ? " has-error" : "");
 
@@ -132,26 +134,20 @@ class Form extends Component {
     const countryClass = this.props.session ? "" : "input-group-lg";
 
     const languageOptions = this.state.languages.map(language => {
-      if (this.props.session) {
-        if (language.code === this.props.session.language) {
+      if (this.props.session && language.code === this.props.session.language) {
           return <option selected key={language.id} value={language.code}>{language.native_name}</option>
-        } }
-      else {
+      } else {
         return <option key={language.id} value={language.code}>{language.native_name}</option>
       }
     });
 
     const countryOptions = this.state.countries.map(country => {
-      if (this.props.session) {
-        if (country.name === this.props.session.country) {
-          return <option selected key={country.id} value={country.name}>{country.name}</option>
-        } }
-      else {
+      if (this.props.session && country.name === this.props.session.country) {
+        return <option selected key={country.id} value={country.name}>{country.name}</option>
+      } else {
         return <option key={country.id} value={country.name}>{country.name}</option>
       }
     });
-
-
 
     return (
 
@@ -161,13 +157,16 @@ class Form extends Component {
 
         { !this.state.formReady && <div className="error">We are experiencing temporary technical difficulties. Please try again later</div> }
 
-        <form className="user-form" onSubmit={this.handleCreate.bind(this)}>
+        <form className="user-form" onSubmit={this.handleUpdate.bind(this)}>
+
           {this.props.session && <label>Update account information</label>}
 
-          <div className={usernameClass}>
+          {!this.props.session &&
+            <div className={usernameClass}>
             <input id="username" className="form-control" type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput.bind(this)} />
             <div id="username-note" className="note">Username must be between 3 and 15 characters.</div>
-          </div>
+            </div>
+          }
 
           <div className={emailClass}>
             <input id="email" className="form-control" type="text" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput.bind(this)} />
@@ -200,6 +199,12 @@ class Form extends Component {
             </div>
           }
 
+          {this.props.session &&
+            <div className="update-buttons">
+            <button className="btn btn-default pull-right orange-button" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
+            <button className="btn btn-default pull-right blue-button" onSubmit={this.handleUpdate.bind(this)} type="submit">Save</button>
+            </div>
+          }
         </form>
       </div>
     );

@@ -88,12 +88,26 @@ class App extends Component {
     })
   }
 
+  handleUpdateUser(event, user) {
+    console.log('in handle update');
+    axios.patch('http://localhost:8080/users/' + this.state.session.id, {
+      email: user.email,
+      country: user.country,
+      language: user.language,
+    })
+    .then((response) => {
+      this.setState({
+        session: response.data.user,
+      })
+    })
+  }
+
   render() {
     return (
       <div className="container-fluid">
         <Switch>
           <Route exact path='/' render = { () =>
-            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} avatar={this.state.avatar} errors={this.state.errors} /> } />
+            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} avatar={this.state.avatar} errors={this.state.errors} onUpdateUser = {this.handleUpdateUser.bind(this)} /> } />
           <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} errors={this.state.errors} /> } />
         </Switch>
       </div>

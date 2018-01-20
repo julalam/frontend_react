@@ -5,9 +5,7 @@ import {ActionCable} from 'react-actioncable-provider'
 class MessageHistory extends Component {
   constructor(props) {
     super(props);
-    if (this.props.contact) {
-      this.getMessages();
-    }
+    this.getMessages();
     this.state = {
       messages: [],
       hover: false,
@@ -29,6 +27,11 @@ class MessageHistory extends Component {
   }
 
   getMessages() {
+    if (!this.props.contact)
+    {
+      return;
+    }
+    
     axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact.id).then((response) => {
       const messages = Array.from(response.data);
       this.updateMessages(messages);

@@ -18,7 +18,6 @@ class UserInfo extends Component {
     event.preventDefault();
 
     const file = event.target.image.files[0];
-    console.log(file);
     let formData = new FormData();
     formData.append('avatar', file);
 
@@ -45,13 +44,9 @@ class UserInfo extends Component {
         </form>
 
         <div className="update-user-form">
-          <Form session={this.props.session}/>
+          <Form session={this.props.session} onCancel={this.props.onCancel} onUpdateUser = {this.props.onUpdateUser} />
         </div>
 
-        <div className="update-buttons">
-          <button className="btn btn-default pull-right orange-button" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
-          <button className="btn btn-default pull-right blue-button" onClick={this.handleCancel.bind(this)} type="button">Save</button>
-        </div>
       </div>
     );
   }
