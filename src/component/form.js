@@ -8,9 +8,10 @@ class Form extends Component {
     this.state = {
       languages: [],
       countries: [],
-      username: '',
-      email: '',
+      username: props.session ? props.session.username : '',
+      email: props.session ? props.session.email : '',
       password: '',
+      language: '',
       usernameValid: false,
       emailValid: false,
       passwordValid: false,
@@ -95,7 +96,7 @@ class Form extends Component {
     })
   }
 
-  handleSubmit(event) {
+  handleCreate(event) {
     event.preventDefault();
     const user = {
       username: event.target.username.value,
@@ -107,21 +108,47 @@ class Form extends Component {
     this.props.onRegistration(event, user);
   }
 
+  handleUpdate(event) {
+    event.preventDefault();
+    const user = {
+      username: event.target.username.value,
+      email: event.target.email.value,
+      password: event.target.password.value,
+      country: event.target.country.value,
+      language: event.target.language.value,
+    };
+    this.props.onUpdateUser(event, user);
+  }
+
   render() {
-    const usernameClass = "input-group-lg" + (!this.state.usernameValid && !this.state.formEmpty ? " has-error" : "");
+    const usernameClass = (this.props.session ? "" : "input-group-lg") + (!this.state.usernameValid && !this.state.formEmpty ? " has-error" : "");
 
-    const emailClass = "input-group-lg" + (!this.state.emailValid && !this.state.formEmpty ? " has-error" : "");
+    const emailClass = (this.props.session ? "" : "input-group-lg") + (!this.state.emailValid && !this.state.formEmpty ? " has-error" : "");
 
-    const passwordClass = "input-group-lg" + (!this.state.passwordValid && !this.state.formEmpty ? " has-error" : "");
+    const passwordClass = (this.props.session ? "" : "input-group-lg") + (!this.state.passwordValid && !this.state.formEmpty ? " has-error" : "");
 
-    const languageClass = "input-group-lg" + (!this.state.languageValid && !this.state.formEmpty ? " has-error" : "");
+    const languageClass = (this.props.session ? "" : "input-group-lg") + (!this.state.languageValid && !this.state.formEmpty ? " has-error" : "");
+
+    const countryClass = this.props.session ? "" : "input-group-lg";
 
     const languageOptions = this.state.languages.map(language => {
-      return <option key={language.id} value={language.code}>{language.native_name}</option>
+      if (this.props.session) {
+        if (language.code === this.props.session.language) {
+          return <option selected key={language.id} value={language.code}>{language.native_name}</option>
+        } }
+      else {
+        return <option key={language.id} value={language.code}>{language.native_name}</option>
+      }
     });
 
     const countryOptions = this.state.countries.map(country => {
-      return <option key={country.id} value={country.name}>{country.name}</option>
+      if (this.props.session) {
+        if (country.name === this.props.session.country) {
+          return <option selected key={country.id} value={country.name}>{country.name}</option>
+        } }
+      else {
+        return <option key={country.id} value={country.name}>{country.name}</option>
+      }
     });
 
 
@@ -129,12 +156,13 @@ class Form extends Component {
     return (
 
       <div className="registration">
-        <h2>Sign Up</h2>
-        { this.props.errors && <div className="error">{this.props.errors}</div>}
+        { this.props.session ? '' : <h2>Sign Up</h2>}
+        { this.props.errors && <div className="error">{this.props.errors}</div> }
 
         { !this.state.formReady && <div className="error">We are experiencing temporary technical difficulties. Please try again later</div> }
 
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form className="user-form" onSubmit={this.handleCreate.bind(this)}>
+          {this.props.session && <label>Update account information</label>}
 
           <div className={usernameClass}>
             <input id="username" className="form-control" type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput.bind(this)} />
@@ -146,28 +174,31 @@ class Form extends Component {
             <div id="email-note" className="note">Please enter email in following format: name@gmail.com</div>
           </div>
 
-          <div className={passwordClass}>
-            <input id="password" className="form-control" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput.bind(this)} />
-            <div id="password-note" className="note">Select a 6-10 character password that begins with a letter and contains at least one number. Your password may not contain your email, word "password", or any blank spaces.</div>
-          </div>
+          {!this.props.session &&
+            <div className={passwordClass}>
+              <input id="password" className="form-control" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput.bind(this)} />
+              <div id="password-note" className="note">Select a 6-10 character password that begins with a letter and contains at least one number. Your password may not contain your email, word "password", or any blank spaces.</div>
+            </div> }
 
-          <div className="input-group-lg">
+          <div className={countryClass}>
             <select className="form-control" name="country">
-              <option value="" disabled selected>Select Country</option>
+              {this.props.session ? <option value="" disabled>Select Country</option> : <option value="" disabled selected>Select Country</option>}
               {countryOptions}
             </select>
           </div>
 
           <div className={languageClass}>
             <select className="form-control" name="language" onChange={this.handleUserInput.bind(this)}>
-              <option value="" disabled selected>Select Language</option>
+              {this.props.session ? <option value="" disabled>Select Language</option> : <option value="" disabled selected>Select Language</option>}
               {languageOptions}
             </select>
           </div>
 
-          <div className="input-group-lg">
-            <button className="form-control orange-button" type="submit" disabled={!this.state.formValid || !this.state.formReady}>Create Account</button>
-          </div>
+          {!this.props.session &&
+            <div className="input-group-lg">
+            <button className="form-control orange-button" type="submit" disabled>Create Account</button>
+            </div>
+          }
 
         </form>
       </div>

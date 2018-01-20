@@ -109,16 +109,22 @@ img.logo {
   text-decoration: none;
 }
 
-/* REGISTRATION PAGE */
-.registration {
-  /* padding-top: 1rem; */
-}
-
+/* FORM */
 .registration form select {
   text-indent: .8rem;
   color: #999;
+  /* color: #2A94A1; */
 }
 
+.user-info input, .user-info select{
+  font-size: 1.6rem;
+}
+
+.user-form label {
+  margin-top: 3rem;
+}
+
+/* REGISTRATION PAGE */
 .logo-sm {
   margin: 5rem auto 3rem auto;
   display: block;
@@ -291,6 +297,7 @@ footer {
 
 .image-form label {
   display: block;
+  margin-left: 1rem;
 }
 
 .image-form input {
@@ -306,4 +313,8 @@ footer {
 .user-info button {
   font-size: 1.5rem;
   margin: .5rem;
+}
+
+.update-buttons {
+  margin-top: 6rem;
 }

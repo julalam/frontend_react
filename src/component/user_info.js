@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Form from './form';
 import axios from 'axios';
 
 class UserInfo extends Component {
@@ -43,13 +44,14 @@ class UserInfo extends Component {
           <button className="btn btn-default blue-button" type="submit">Upload</button>
         </form>
 
-        <p><strong>Country: </strong>{this.props.session.country}</p>
-        <p><strong>Language: </strong>{this.props.session.language}</p>
+        <div className="update-user-form">
+          <Form session={this.props.session}/>
+        </div>
 
-
-        <button className="btn btn-default pull-right orange-button" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
-
-        <button className="btn btn-default pull-right blue-button" onClick={this.handleCancel.bind(this)} type="button">Save</button>
+        <div className="update-buttons">
+          <button className="btn btn-default pull-right orange-button" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
+          <button className="btn btn-default pull-right blue-button" onClick={this.handleCancel.bind(this)} type="button">Save</button>
+        </div>
       </div>
     );
   }
