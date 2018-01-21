@@ -51,7 +51,7 @@ class UserInfo extends Component {
         // {this.state.imageSuccess && <div className="clearfix success">{this.state.imageSuccess}</div>}
 
         <div className="update-user-form">
-          <Form session={this.props.session} onCancel={this.props.onCancel} onUpdateUser = {this.props.onUpdateUser} />
+          <Form session={this.props.session}  onCancel={this.props.onCancel} onUpdateUser = {this.props.onUpdateUser} />
         </div>
 
         <div className="clearfix error">{this.props.infoErrors}</div>

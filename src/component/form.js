@@ -134,7 +134,7 @@ class Form extends Component {
     const countryClass = this.props.session ? "" : "input-group-lg";
 
     const languageOptions = this.state.languages.map(language => {
-      if (this.props.session && language.code === this.props.session.language) {
+      if (this.props.session && language.id === this.props.session.language_id) {
           return <option selected key={language.id} value={language.id}>{language.native_name}</option>
       } else {
         return <option key={language.id} value={language.id}>{language.native_name}</option>

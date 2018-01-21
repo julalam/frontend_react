@@ -11,7 +11,7 @@ class ContactProfile extends Component {
 
         <p><strong>Username: </strong>{this.props.contact.username}</p>
         <p><strong>Country: </strong>{this.props.contact.country}</p>
-        <p><strong>Language: </strong>{this.props.contact.language}</p>
+        <p><strong>Language: </strong>{this.props.language}</p>
 
       </div>
     );

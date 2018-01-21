@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       session: cookie.load('session'),
       avatar: cookie.load('avatar'),
+      language: cookie.load('language'),
       loginErrors: '',
       registrationErrors: '',
       imageErrors: '',
@@ -28,9 +29,11 @@ class App extends Component {
         this.setState({
           session: response.data.session,
           avatar: response.data.avatar,
+          language: response.data.language,
         });
         cookie.save('session', this.state.session)
         cookie.save('avatar', this.state.avatar)
+        cookie.save('language', this.state.language)
         console.log(`User ${this.state.session.username} logged in successfully`);
       } else if (response.data.user === null) {
         console.log('Username does\'n match');
@@ -53,11 +56,13 @@ class App extends Component {
       this.setState({
         session: response.data.session,
         avatar: response.data.avatar,
+        language: response.data.language,
         errors: '',
       });
-      if (!this.state.session || !this.state.avatar) {
+      if (!this.state.session || !this.state.avatar || !this.state.language) {
         cookie.remove('session')
         cookie.remove('avatar')
+        cookie.remove('language')
         cookie.remove('contact')
         cookie.remove('contact_avatar')
         console.log(`User logged out successfully`);
@@ -80,9 +85,11 @@ class App extends Component {
       this.setState({
         session: response.data.session,
         avatar: response.data.avatar,
+        language: response.data.language,
       });
       cookie.save('session', this.state.session)
       cookie.save('avatar', this.state.avatar)
+      cookie.save('language', this.state.language)
       console.log(`User ${this.state.session.username} successfully created new account`)
     })
     .catch((error) => {
@@ -102,13 +109,16 @@ class App extends Component {
     .then((response) => {
       this.setState({
         session: response.data.user,
+        language: response.data.language,
         infoSuccess: 'Account information has been updated',
       })
       cookie.remove('session');
+      cookie.remove('language');
       cookie.save('session', this.state.session);
+      cookie.save('language', this.state.language);
     })
     .catch((error) => {
-      console.log('Accunt information wasn\'t updates');
+      console.log('Accunt information wasn\'t updated');
       this.setState({
         infoErrors: 'Something went wrong. Please try again later',
       })
@@ -142,7 +152,7 @@ class App extends Component {
       <div className="container-fluid">
         <Switch>
           <Route exact path='/' render = { () =>
-            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} avatar={this.state.avatar} loginErrors={this.state.loginErrors} infoErrors={this.state.infoErrors} imageErrors={this.state.imageErrors} infoSuccess={this.state.infoSuccess} imageSuccess={this.state.imageSuccess} onUpdateUser={this.handleUpdateUser.bind(this)} onImageUpdate={this.handleUpdateImage.bind(this)} /> } />
+            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} avatar={this.state.avatar} language={this.state.language} loginErrors={this.state.loginErrors} infoErrors={this.state.infoErrors} imageErrors={this.state.imageErrors} infoSuccess={this.state.infoSuccess} imageSuccess={this.state.imageSuccess} onUpdateUser={this.handleUpdateUser.bind(this)} onImageUpdate={this.handleUpdateImage.bind(this)} /> } />
           <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} errors={this.state.registrationErrors} /> } />
         </Switch>
       </div>

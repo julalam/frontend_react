@@ -46,7 +46,7 @@ class MessageHistory extends Component {
         text: event.target.message.value,
         from: this.props.session.id,
         to: this.props.contact.id,
-        language: this.props.contact.language,
+        language_id: this.props.contact.language_id,
       }).then((response) => {
         console.log('Message successfully sent');
       });
