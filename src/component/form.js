@@ -18,7 +18,7 @@ class Form extends Component {
       languageValid: false,
       formValid: false,
       formEmpty: true,
-      formReady: true,   
+      formReady: true,
     };
   }
 
@@ -92,7 +92,7 @@ class Form extends Component {
 
   validateForm() {
     this.setState({
-      formValid: this.state.usernameValid && this.state.emailValid && this.state.passwordValid && this.state.language
+      formValid: this.state.usernameValid && this.state.emailValid && this.state.passwordValid && this.state.languageValid
     })
   }
 
@@ -157,7 +157,7 @@ class Form extends Component {
 
         { !this.state.formReady && <div className="error">We are experiencing temporary technical difficulties. Please try again later</div> }
 
-        <form className="user-form" onSubmit={this.handleUpdate.bind(this)}>
+        <form className="user-form" onSubmit={this.handleCreate.bind(this)}>
 
           {this.props.session && <label>Update account information</label>}
 
@@ -195,7 +195,7 @@ class Form extends Component {
 
           {!this.props.session &&
             <div className="input-group-lg">
-            <button className="form-control orange-button" type="submit" disabled>Create Account</button>
+            <button className="form-control orange-button" type="submit" disabled={!this.state.formValid || !this.state.formReady}>Create Account</button>
             </div>
           }
 
