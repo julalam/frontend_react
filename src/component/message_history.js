@@ -132,7 +132,7 @@ class MessageHistory extends Component {
 
     if (!this.props.contact) {
       return (
-        <div><p>select a user...</p></div>
+        <div className="message-history"><p>Add friends to chat...</p></div>
       )
     } else {
       return (

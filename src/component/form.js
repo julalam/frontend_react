@@ -113,7 +113,7 @@ class Form extends Component {
     const user = {
       email: event.target.email.value,
       country: event.target.country.value,
-      language_id: event.target.language.value,
+      language_id: parseInt(event.target.language.value),
     };
     this.props.onUpdateUser(event, user);
   }

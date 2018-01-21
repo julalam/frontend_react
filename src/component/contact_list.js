@@ -23,7 +23,7 @@ class ContactList extends Component {
       const contact = this.state.contacts.find((contact) => {
         return contact.status==='friend';
       });
-      if (!cookie.load('contact')) {
+      if (!cookie.load('contact') && contact) {
         this.props.onContact(contact);
       }
     });
