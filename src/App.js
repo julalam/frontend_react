@@ -104,6 +104,8 @@ class App extends Component {
         session: response.data.user,
         infoSuccess: 'Account information has been updated',
       })
+      cookie.remove('session');
+      cookie.save('session', this.state.session);
     })
     .catch((error) => {
       console.log('Accunt information wasn\'t updates');
@@ -124,6 +126,8 @@ class App extends Component {
         avatar: response.data.avatar,
         imageSuccess: 'Account avatar has been updated',
       })
+      cookie.remove('avatar');
+      cookie.save('avatar', this.state.avatar);
     })
     .catch((error) => {
       console.log('Accunt avatar wasn\'t updates');
