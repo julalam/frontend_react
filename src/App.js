@@ -74,7 +74,7 @@ class App extends Component {
       email: user.email,
       password: user.password,
       country: user.country,
-      language: user.language,
+      language_id: user.language_id,
     })
     .then((response) => {
       this.setState({
@@ -97,7 +97,7 @@ class App extends Component {
     axios.patch('http://localhost:8080/users/' + this.state.session.id, {
       email: user.email,
       country: user.country,
-      language: user.language,
+      language_id: user.language,
     })
     .then((response) => {
       this.setState({

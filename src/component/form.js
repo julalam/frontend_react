@@ -103,7 +103,7 @@ class Form extends Component {
       email: event.target.email.value,
       password: event.target.password.value,
       country: event.target.country.value,
-      language: event.target.language.value,
+      language_id: parseInt(event.target.language.value),
     };
     this.props.onRegistration(event, user);
   }
@@ -113,7 +113,7 @@ class Form extends Component {
     const user = {
       email: event.target.email.value,
       country: event.target.country.value,
-      language: event.target.language.value,
+      language_id: event.target.language.value,
     };
     this.props.onUpdateUser(event, user);
   }
@@ -135,9 +135,9 @@ class Form extends Component {
 
     const languageOptions = this.state.languages.map(language => {
       if (this.props.session && language.code === this.props.session.language) {
-          return <option selected key={language.id} value={language.code}>{language.native_name}</option>
+          return <option selected key={language.id} value={language.id}>{language.native_name}</option>
       } else {
-        return <option key={language.id} value={language.code}>{language.native_name}</option>
+        return <option key={language.id} value={language.id}>{language.native_name}</option>
       }
     });
 
