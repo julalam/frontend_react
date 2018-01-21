@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {ActionCable} from 'react-actioncable-provider'
 import axios from 'axios';
 import dateFormat from 'dateformat';
+import cookie from 'react-cookies';
 
 class ContactList extends Component {
   constructor(props) {
@@ -19,6 +20,12 @@ class ContactList extends Component {
       this.setState({
         contacts: contacts,
       })
+      const contact = this.state.contacts.find((contact) => {
+        return contact.status==='friend';
+      });
+      if (!cookie.load('contact')) {
+        this.props.onContact(contact);
+      }
     });
   }
 
@@ -27,7 +34,6 @@ class ContactList extends Component {
   }
 
   handleClick(contact, event) {
-    this.props.onContact(contact);
     const newMessages = this.state.newMessages.slice();
     const index = newMessages.indexOf(contact.id);
     if (index > -1) {
@@ -36,6 +42,7 @@ class ContactList extends Component {
     this.setState({
       newMessages: newMessages,
     })
+    this.props.onContact(contact);
   }
 
   createRequest(user, event) {
