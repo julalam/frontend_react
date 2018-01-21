@@ -115,7 +115,7 @@ class ContactList extends Component {
         break;
       }
     }
-    contacts.push(contact);
+    contacts.unshift(contact);
     this.setState({
       contacts: contacts,
     });

@@ -124,8 +124,8 @@ class MessageHistory extends Component {
 
       return (
         <div key={date}>
+          <small><p className="date clearfix">{dateFormat(date).slice(0,10)}</p></small>
           {messages}
-          <small><p className="date clearfix" id={dateFormat(date).slice(0,15)===dateFormat(new Date()).slice(0,15) ? 'today' : ''}>{dateFormat(date).slice(0,15)}</p></small>
         </div>
       );
     });

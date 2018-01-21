@@ -298,10 +298,6 @@ footer {
   border-bottom: 1px solid #76c6cf;
 }
 
-#today {
-  display: none;
-}
-
 /* USER INFO */
 .user-info {
   padding: 1rem;
