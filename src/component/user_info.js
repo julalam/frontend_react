@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Form from './form';
-import axios from 'axios';
 
 class UserInfo extends Component {
   constructor(props) {
@@ -29,7 +28,7 @@ class UserInfo extends Component {
         <form className="image-form" onSubmit={this.handleUpload.bind(this)} >
           <label>Upload new avatar</label>
           <input id="image" type="file" name="image" accept="image/x-png, image/gif, image/jpeg" />
-          <button className="btn btn-default blue-button" type="submit">Upload</button>
+          <button className="btn btn-default blue-button pull-right" type="submit">Upload</button>
         </form>
 
         <div className="update-user-form">

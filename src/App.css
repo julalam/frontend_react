@@ -295,6 +295,10 @@ footer {
   margin: 2rem auto;
 }
 
+.image-form {
+  margin: 0 2.5rem;
+}
+
 .image-form label {
   display: block;
   margin-left: 1rem;
@@ -302,8 +306,11 @@ footer {
 
 .image-form input {
   display: inline-block;
-  width: 22rem;
-  margin-right: .5rem;
+  margin-left: 1rem;
+}
+
+.user-form {
+  margin-left: 2rem;
 }
 
 .user-info p {
@@ -313,8 +320,5 @@ footer {
 .user-info button {
   font-size: 1.5rem;
   margin: .5rem;
-}
-
-.update-buttons {
-  margin-top: 6rem;
+  margin-top: 2rem;
 }

@@ -200,9 +200,9 @@ class Form extends Component {
           }
 
           {this.props.session &&
-            <div className="update-buttons">
-            <button className="btn btn-default pull-right orange-button" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
-            <button className="btn btn-default pull-right blue-button" onSubmit={this.handleUpdate.bind(this)} type="submit">Save</button>
+            <div>
+              <button className="btn btn-default pull-right orange-button" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
+              <button className="btn btn-default pull-right blue-button" onSubmit={this.handleUpdate.bind(this)} type="submit">Save</button>
             </div>
           }
         </form>
