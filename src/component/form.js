@@ -157,7 +157,7 @@ class Form extends Component {
 
         { !this.state.formReady && <div className="error">We are experiencing temporary technical difficulties. Please try again later</div> }
 
-        <form className="user-form" onSubmit={this.handleCreate.bind(this)}>
+        <form className="user-form" onSubmit={this.props.session ? this.handleUpdate.bind(this) : this.handleCreate.bind(this) } >
 
           {this.props.session && <label>Update account information</label>}
 
@@ -202,7 +202,7 @@ class Form extends Component {
           {this.props.session &&
             <div>
               <button className="btn btn-default pull-right orange-button" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
-              <button className="btn btn-default pull-right blue-button" onSubmit={this.handleUpdate.bind(this)} type="submit">Save</button>
+              <button className="btn btn-default pull-right blue-button"  type="submit">Save</button>
             </div>
           }
         </form>

@@ -6,15 +6,31 @@ class UserInfo extends Component {
     super(props);
     this.state = {
       avatar: this.props.avatar,
+      // imageErrors: this.props.imageErrors,
+      // infoErrors: this.props.infoErrors,
+      // imageSuccess: this.props.imageSuccess,
+      infoSuccess: this.props.infoSuccess,
     };
   }
 
   handleCancel(event) {
+    // this.setState({
+    //   imageErrors: '',
+    //   infoErrors: '',
+    //   imageSuccess: '',
+    //   infoSuccess: '',
+    // })
     this.props.onCancel(event);
   }
 
   handleUpload(event) {
     event.preventDefault();
+    // this.setState({
+    //   imageErrors: '',
+    //   infoErrors: '',
+    //   imageSuccess: '',
+    //   infoSuccess: '',
+    // })
 
     const file = event.target.image.files[0];
     this.props.onImageUpdate(event, file);
@@ -31,9 +47,15 @@ class UserInfo extends Component {
           <button className="btn btn-default blue-button pull-right" type="submit">Upload</button>
         </form>
 
+        // {this.state.imageErrors && <div className="clearfix error">{this.state.imageErrors}</div>}
+        // {this.state.imageSuccess && <div className="clearfix success">{this.state.imageSuccess}</div>}
+
         <div className="update-user-form">
           <Form session={this.props.session} onCancel={this.props.onCancel} onUpdateUser = {this.props.onUpdateUser} />
         </div>
+
+        <div className="clearfix error">{this.props.infoErrors}</div>
+        <div className="clearfix success">{this.state.infoSuccess}</div>
 
       </div>
     );

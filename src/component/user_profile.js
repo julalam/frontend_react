@@ -61,7 +61,7 @@ class UserProfile extends Component {
         </div>
 
         <div className="contact-list col-lg-3">
-          { this.state.update ? <UserInfo session={this.props.session} avatar={this.props.avatar} onUpdateUser={this.props.onUpdateUser} onImageUpdate={this.props.onImageUpdate} onCancel={this.handleCancel.bind(this)} /> : <ContactList session={this.props.session} onContact={this.handleContact.bind(this)} /> }
+          { this.state.update ? <UserInfo session={this.props.session} avatar={this.props.avatar} onUpdateUser={this.props.onUpdateUser} onImageUpdate={this.props.onImageUpdate} onCancel={this.handleCancel.bind(this)} infoErrors={this.props.infoErrors} imageErrors={this.props.imageErrors} infoSuccess={this.props.infoSuccess} imageSuccess={this.props.imageSuccess} /> : <ContactList session={this.props.session} onContact={this.handleContact.bind(this)} /> }
         </div>
 
         <div className="message-history-wrapper col-lg-6">

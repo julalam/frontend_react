@@ -12,7 +12,12 @@ class App extends Component {
     this.state = {
       session: cookie.load('session'),
       avatar: cookie.load('avatar'),
-      errors: '',
+      loginErrors: '',
+      registrationErrors: '',
+      imageErrors: '',
+      imageSuccess: '',
+      infoErrors: '',
+      infoSuccess: '',
     };
   }
 
@@ -30,14 +35,14 @@ class App extends Component {
       } else if (response.data.user === null) {
         console.log('Username does\'n match');
         this.setState({
-          errors: 'We do not recognize that username and password combination'
+          loginErrors: 'We do not recognize that username and password combination'
         })
       }
     })
     .catch((error) => {
       console.log('User couldn\'t log in');
       this.setState({
-        errors: 'Something went wrong. Please try again later',
+        loginErrors: 'Something went wrong. Please try again later',
       })
     });
   }
@@ -83,7 +88,7 @@ class App extends Component {
     .catch((error) => {
       console.log('New account wasn\'t created');
       this.setState({
-        errors: 'Something went wrong. Please try again later',
+        registrationErrors: 'Something went wrong. Please try again later',
       })
     })
   }
@@ -97,6 +102,13 @@ class App extends Component {
     .then((response) => {
       this.setState({
         session: response.data.user,
+        infoSuccess: 'Account information has been updated',
+      })
+    })
+    .catch((error) => {
+      console.log('Accunt information wasn\'t updates');
+      this.setState({
+        infoErrors: 'Something went wrong. Please try again later',
       })
     })
   }
@@ -110,8 +122,15 @@ class App extends Component {
     .then((response) => {
       this.setState({
         avatar: response.data.avatar,
+        imageSuccess: 'Account avatar has been updated',
       })
-    });
+    })
+    .catch((error) => {
+      console.log('Accunt avatar wasn\'t updates');
+      this.setState({
+        imageErrors: 'Something went wrong. Please try again later',
+      })
+    })
   }
 
   render() {
@@ -119,8 +138,8 @@ class App extends Component {
       <div className="container-fluid">
         <Switch>
           <Route exact path='/' render = { () =>
-            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} avatar={this.state.avatar} errors={this.state.errors} onUpdateUser={this.handleUpdateUser.bind(this)} onImageUpdate={this.handleUpdateImage.bind(this)} /> } />
-          <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} errors={this.state.errors} /> } />
+            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} avatar={this.state.avatar} loginErrors={this.state.loginErrors} infoErrors={this.state.infoErrors} imageErrors={this.state.imageErrors} infoSuccess={this.state.infoSuccess} imageSuccess={this.state.imageSuccess} onUpdateUser={this.handleUpdateUser.bind(this)} onImageUpdate={this.handleUpdateImage.bind(this)} /> } />
+          <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} errors={this.state.registrationErrors} /> } />
         </Switch>
       </div>
     );
