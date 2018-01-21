@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {ActionCable} from 'react-actioncable-provider'
+import {ActionCable} from 'react-actioncable-provider';
+import dateFormat from 'dateformat';
 
 class MessageHistory extends Component {
   constructor(props) {
@@ -27,11 +28,10 @@ class MessageHistory extends Component {
   }
 
   getMessages() {
-    if (!this.props.contact)
-    {
+    if (!this.props.contact) {
       return;
     }
-    
+
     axios.get('http://localhost:8080/messages?from=' + this.props.session.id + '&to=' + this.props.contact.id).then((response) => {
       const messages = Array.from(response.data);
       this.updateMessages(messages);
@@ -87,15 +87,45 @@ class MessageHistory extends Component {
     })
   }
 
+  divideMessagesByDate() {
+    let messageHash = {};
+    for(let message of this.state.messages) {
+      const date = new Date(message.created_at.slice(0,10));
+      if (!messageHash.hasOwnProperty(date)) {
+        messageHash[date] = [];
+      }
+      messageHash[date].push(message);
+    }
+    return messageHash;
+  }
+
+  getMessageDates(messageHash) {
+    const dates = Object.keys(messageHash).sort((a,b) => a-b);
+    return dates;
+  }
+
+  messageAsDiv(message) {
+    const from_me = message.from === this.props.session.id;
+    const className = "message clearfix " + (from_me ? "pull-right from" : "pull-left to");
+    return (
+      <div key={message.id} className={className}
+      onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
+      >
+        <p className="pull-right">{message.from === this.props.session.id ? message.text : message.message ? message.message : message.text}</p>
+      </div>
+    );
+  }
+
   render() {
-    const messages = this.state.messages.map(message => {
-      const from_me = message.from === this.props.session.id;
-      const className = "message clearfix " + (from_me ? "pull-right from" : "pull-left to");
+    const messagesByDate = this.divideMessagesByDate();
+    const dates = this.getMessageDates(messagesByDate);
+    const allMessages = dates.map(date => {
+      const messages = messagesByDate[date].map(message => this.messageAsDiv(message));
+
       return (
-        <div key={message.id} className={className}
-        onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
-        >
-          <p className="pull-right">{message.from === this.props.session.id ? message.text : message.message ? message.message : message.text}</p>
+        <div key={date}>
+          {messages}
+          <small><p className="date clearfix" id={dateFormat(date).slice(0,15)===dateFormat(new Date()).slice(0,15) ? 'today' : ''}>{dateFormat(date).slice(0,15)}</p></small>
         </div>
       );
     });
@@ -109,7 +139,7 @@ class MessageHistory extends Component {
         <div className="message-history" ref={div => this.messageHistory = div}>
           <div className="messages clearfix">
             <ActionCable ref='cable' channel={{channel: 'MessagesChannel', id: this.props.contact.id}} onReceived={this.onMessage.bind(this)} />
-              {messages}
+              {allMessages}
           </div>
           <div className="new-message">
             <form onSubmit={this.sendMessage.bind(this)}>
