@@ -89,7 +89,6 @@ class App extends Component {
   }
 
   handleUpdateUser(event, user) {
-    console.log('in handle update');
     axios.patch('http://localhost:8080/users/' + this.state.session.id, {
       email: user.email,
       country: user.country,
@@ -102,12 +101,25 @@ class App extends Component {
     })
   }
 
+  handleUpdateImage(event, file) {
+    console.log('in image update');
+    let formData = new FormData();
+    formData.append('avatar', file);
+    axios.patch('http://localhost:8080/users/' + this.state.session.id, formData, { headers: { 'Content-Type': 'multipart/form-data' }
+    })
+    .then((response) => {
+      this.setState({
+        avatar: response.data.avatar,
+      })
+    });
+  }
+
   render() {
     return (
       <div className="container-fluid">
         <Switch>
           <Route exact path='/' render = { () =>
-            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} avatar={this.state.avatar} errors={this.state.errors} onUpdateUser = {this.handleUpdateUser.bind(this)} /> } />
+            <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} avatar={this.state.avatar} errors={this.state.errors} onUpdateUser={this.handleUpdateUser.bind(this)} onImageUpdate={this.handleUpdateImage.bind(this)} /> } />
           <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} errors={this.state.errors} /> } />
         </Switch>
       </div>

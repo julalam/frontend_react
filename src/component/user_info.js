@@ -18,18 +18,7 @@ class UserInfo extends Component {
     event.preventDefault();
 
     const file = event.target.image.files[0];
-    let formData = new FormData();
-    formData.append('avatar', file);
-
-    if (file) {
-      axios.patch('http://localhost:8080/users/' + this.props.session.id, formData, { headers: { 'Content-Type': 'multipart/form-data' }
-      })
-      .then((response) => {
-        this.setState({
-          avatar: response.data.avatar,
-        })
-      });
-    }
+    this.props.onImageUpdate(event, file);
   }
 
   render() {
