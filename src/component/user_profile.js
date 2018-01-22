@@ -79,7 +79,8 @@ class UserProfile extends Component {
               infoErrors={this.props.infoErrors}
               imageErrors={this.props.imageErrors}
               infoSuccess={this.props.infoSuccess}
-              imageSuccess={this.props.imageSuccess} /> :
+              imageSuccess={this.props.imageSuccess}
+              closeReport={this.props.closeReport} /> :
             <ContactList
               ref={obj => this.contactList = obj}
               contact={this.state.contact}

@@ -8,7 +8,8 @@ class Home extends Component {
   render() {
     if (this.props.session) {
       return <UserProfile onLogout={this.props.onLogout} session={this.props.session} avatar={this.props.avatar} language={this.props.language} onUpdateUser={this.props.onUpdateUser} onImageUpdate={this.props.onImageUpdate}
-      infoErrors={this.props.infoErrors} imageErrors={this.props.imageErrors} infoSuccess={this.props.infoSuccess} imageSuccess={this.props.imageSuccess} />
+      infoErrors={this.props.infoErrors} imageErrors={this.props.imageErrors} infoSuccess={this.props.infoSuccess} imageSuccess={this.props.imageSuccess}
+      closeReport={this.props.closeReport} />
     } else {
       return (
         <div className="row">
