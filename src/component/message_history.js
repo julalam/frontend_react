@@ -9,7 +9,6 @@ class MessageHistory extends Component {
     this.getMessages();
     this.state = {
       messages: [],
-      hover: false,
     };
   }
 
@@ -57,8 +56,7 @@ class MessageHistory extends Component {
   onMessage(message) {
     console.log('Message received by message history');
     if (message.from !== this.props.contact.user.id &&
-        message.to !== this.props.contact.user.id)
-    {
+        message.to !== this.props.contact.user.id) {
        return;
     }
 
@@ -67,19 +65,12 @@ class MessageHistory extends Component {
     messages.push(message);
     this.updateMessages(messages);
 
-    if (document.hidden && message.from != this.props.session.id)
-    {
+    if (document.hidden && message.from !== this.props.session.id) {
       Push.create(`New message from ${this.props.contact.user.username}`, {
         body: message.text,
-        icon: '/favicon.ico'
+        icon: '/favicon.ico',
       });
     }
-  }
-
-  handleMouseHover() {
-    this.setState({
-      hover: !this.state.hover,
-    })
   }
 
   divideMessagesByDate() {
@@ -103,10 +94,8 @@ class MessageHistory extends Component {
     const from_me = message.from === this.props.session.id;
     const className = "message clearfix " + (from_me ? "pull-right from" : "pull-left to");
     return (
-      <div key={message.id} className={className}
-      onMouseEnter={this.handleMouseHover.bind(this)} onMouseLeave={this.handleMouseHover.bind(this)}
-      >
-        <p className="pull-right">{message.from === this.props.session.id ? message.text : message.message ? message.message : message.text}</p>
+      <div key={message.id} className={className}>
+        <p data-toggle="tooltip" data-placement="top" title="Hooray!"  className="pull-right" ref={p => this.message = p} >{message.from === this.props.session.id ? message.text : message.message ? message.message : message.text}</p>
       </div>
     );
   }
