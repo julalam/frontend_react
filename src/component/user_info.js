@@ -5,32 +5,16 @@ class UserInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      avatar: this.props.avatar,
-      // imageErrors: this.props.imageErrors,
-      // infoErrors: this.props.infoErrors,
-      // imageSuccess: this.props.imageSuccess,
       infoSuccess: this.props.infoSuccess,
     };
   }
 
   handleCancel(event) {
-    // this.setState({
-    //   imageErrors: '',
-    //   infoErrors: '',
-    //   imageSuccess: '',
-    //   infoSuccess: '',
-    // })
     this.props.onCancel(event);
   }
 
   handleUpload(event) {
     event.preventDefault();
-    // this.setState({
-    //   imageErrors: '',
-    //   infoErrors: '',
-    //   imageSuccess: '',
-    //   infoSuccess: '',
-    // })
 
     const file = event.target.image.files[0];
     this.props.onImageUpdate(event, file);
@@ -39,7 +23,7 @@ class UserInfo extends Component {
   render() {
     return (
       <div className="user-info clearfix">
-        <img className="img-thumbnail" src={this.state.avatar} alt="Avatar" />
+        <img className="img-thumbnail" src={this.props.avatar} alt="Avatar" />
 
         <form className="image-form" onSubmit={this.handleUpload.bind(this)} >
           <label>Upload new avatar</label>
@@ -47,15 +31,15 @@ class UserInfo extends Component {
           <button className="btn btn-default blue-button pull-right" type="submit">Upload</button>
         </form>
 
-        // {this.state.imageErrors && <div className="clearfix error">{this.state.imageErrors}</div>}
-        // {this.state.imageSuccess && <div className="clearfix success">{this.state.imageSuccess}</div>}
+        {this.props.imageErrors && <div className="clearfix error"><small>{this.props.imageErrors}</small></div>}
+        {this.props.imageSuccess && <div className="clearfix success"><small>{this.props.imageSuccess}</small></div>}
 
         <div className="update-user-form">
           <Form session={this.props.session}  onCancel={this.props.onCancel} onUpdateUser = {this.props.onUpdateUser} />
         </div>
 
-        <div className="clearfix error">{this.props.infoErrors}</div>
-        <div className="clearfix success">{this.state.infoSuccess}</div>
+        {this.props.infoErrors && <div className="clearfix error"><small>{this.props.infoErrors}</small></div>}
+        {this.props.infoSuccess && <div className="clearfix success"><small>{this.props.infoSuccess}</small></div>}
 
       </div>
     );
