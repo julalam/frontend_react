@@ -68,7 +68,7 @@ class MessageHistory extends Component {
     if (document.hidden && message.from !== this.props.session.id) {
       Push.create(`New message from ${this.props.contact.user.username}`, {
         body: message.text,
-        icon: '/favicon.ico',
+        icon: '/favicon.ico'
       });
     }
   }

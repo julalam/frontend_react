@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   handleLogout(event) {
-    axios.post('http://localhost:8080/logout')
+    axios.post('http://localhost:8080/logout?user=' + this.state.session.id)
     .then((response) => {
       this.setState({
         session: response.data.session,

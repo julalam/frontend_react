@@ -128,7 +128,7 @@ class ContactList extends Component {
         const date = dateFormat(contact.contact.created_at).slice(0,-3);
         return (
           <div className="contact clearfix" key={contact.user.id}>
-            <img className="img-circle pull-left" src={contact.avatar} alt="Avatar" />
+            <img className="img-circle pull-left clearfix" src={contact.avatar} alt="Avatar" />
             <div className="contact-text">
               <strong>{contact.user.username}</strong>
               <br/>
@@ -169,9 +169,10 @@ class ContactList extends Component {
         !contact.last_message ? date = '' : date_rails === date_today ? date = dateFormat(contact.last_message.created_at, 'h:MM') :  date = dateFormat(contact.last_message.created_at, 'mmm dS')
         return (
           <div className={className} key={contact.user.id} onClick={this.handleClick.bind(this, contact)}>
-            <img className="img-circle pull-left" src={contact.avatar} alt="Avatar" />
+            <img className="img-circle pull-left clearfix" src={contact.avatar} alt="Avatar" />
             <div className="contact-text">
               <strong>{contact.user.username}</strong>
+              <div className={contact.user.state}></div>
               <br/>
                <small>{!contact.last_message  ? '' : contact.last_message.from === this.props.session.id ? 'You: ' + contact.last_message.text : contact.last_message.message ? contact.user.username + ': ' + contact.last_message.message : contact.last_message.text }</small>
                <small className="pull-right">{date}</small>

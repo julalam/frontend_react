@@ -228,6 +228,21 @@ footer {
   margin: .5rem 0 .5rem .5rem;
 }
 
+.online, .offline {
+  display: inline-block;
+  padding: .4rem;
+  margin-left: .5rem;
+  border-radius: .5rem;
+}
+
+.online {
+  background-color: #24BE6D;
+}
+
+.offline {
+  background-color: #999;
+}
+
 
 /* MESSAGE HISTORY */
 .message-history-wrapper {
