@@ -103,7 +103,7 @@ class Form extends Component {
       email: event.target.email.value,
       password: event.target.password.value,
       country: event.target.country.value,
-      language_id: parseInt(event.target.language.value),
+      language_id: parseInt(event.target.language.value, 10),
     };
     this.props.onRegistration(event, user);
   }
@@ -113,7 +113,7 @@ class Form extends Component {
     const user = {
       email: event.target.email.value,
       country: event.target.country.value,
-      language_id: parseInt(event.target.language.value),
+      language_id: parseInt(event.target.language.value, 10),
     };
     this.props.onUpdateUser(event, user);
   }

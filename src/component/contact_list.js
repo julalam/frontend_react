@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {ActionCable} from 'react-actioncable-provider'
 import axios from 'axios';
 import dateFormat from 'dateformat';
-import cookie from 'react-cookies';
+import {ActionCable} from 'react-actioncable-provider';
 
 class ContactList extends Component {
   constructor(props) {
@@ -19,12 +18,12 @@ class ContactList extends Component {
       const contacts = response.data;
       this.setState({
         contacts: contacts,
-      })
-      const contact = this.state.contacts.find((contact) => {
+      });
+      const friend = this.state.contacts.find((contact) => {
         return contact.status==='friend';
       });
-      if (!cookie.load('contact') && contact) {
-        this.props.onContact(contact);
+      if (!this.props.contact && friend) {
+        this.props.onContact(friend);
       }
     });
   }
@@ -35,13 +34,13 @@ class ContactList extends Component {
 
   handleClick(contact, event) {
     const newMessages = this.state.newMessages.slice();
-    const index = newMessages.indexOf(contact.id);
+    const index = newMessages.indexOf(contact.user.id);
     if (index > -1) {
       newMessages.splice(index, 1);
     }
     this.setState({
       newMessages: newMessages,
-    })
+    });
     this.props.onContact(contact);
   }
 
@@ -88,11 +87,13 @@ class ContactList extends Component {
 
   onMessage(message) {
     console.log('Message received by contact list');
-    const newMessages = this.state.newMessages.slice();
-    newMessages.push(message.from);
-    this.setState({
-      newMessages: newMessages,
-    });
+    if (this.props.contact && this.props.contact.user && message.from !== this.props.contact.user.id) {
+      const newMessages = this.state.newMessages.slice();
+      newMessages.push(message.from);
+      this.setState({
+        newMessages: newMessages,
+      });
+    }
 
     const contacts = this.state.contacts;
     for (let i = 0; i < contacts.length; i++) {
@@ -106,8 +107,8 @@ class ContactList extends Component {
     });
   }
 
-  onContact(contact) {
-    console.log('Contact received');
+  onContactUpdateViaCable(contact) {
+    console.log('Contact received via Action Cable');
     const contacts = this.state.contacts;
     for (let i = 0; i < contacts.length; i++) {
       if (contacts[i].user.id === contact.user.id) {
@@ -160,7 +161,7 @@ class ContactList extends Component {
           </div>
         )
       } else {
-        const className = "contact clearfix" +  (this.state.newMessages.includes(contact.user.id) ? " notification" : "");
+        const className = "contact clearfix" +  (this.props.contact && this.props.contact.user.id === contact.user.id ? " selected-contact" : "") +  (this.state.newMessages.includes(contact.user.id) ? " notification" : "");
         let date = '';
         let date_rails = '';
         contact.last_message ? date_rails = dateFormat(contact.last_message.created_at).slice(0,10) : date_rails = '';
@@ -188,9 +189,7 @@ class ContactList extends Component {
         </div>
 
         <div>
-        <ActionCable ref='cable3' channel={{channel: 'MessagesChannel', id: this.props.session.id}} onReceived={this.onMessage.bind(this)} />
-
-        <ActionCable ref='cable2' channel={{channel: 'ContactsChannel', id: this.props.session.id}} onReceived={this.onContact.bind(this)} />
+        <ActionCable ref='cable2' channel={{channel: 'ContactsChannel', id: this.props.session.id}} onReceived={this.onContactUpdateViaCable.bind(this)} />
           {contacts}
         </div>
       </div>
