@@ -76,7 +76,8 @@ class MessageHistory extends Component {
   divideMessagesByDate() {
     let messageHash = {};
     for(let message of this.state.messages) {
-      const date = new Date(message.created_at.slice(0,10));
+      const date = new Date(dateFormat(message.created_at).slice(0,16));
+      console.log(date);
       if (!messageHash.hasOwnProperty(date)) {
         messageHash[date] = [];
       }
