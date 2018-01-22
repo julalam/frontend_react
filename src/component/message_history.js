@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import dateFormat from 'dateformat';
+import Push from 'push.js';
 
 class MessageHistory extends Component {
   constructor(props) {
@@ -65,6 +66,14 @@ class MessageHistory extends Component {
 
     messages.push(message);
     this.updateMessages(messages);
+
+    if (document.hidden && message.from != this.props.session.id)
+    {
+      Push.create(`New Message from ${this.props.contact.user.username}`, {
+        body: message.text,
+        icon: '/favicon.ico'
+      });
+    }
   }
 
   handleMouseHover() {
@@ -77,7 +86,6 @@ class MessageHistory extends Component {
     let messageHash = {};
     for(let message of this.state.messages) {
       const date = new Date(dateFormat(message.created_at).slice(0,16));
-      console.log(date);
       if (!messageHash.hasOwnProperty(date)) {
         messageHash[date] = [];
       }
