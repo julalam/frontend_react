@@ -8,7 +8,7 @@ class ContactProfile extends Component {
     return (
       <div className="user-info">
         <img className="img-thumbnail avatar" src={this.props.contact.avatar} alt="Avatar" />
-
+        <p className={this.props.contact.user.state}>{this.props.contact.user.state}</p>
         <p><strong>Username: </strong>{this.props.contact.user.username}</p>
         <p><strong>Country: </strong>{this.props.contact.user.country}</p>
         <p><strong>Language: </strong>{this.props.contact.language}</p>
