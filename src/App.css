@@ -273,6 +273,25 @@ p.offline {
   border: 1px solid #ccc;
   padding: .7rem 1.3rem;
   margin: .5rem;
+  position: relative;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  background-color: #fff;
+  border: 1px solid #e45e21;
+  color: #fb6a26;
+  text-align: center;
+  padding: .7rem 1.3rem;
+  border-radius: 30px;
+  position: absolute;
+  z-index: 1;
+  top: .5rem;
+  left: .5rem;
+}
+
+.message:hover .tooltiptext {
+  visibility: visible;
 }
 
 .from {
@@ -321,7 +340,6 @@ p.offline {
   padding-bottom: .5rem;
   border-bottom: 1px solid #76c6cf;
 }
-
 
 /* USER INFO */
 .user-info {

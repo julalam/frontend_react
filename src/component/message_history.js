@@ -17,7 +17,6 @@ class MessageHistory extends Component {
     if (this.props.session !== prevProps.session || this.props.contact !== prevProps.contact){
       this.getMessages();
     }
-    // $(this.message).tooltip();
   };
 
   updateMessages(messages) {
@@ -97,7 +96,8 @@ class MessageHistory extends Component {
     const className = "message clearfix " + (from_me ? "pull-right from" : "pull-left to");
     return (
       <div key={message.id} className={className}>
-        <p data-toggle="tooltip" data-placement="top" title={message.text}  className="pull-right" ref={p => this.message = p}>{message.from === this.props.session.id ? message.text : message.message ? message.message : message.text}</p>
+        <p className="pull-right">{message.from === this.props.session.id ? message.text : message.message ? message.message : message.text}</p>
+        {message.from !== this.props.session.id && <p className="tooltiptext">{message.text}</p>}
       </div>
     );
   }
