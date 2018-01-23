@@ -201,7 +201,7 @@ class Form extends Component {
 
           {this.props.session &&
             <div className="clearfix">
-              <button className="btn btn-default pull-right orange-button" onClick={this.handleCancel.bind(this)} type="button">Cancel</button>
+              <button className="btn btn-default pull-right orange-button" onClick={this.handleCancel.bind(this)} type="button">Go back</button>
               <button className="btn btn-default pull-right blue-button"  type="submit">Save</button>
             </div>
           }
