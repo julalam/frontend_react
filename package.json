@@ -6,6 +6,7 @@
     "axios": "^0.17.1",
     "date-format": "^1.2.0",
     "dateformat": "^3.0.2",
+    "jquery": "^3.3.1",
     "push.js": "^1.0.5",
     "react": "^16.2.0",
     "react-actioncable-provider": "^1.0.2",
