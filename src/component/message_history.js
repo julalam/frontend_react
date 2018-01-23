@@ -95,7 +95,7 @@ class MessageHistory extends Component {
     const className = "message clearfix " + (from_me ? "pull-right from" : "pull-left to");
     return (
       <div key={message.id} className={className}>
-        <p data-toggle="tooltip" data-placement="top" title="Hooray!"  className="pull-right" ref={p => this.message = p} >{message.from === this.props.session.id ? message.text : message.message ? message.message : message.text}</p>
+        <p data-toggle="tooltip" data-placement="top" title={message.text}  className="pull-right" ref={p => this.message = p}>{message.from === this.props.session.id ? message.text : message.message ? message.message : message.text}</p>
       </div>
     );
   }

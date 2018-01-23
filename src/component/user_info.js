@@ -9,6 +9,14 @@ class UserInfo extends Component {
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.infoSuccess !== prevProps.infoSuccess) {
+      setTimeout(() => {
+        this.props.closeReport('infoSuccess');
+      }, 5000);
+    }
+  }
+
   handleCancel(event) {
     this.props.onCancel(event);
   }
