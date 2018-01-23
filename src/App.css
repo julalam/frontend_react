@@ -376,3 +376,7 @@ p.offline {
   margin: .5rem;
   margin-top: 2rem;
 }
+
+form span, .user-info span {
+  margin: .5rem;
+}
