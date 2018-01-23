@@ -3,10 +3,10 @@ import dateFormat from 'dateformat';
 
 class ContactProfile extends Component {
   render() {
-    const date = dateFormat(this.props.contact.user.created_at, 'mmmm yyyy');
     if (!this.props.contact) {
       return <div className="user-info">...</div>
     }
+    const date = dateFormat(this.props.contact.user.created_at, 'mmmm yyyy');
     return (
       <div className="user-info">
         <img className="img-thumbnail avatar" src={this.props.contact.avatar} alt="Avatar" />
