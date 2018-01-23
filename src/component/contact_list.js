@@ -95,7 +95,7 @@ class ContactList extends Component {
       });
     }
 
-    const contacts = this.state.contacts;
+    const contacts = this.state.contacts.slice();
     for (let i = 0; i < contacts.length; i++) {
       if (contacts[i].user.id === message.to || contacts[i].user.id === message.from) {
         contacts[i].last_message = message;
@@ -109,7 +109,7 @@ class ContactList extends Component {
 
   onContactUpdateViaCable(contact) {
     console.log('Contact received via Action Cable');
-    const contacts = this.state.contacts;
+    const contacts = this.state.contacts.slice();
     for (let i = 0; i < contacts.length; i++) {
       if (contacts[i].user.id === contact.user.id) {
         contacts.splice(i, 1);
@@ -124,7 +124,7 @@ class ContactList extends Component {
 
   onOnlineStateChange(object) {
     console.log('Online state change received via Action Cable');
-    const contacts = this.state.contacts;
+    const contacts = this.state.contacts.slice();
     for (let i = 0; i < contacts.length; i++) {
       if (contacts[i].user.id === object.id) {
         contacts[i].user.state = object.state;
