@@ -16,7 +16,7 @@ class Registration extends Component {
         <div className="row">
             <img className="logo-sm" src={require("../assets/logo-name-circle.png")} alt="SpeakEasy logo" />
 
-            <Form onRegistration={this.props.onRegistration} errors={this.props.errors}/>
+            <Form onRegistration={this.props.onRegistration} errors={this.props.errors} closeReport={this.props.closeReport}/>
           <Footer />
         </div>
       );

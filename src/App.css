@@ -70,6 +70,7 @@ div {
   max-width: 18em;
   text-align: center;
   margin: 1rem auto 0 auto;
+  padding: .5rem;
 }
 
 .error {
@@ -123,6 +124,10 @@ img.logo {
   text-indent: .8rem;
   color: #999;
   /* color: #2A94A1; */
+}
+
+.registration h2 {
+  font-weight: 400;
 }
 
 .user-info input, .user-info select{
@@ -352,10 +357,6 @@ p.offline {
   margin: 2rem auto;
 }
 
-.image-form {
-  margin: 0 2.5rem;
-}
-
 .image-form label {
   display: block;
   margin-left: 1rem;
@@ -364,10 +365,6 @@ p.offline {
 .image-form input {
   display: inline-block;
   margin-left: 1rem;
-}
-
-.user-form {
-  margin-left: 2rem;
 }
 
 .user-info p {

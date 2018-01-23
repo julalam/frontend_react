@@ -161,7 +161,7 @@ class App extends Component {
             <Home onLogin={this.handleLogin.bind(this)} onLogout={this.handleLogout.bind(this)} session={this.state.session} avatar={this.state.avatar} language={this.state.language} loginErrors={this.state.loginErrors} infoErrors={this.state.infoErrors} imageErrors={this.state.imageErrors} infoSuccess={this.state.infoSuccess} imageSuccess={this.state.imageSuccess}
             onUpdateUser={this.handleUpdateUser.bind(this)} onImageUpdate={this.handleUpdateImage.bind(this)}
             closeReport={this.closeReport.bind(this)} /> } />
-          <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} errors={this.state.registrationErrors} /> } />
+          <Route path='/registration' render = { () => <Registration onRegistration={this.handleRegistration.bind(this)} session={this.state.session} errors={this.state.registrationErrors} closeReport={this.closeReport.bind(this)} /> } />
         </Switch>
       </div>
     );

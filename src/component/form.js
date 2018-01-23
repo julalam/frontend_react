@@ -22,6 +22,14 @@ class Form extends Component {
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.errors !== prevProps.errors) {
+      setTimeout(() => {
+        this.props.closeReport('registrationErrors');
+      }, 5000);
+    }
+  }
+
   componentWillMount() {
     axios.get('http://localhost:8080/languages')
     .then((response) => {
@@ -157,7 +165,7 @@ class Form extends Component {
 
         { !this.state.formReady && <div className="error">We are experiencing temporary technical difficulties. Please try again later</div> }
 
-        <form className="user-form" onSubmit={this.props.session ? this.handleUpdate.bind(this) : this.handleCreate.bind(this) } >
+        <form className="user-form clearfix" onSubmit={this.props.session ? this.handleUpdate.bind(this) : this.handleCreate.bind(this) } >
 
           {this.props.session && <label>Update account information</label>}
 

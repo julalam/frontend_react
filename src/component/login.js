@@ -13,6 +13,14 @@ class Login extends Component {
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.errors !== prevProps.errors) {
+      setTimeout(() => {
+        this.props.closeReport('loginErrors');
+      }, 5000);
+    }
+  }
+
   handleUserInput(event) {
     const field = event.target.name;
     const value = event.target.value;
