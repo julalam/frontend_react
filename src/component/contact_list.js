@@ -122,6 +122,21 @@ class ContactList extends Component {
     });
   }
 
+  onOnlineStateChange(object) {
+    console.log('Online state change received via Action Cable');
+    const contacts = this.state.contacts;
+    for (let i = 0; i < contacts.length; i++) {
+      if (contacts[i].user.id === object.id) {
+        contacts[i].user.state = object.state;
+        break;
+      }
+    }
+
+    this.setState({
+      contacts: contacts,
+    });
+  }
+
   render() {
     const contacts = this.state.contacts.map(contact => {
       if (contact.status === 'sent_request') {
@@ -190,7 +205,8 @@ class ContactList extends Component {
         </div>
 
         <div>
-        <ActionCable ref='cable2' channel={{channel: 'ContactsChannel', id: this.props.session.id}} onReceived={this.onContactUpdateViaCable.bind(this)} />
+        <ActionCable channel={{channel: 'ContactsChannel', id: this.props.session.id}} onReceived={this.onContactUpdateViaCable.bind(this)} />
+        <ActionCable channel={{channel: 'OnlineStateChannel', id: this.props.session.id}} onReceived={this.onOnlineStateChange.bind(this)} />
           {contacts}
         </div>
       </div>
