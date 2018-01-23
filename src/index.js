@@ -7,7 +7,7 @@ import ActionCableProvider from 'react-actioncable-provider';
 
 ReactDOM.render((
   <BrowserRouter>
-    <ActionCableProvider url='ws://localhost:8080/cable'>
+    <ActionCableProvider url='ws://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/cable'>
       <App />
     </ActionCableProvider>
   </BrowserRouter>

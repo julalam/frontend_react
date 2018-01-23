@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   handleLogin(event, data) {
-    axios.post('http://localhost:8080/login', {data})
+    axios.post('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/login', {data})
     .then((response) => {
       if (response.data.session) {
         this.setState({
@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   handleLogout(event) {
-    axios.post('http://localhost:8080/logout?user=' + this.state.session.id)
+    axios.post('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/logout?user=' + this.state.session.id)
     .then((response) => {
       this.setState({
         session: response.data.session,
@@ -74,7 +74,7 @@ class App extends Component {
   }
 
   handleRegistration(event, user) {
-    axios.post('http://localhost:8080/users', {
+    axios.post('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/users', {
       username: user.username,
       email: user.email,
       password: user.password,
@@ -101,7 +101,7 @@ class App extends Component {
   }
 
   handleUpdateUser(event, user) {
-    axios.patch('http://localhost:8080/users/' + this.state.session.id, {
+    axios.patch('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/users/' + this.state.session.id, {
       email: user.email,
       country: user.country,
       language_id: user.language_id,
@@ -129,7 +129,7 @@ class App extends Component {
     console.log('in image update');
     let formData = new FormData();
     formData.append('avatar', file);
-    axios.patch('http://localhost:8080/users/' + this.state.session.id, formData, { headers: { 'Content-Type': 'multipart/form-data' }
+    axios.patch('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/users/' + this.state.session.id, formData, { headers: { 'Content-Type': 'multipart/form-data' }
     })
     .then((response) => {
       this.setState({

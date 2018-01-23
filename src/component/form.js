@@ -31,7 +31,7 @@ class Form extends Component {
   }
 
   componentWillMount() {
-    axios.get('http://localhost:8080/languages')
+    axios.get('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/languages')
     .then((response) => {
       const languages = Array.from(response.data);
       this.setState({
@@ -45,7 +45,7 @@ class Form extends Component {
       })
     })
 
-    axios.get('http://localhost:8080/countries').then((response) => {
+    axios.get('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/countries').then((response) => {
       const countries = Array.from(response.data);
       this.setState({
         countries: countries,
