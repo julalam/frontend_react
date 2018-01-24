@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import dateFormat from 'dateformat';
 import Push from 'push.js';
-import $ from 'jquery';
 
 class MessageHistory extends Component {
   constructor(props) {
