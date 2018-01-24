@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   handleLogin(event, data) {
-    axios.post('http://speakeasy-rails.herokuapp.com/login', {data})
+    axios.post('https://speakeasy-rails.herokuapp.com/login', {data})
     .then((response) => {
       if (response.data.session) {
         this.setState({
@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   handleLogout(event) {
-    axios.post('http://speakeasy-rails.herokuapp.com/logout?user=' + this.state.session.id)
+    axios.post('https://speakeasy-rails.herokuapp.com/logout?user=' + this.state.session.id)
     .then((response) => {
       this.setState({
         session: response.data.session,
@@ -74,7 +74,7 @@ class App extends Component {
   }
 
   handleRegistration(event, user) {
-    axios.post('http://speakeasy-rails.herokuapp.com/users', {
+    axios.post('https://speakeasy-rails.herokuapp.com/users', {
       username: user.username,
       email: user.email,
       password: user.password,
@@ -101,7 +101,7 @@ class App extends Component {
   }
 
   handleUpdateUser(event, user) {
-    axios.patch('http://speakeasy-rails.herokuapp.com/users/' + this.state.session.id, {
+    axios.patch('https://speakeasy-rails.herokuapp.com/users/' + this.state.session.id, {
       email: user.email,
       country: user.country,
       language_id: user.language_id,
@@ -129,7 +129,7 @@ class App extends Component {
     console.log('in image update');
     let formData = new FormData();
     formData.append('avatar', file);
-    axios.patch('http://speakeasy-rails.herokuapp.com/users/' + this.state.session.id, formData, { headers: { 'Content-Type': 'multipart/form-data' }
+    axios.patch('https://speakeasy-rails.herokuapp.com/users/' + this.state.session.id, formData, { headers: { 'Content-Type': 'multipart/form-data' }
     })
     .then((response) => {
       this.setState({

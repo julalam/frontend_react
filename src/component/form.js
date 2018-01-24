@@ -31,7 +31,7 @@ class Form extends Component {
   }
 
   componentWillMount() {
-    axios.get('http://speakeasy-rails.herokuapp.com/languages')
+    axios.get('https://speakeasy-rails.herokuapp.com/languages')
     .then((response) => {
       const languages = Array.from(response.data);
       this.setState({
@@ -45,7 +45,7 @@ class Form extends Component {
       })
     })
 
-    axios.get('http://speakeasy-rails.herokuapp.com/countries').then((response) => {
+    axios.get('https://speakeasy-rails.herokuapp.com/countries').then((response) => {
       const countries = Array.from(response.data);
       this.setState({
         countries: countries,
