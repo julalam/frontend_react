@@ -32,7 +32,7 @@ class MessageHistory extends Component {
       return;
     }
 
-    axios.get('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/messages?from=' + this.props.session.id + '&to=' + this.props.contact.user.id).then((response) => {
+    axios.get('http://speakeasy-rails.herokuapp.com/messages?from=' + this.props.session.id + '&to=' + this.props.contact.user.id).then((response) => {
       const messages = Array.from(response.data);
       this.updateMessages(messages);
     });
@@ -42,7 +42,7 @@ class MessageHistory extends Component {
     event.preventDefault();
 
     if (event.target.message.value !== '') {
-      axios.post('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/messages', {
+      axios.post('http://speakeasy-rails.herokuapp.com/messages', {
         text: event.target.message.value,
         from: this.props.session.id,
         to: this.props.contact.user.id,

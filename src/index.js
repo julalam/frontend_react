@@ -7,7 +7,7 @@ import ActionCableProvider from 'react-actioncable-provider';
 
 ReactDOM.render((
   <BrowserRouter>
-    <ActionCableProvider url='ws://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/cable'>
+    <ActionCableProvider url='ws://speakeasy-rails.herokuapp.com/cable'>
       <App />
     </ActionCableProvider>
   </BrowserRouter>

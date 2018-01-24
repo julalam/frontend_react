@@ -14,7 +14,7 @@ class ContactList extends Component {
   }
 
   getContacts() {
-    axios.get('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/users?user=' + this.props.session.id).then((response) => {
+    axios.get('http://speakeasy-rails.herokuapp.com/users?user=' + this.props.session.id).then((response) => {
       const contacts = response.data;
       this.setState({
         contacts: contacts,
@@ -45,7 +45,7 @@ class ContactList extends Component {
   }
 
   createRequest(user, event) {
-    axios.post('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/contacts', {
+    axios.post('http://speakeasy-rails.herokuapp.com/contacts', {
       from: this.props.session.id,
       to: user.id,
     }).then((response) => {
@@ -54,7 +54,7 @@ class ContactList extends Component {
   }
 
   acceptRequest(contact, event) {
-    axios.patch('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/contacts/' + contact.id, {
+    axios.patch('http://speakeasy-rails.herokuapp.com/contacts/' + contact.id, {
       status: 'accepted',
     }).then((response) => {
       console.log(`${this.props.session.username} accepted request`);
@@ -62,7 +62,7 @@ class ContactList extends Component {
   }
 
   declineRequest(contact, event) {
-    axios.delete('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/contacts/' + contact.id).then((response) => {
+    axios.delete('http://speakeasy-rails.herokuapp.com/contacts/' + contact.id).then((response) => {
       console.log(`${this.props.session.username} declined request`);
       this.getContacts();
     });
@@ -73,7 +73,7 @@ class ContactList extends Component {
     if (query === '') {
       this.getContacts();
     } else {
-      axios.get('https://example-env.mpmpcu8qtu.us-west-2.elasticbeanstalk.com/search?user=' + this.props.session.id + '&query=' + query).then((response) => {
+      axios.get('http://speakeasy-rails.herokuapp.com/search?user=' + this.props.session.id + '&query=' + query).then((response) => {
         const contacts = response.data;
         this.setState({
           contacts: contacts,
