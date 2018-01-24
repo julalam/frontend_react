@@ -7,7 +7,7 @@ import ActionCableProvider from 'react-actioncable-provider';
 
 ReactDOM.render((
   <BrowserRouter>
-    <ActionCableProvider url='ws://speakeasy-rails.herokuapp.com/cable'>
+    <ActionCableProvider url='wss://speakeasy-rails.herokuapp.com/cable'>
       <App />
     </ActionCableProvider>
   </BrowserRouter>
