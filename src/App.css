@@ -201,6 +201,10 @@ footer {
   height: 90vh;
 }
 
+.contact-list {
+  overflow: scroll;
+}
+
 .message-history-wrapper {
   padding: 0;
 }
